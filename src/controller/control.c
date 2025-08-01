@@ -56,6 +56,12 @@ void init_list(t_task *list[6])
     list[5]->func = is_floor;
 }
 
+int wgnl(char **line, int fd)
+{
+    *line = get_next_line(fd);
+    return (*line);
+}
+
 int hard_verif(int argc, char *argv[], char *env[])
 {
     //initialiser la liste de verif a passer a assets checker ... 
@@ -70,25 +76,37 @@ int hard_verif(int argc, char *argv[], char *env[])
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
         return (perror("Error: "), 1);
-    while (1)
+    while (wgnl(&line, fd))
     {
-        line = get_next_line(fd); // need to think....
-        if (!line) //maybe set sgt ... 
-            return (0);
-        if (*line != '\0')
-        {
-            if(asset_checker(liste, line))
-            {
-                free(line);//here maybe a function that empty getnexline...
-                return (print_error());
-            }
-        }
-        else
+        if (*line == '\0')
         {
             free(line);
             continue;
         }
-    } 
+        if(is_map(line))
+        {
+            if (checked_list(liste))
+            {
+                if(map_parser(line, fd))
+                    return (0);
+                else
+                    return(1);
+            }
+        } 
+        else
+        {
+            if (asset_checker(liste, line))
+            {
+                if(!asset_parser(liste, line))
+                    return (print_error());
+            }
+            else
+                return (print_error());
+            free(line);
+        }
+    }
+    checked_list(liste);
+    return (print_error());
 }
 
 int controller_parser(int argc, char *argv[], char *env[])
