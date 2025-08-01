@@ -62,6 +62,19 @@ int wgnl(char **line, int fd)
     return (*line);
 }
 
+
+//TODO not need anymore since 
+/* int is_map(char *line)
+{
+    int i;
+
+    i = 0;
+
+    while (*line && *line == ' ')
+        line++;
+     while (*line && *line == '1')
+}*/
+
 int hard_verif(int argc, char *argv[], char *env[])
 {
     //initialiser la liste de verif a passer a assets checker ... 
@@ -69,7 +82,7 @@ int hard_verif(int argc, char *argv[], char *env[])
     // verifi et redirection
 
     int fd;
-    t_task *liste[10];
+    t_task *liste[6];
     char *line;
 
     init_list(liste);
@@ -83,27 +96,22 @@ int hard_verif(int argc, char *argv[], char *env[])
             free(line);
             continue;
         }
-        if(is_map(line))
+        if (checked_list(liste))
         {
-            if (checked_list(liste))
-            {
-                if(map_parser(line, fd))
-                    return (0);
-                else
-                    return(1);
-            }
+            if(!map_parser(line, fd))
+                return(1);
         } 
         else
         {
             if (asset_checker(liste, line))
             {
                 if(!asset_parser(liste, line))
-                    return (print_error());
+                    return (free(line), print_error());
             }
             else
-                return (print_error());
-            free(line);
+                return (free(line), print_error());
         }
+        free(line);
     }
     checked_list(liste);
     return (print_error());

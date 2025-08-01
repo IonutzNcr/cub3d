@@ -18,10 +18,12 @@ enum e_err
 
 };
 
+typedef int(*check)(char *line);
 
 typedef struct s_task
 {
     check func;
+    check parse;
     int done;
 } t_task;
 
@@ -34,7 +36,6 @@ typedef struct s_assets {
     int ceiling;
 } t_assets;
 
-typedef int(*check)(char *line);
 
 int is_extension(int argc, char *argv[], char *env[]);
 int is_garbage(int argc, char *argv[], char *env[]);
@@ -51,5 +52,7 @@ int   is_texture_EA(char *line);
 int is_ceiling(char *line);
 int is_floor(char *line);
 int asset_checker(t_task *liste, char *line);
+
+int checked_list(t_task *liste[6]);
 
 #endif
