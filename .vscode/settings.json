@@ -1,0 +1,13 @@
+{
+    "42norminette.path": "/home/yoyo/.local/bin/norminette;",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "[c]": {
+        "editor.defaultFormatter": "keyhr.42-c-format"
+    },
+    "files.associations": {
+        "checker.h": "c",
+        "stdio.h": "c"
+    }
+}

@@ -1,0 +1,55 @@
+#ifndef CHECKER_H
+    #define CHECKER_H
+
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+# include "libft/libft.h"
+
+
+
+enum e_err
+{
+    P_NUM = 1,
+    NO_ENV,
+    INV_EXT,
+    E_SCENE,
+
+};
+
+
+typedef struct s_task
+{
+    check func;
+    int done;
+} t_task;
+
+typedef struct s_assets {
+    int fd_NO;
+    int fd_SO;
+    int fd_WE;
+    int fd_EA;
+    int floor;
+    int ceiling;
+} t_assets;
+
+typedef int(*check)(char *line);
+
+int is_extension(int argc, char *argv[], char *env[]);
+int is_garbage(int argc, char *argv[], char *env[]);
+int is_four_directions(int argc, char *argv[], char *env[]);
+int is_valid_assets(int argc, char *argv[], char *env[]);
+int set_sgt_error(int error);
+int *sgt_error();
+int *sgt_line();
+
+int   is_texture_NO(char *line);
+int   is_texture_SO(char *line);
+int   is_texture_WE(char *line);
+int   is_texture_EA(char *line);
+int is_ceiling(char *line);
+int is_floor(char *line);
+int asset_checker(t_task *liste, char *line);
+
+#endif
