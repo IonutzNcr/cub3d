@@ -1,4 +1,4 @@
-
+#include "checker.h"
 
 int is_extension(int argc, char *argv[], char *env[])
 {

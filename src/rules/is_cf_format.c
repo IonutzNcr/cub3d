@@ -1,6 +1,6 @@
 #include "checker.h"
 
-static void free_split(char **arg)
+void free_split(char **arg)
 {
     int i;
 

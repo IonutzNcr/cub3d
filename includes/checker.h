@@ -38,9 +38,7 @@ typedef struct s_assets {
 
 
 int is_extension(int argc, char *argv[], char *env[]);
-int is_garbage(int argc, char *argv[], char *env[]);
-int is_four_directions(int argc, char *argv[], char *env[]);
-int is_valid_assets(int argc, char *argv[], char *env[]);
+int is_file_empty(char *file);
 int set_sgt_error(int error);
 int *sgt_error();
 int *sgt_line();
@@ -55,5 +53,16 @@ int is_floor(char *line);
 int asset_checker(t_task *liste, char *line);
 
 int checked_list(t_task *liste[6]);
+void free_split(char **arg);
+int parse_floor(char *line);
+int parse_ceiling(char *line);
+int parse_NO(char *line);
+int parse_SO(char *line);
+int parse_WE(char *line);
+int parse_EA(char *line);
+int asset_parser(t_task *liste[6], char *line);
+int is_invalid_space(char ch);
+
+
 
 #endif
