@@ -44,6 +44,7 @@ int is_valid_assets(int argc, char *argv[], char *env[]);
 int set_sgt_error(int error);
 int *sgt_error();
 int *sgt_line();
+int sgt_assets();
 
 int   is_texture_NO(char *line);
 int   is_texture_SO(char *line);

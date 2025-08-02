@@ -62,19 +62,6 @@ int wgnl(char **line, int fd)
     return (*line);
 }
 
-
-//TODO not need anymore since 
-/* int is_map(char *line)
-{
-    int i;
-
-    i = 0;
-
-    while (*line && *line == ' ')
-        line++;
-     while (*line && *line == '1')
-}*/
-
 int hard_verif(int argc, char *argv[], char *env[])
 {
     //initialiser la liste de verif a passer a assets checker ... 
@@ -113,7 +100,7 @@ int hard_verif(int argc, char *argv[], char *env[])
         }
         free(line);
     }
-    checked_list(liste);
+    checked_list(liste);//maybe need also to have check map...
     return (print_error());
 }
 
