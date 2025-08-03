@@ -56,7 +56,7 @@ int hard_verif(char *argv[])
         }
         if (checked_list(liste))
         {
-            if(!map_parser(line, fd))
+            if(!mapper(line, fd))
                 return(1);
         } 
         else
