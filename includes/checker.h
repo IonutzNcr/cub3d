@@ -17,7 +17,8 @@ enum e_err
     E_SCENE,
     E_DUPLI,
     INV_LN,
-    EM_FILE
+    EM_FILE,
+    F_MALL
 };
 
 typedef int(*check)(char *line);
@@ -30,10 +31,10 @@ typedef struct s_task
 } t_task;
 
 typedef struct s_assets {
-    int fd_NO;
-    int fd_SO;
-    int fd_WE;
-    int fd_EA;
+    char file_NO;
+    char file_SO;
+    char file_WE;
+    char file_EA;
     int floor;
     int ceiling;
 } t_assets;

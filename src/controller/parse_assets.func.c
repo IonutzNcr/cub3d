@@ -18,8 +18,11 @@ int parse_NO(char *line)
         return (*sgt_error());
     if (is_file_empty(line) && set_sgt_error(EM_FILE))//empty .xmp file
         return (close(fd), *sgt_error());
+    close(fd);
     assets = sgt_assets();
-    assets->fd_NO = fd;
+    assets->file_NO = ft_strdup(line);
+    if (!assets->file_NO && set_sgt_error(F_MALL))//malloc fail
+        return (*sgt_error());
     return (0);
 }
 /*
@@ -40,8 +43,11 @@ int parse_SO(char *line)
         return (*sgt_error());
     if (is_file_empty(line) && set_sgt_error(EM_FILE))//empty .xmp file
         return (close(fd), *sgt_error());
+    close(fd);
     assets = sgt_assets();
-    assets->fd_SO = fd;
+    assets->file_SO = ft_strdup(line);
+    if (!assets->file_SO && set_sgt_error(F_MALL))//malloc fail
+        return (*sgt_error());
     return (0);
 }
 /*
@@ -62,8 +68,11 @@ int parse_WE(char *line)
         return (*sgt_error());
     if (is_file_empty(line) && set_sgt_error(EM_FILE))//empty .xmp file
         return (close(fd), *sgt_error());
+    close(fd);
     assets = sgt_assets();
-    assets->fd_WE = fd;
+    assets->file_WE = ft_strdup(line);
+    if (!assets->file_WE && set_sgt_error(F_MALL))//malloc fail
+        return (*sgt_error());
     return (0);
 }
 /*
@@ -84,7 +93,10 @@ int parse_EA(char *line)
         return (*sgt_error());
     if (is_file_empty(line) && set_sgt_error(EM_FILE))//empty .xmp file
         return (close(fd), *sgt_error());
+    close(fd);
     assets = sgt_assets();
-    assets->fd_EA = fd;
+    assets->file_EA = ft_strdup(line);
+    if (!assets->file_EA && set_sgt_error(F_MALL))//malloc fail
+        return (*sgt_error());
     return (0);
 }
