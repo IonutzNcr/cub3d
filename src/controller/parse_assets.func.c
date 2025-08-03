@@ -1,12 +1,5 @@
 #include "checker.h"
 
-//iif there are other sgn_assets this one is the right one
-int sgt_assets()
-{
-    static t_assets assets;
-    return &assets;
-}
-
 /*
     return 0 if success
     return err if error found...

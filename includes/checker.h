@@ -45,6 +45,7 @@ int set_sgt_error(int error);
 int *sgt_error();
 int *sgt_line();
 int sgt_assets();
+char **sgt_map();
 
 /*this is ok...*/
 int   is_texture_NO(char *line);
@@ -66,6 +67,12 @@ int parse_WE(char *line);
 int parse_EA(char *line);
 int asset_parser(t_task *liste[6], char *line);
 int is_invalid_space(char ch);
-
+int print_error();
+void init_list(t_task *list[6]);
+int wgnl(char **line, int fd);
+int parser(int argc, char *argv[], char *env[]);
+int last_verif(t_task *liste[6]);
+int quick_verif(int argc, char *argv[], char *env[]);
+int hard_verif(char *argv[]);
 
 #endif

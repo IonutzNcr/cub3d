@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+         #
+#    By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 16:19:15 by kjullien          #+#    #+#              #
-#    Updated: 2025/07/28 20:41:27 by yoyo             ###   ########.fr        #
+#    Updated: 2025/08/03 20:35:54 by inicoara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,23 @@ OBJ_DIR = obj
 
 # Source files
 SRC_FILES = $(SRC_DIR)/main.c\
-			$(SRC_DIR)/checker.c\
-			$(SRC_DIR)/checks/is_extension.c
+			$(SRC_DIR)/controller/asset_checker.c\
+			$(SRC_DIR)/controller/asset_parser.c\
+			$(SRC_DIR)/controller/checked_list.c\
+			$(SRC_DIR)/controller/parse_assets.func.c\
+			$(SRC_DIR)/controller/parse_cf.func.c\
+			$(SRC_DIR)/controller/parser.c\
+			$(SRC_DIR)/controller/utils.c\
+			$(SRC_DIR)/controller/verif.c\
+			$(SRC_DIR)/rules/is_cf_format.c\
+			$(SRC_DIR)/rules/is_extension.c\
+			$(SRC_DIR)/rules/is_file_empty.c\
+			$(SRC_DIR)/rules/is_invalid_space.c\
+			$(SRC_DIR)/rules/is_texture_format.c\
+			$(SRC_DIR)/singleton/sgt_assets.c\
+			$(SRC_DIR)/singleton/sgt_error.c\
+			$(SRC_DIR)/singleton/sgt_line.c\
+			$(SRC_DIR)/singleton/sgt_map.c\
           
 # All C files for linting and formatting
 C_FILES = $(SRC_FILES)
