@@ -73,6 +73,22 @@ int wgnl(char **line, int fd)
     *line = get_next_line(fd);
     return (*line);
 }
+
+/*
+    check if the list is complete and if the map exist
+    return 0 if success
+    return 1 if fail
+    set error to corresponding error
+*/
+int last_verif(t_task *liste[6])
+{
+    if(!checked_list(liste))
+        return (set_sgt_error(10));// incomplete config file;
+    if (!sgt_map())
+        return (set_sgt_error(11)); //missing map
+    return (0);
+
+}
 /*
     should return 0 if good
     return err if error...
@@ -113,8 +129,9 @@ int hard_verif(int argc, char *argv[], char *env[])
         free(line);
     }
     //TODO:: ici je dois faire plus de verif car potentiellement problematique
-    checked_list(liste);//maybe need also to have check map...
-    return (print_error());
+    if(last_verif(liste))
+        return (print_error());
+    return (0);
 }
 
 /*
