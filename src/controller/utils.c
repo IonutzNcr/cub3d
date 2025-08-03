@@ -20,7 +20,6 @@ int print_error()
     return (error);
 }
 
-
 /*
     wrapper to getnextline to win some lines
 */
@@ -49,4 +48,12 @@ void init_list(t_task *list[6])
     list[4]->parse = parse_ceiling;
     list[5]->func = is_floor;
     list[5]->parse = is_floor;
+}
+int empty_gnl(int fd)
+{
+    char *line;
+
+    while (wgnl(&line))
+        free(line);
+    return (0);
 }

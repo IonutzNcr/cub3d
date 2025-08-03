@@ -75,5 +75,6 @@ int parser(int argc, char *argv[], char *env[]);
 int last_verif(t_task *liste[6]);
 int quick_verif(int argc, char *argv[], char *env[]);
 int hard_verif(char *argv[]);
-
+int empty_gnl(int fd);
+int mapper(char *line, int fd);
 #endif

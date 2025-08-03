@@ -56,20 +56,20 @@ int hard_verif(char *argv[])
         }
         if (checked_list(liste))
         {
-            if(!mapper(line, fd))
+            if(mapper(line, fd))
                 return(1);
         } 
         else
         {
             if (!asset_checker(liste, line))
             {
-                if(!asset_parser(liste, line))
+                if(asset_parser(liste, line))
                     return (free(line), empty_gnl(fd), print_error());
             }
             else
                 return (free(line), empty_gnl(fd), print_error());
+            free(line);
         }
-        free(line);
     }
     if(last_verif(liste))
         return (print_error());
