@@ -2,6 +2,7 @@
 
 /*
 give the actual line wich is parse
+?? for now im not sure im gonna do it..
 */
 int *sgt_line()
 {
@@ -10,7 +11,10 @@ int *sgt_line()
 }
 
 /*
-return 0 si checker good else if not 
+return 0 si checker good
+return > 0 if eror found...
+set singleton error
+doestn print error
 */
 int asset_checker(t_task *liste, char *line)
 {
@@ -21,7 +25,7 @@ int asset_checker(t_task *liste, char *line)
     {
         if (!liste[i].func(line))
         {
-            if (liste[i].done && set_sgt_error(5))// duplicata error
+            if (liste[i].done && set_sgt_error(E_DUPLI))// duplicata error
                 return (*sgt_error());
             else
             {
@@ -32,6 +36,6 @@ int asset_checker(t_task *liste, char *line)
         else
             continue;
     }
-    set_sgt_error(6); // invalid line
+    set_sgt_error(INV_LN); // invalid line
     return (*sgt_error());
 }

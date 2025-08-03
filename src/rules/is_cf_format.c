@@ -19,7 +19,10 @@ static int count_elements(char **argv)
         i++;
     return (i);
 }
-
+/*
+    return 1 if is good 
+    retunr 0 if is bad
+*/
 static int check_values_rgb(char **argv)
 {
     int i;
@@ -38,6 +41,11 @@ static int check_values_rgb(char **argv)
     return (1);
 }
 
+/*
+    return 0 if everything is good
+    return 1 if error found
+    ****set error singleton on error****bad idea...
+*/
 static int check_rgb(char *line)
 {
     char **rgb;
@@ -61,19 +69,23 @@ static int check_rgb(char *line)
     return (0);
 }
 
+/*
+    Return 0 if is bad
+    Return 1 if is good
+*/
 int is_ceiling(char *line)
 {
-    while (*line == ' ')
+    while (*line && *line == ' ')
         line++;
     if (ft_strncmp(line, "C", 1))
         return (0);
     line += 1;
-    while (*line == ' ')
+    while (*line &&  *line == ' ')
         line++;
     if (!*line)
         return (0);
     if (check_rgb(line))
-        return (1);
+        return (0);
     while (*line != ' ' && *line != '\0')
         line++;
     while(!is_invalid_space(*line) && *line != '\0')
@@ -82,7 +94,10 @@ int is_ceiling(char *line)
         return (1);
     return (0);
 }
-
+/*
+    Return 0 if is bad
+    Return 1 if is good
+*/
 int is_floor(char *line)
 {
     while (*line == ' ')
@@ -95,7 +110,7 @@ int is_floor(char *line)
     if (!*line)
         return (0);
     if (check_rgb(line))
-        return (1);
+        return (0);
     while (*line != ' ' && *line != '\0')
         line++;
     while(!is_invalid_space(*line) && *line != '\0')

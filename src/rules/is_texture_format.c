@@ -3,16 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   is_texture_format.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:55:22 by yoyo              #+#    #+#             */
-/*   Updated: 2025/07/31 12:55:40 by yoyo             ###   ########.fr       */
+/*   Updated: 2025/08/03 17:04:31 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-/* Check if the format for the texture element is right */
+/* 
+    Check if the format for the texture element is right
+    return 1 if is good
+    retunr 0 if is bad
+*/
 int is_texture_NO(char *line)
 {
     while (*line == ' ')
@@ -36,7 +40,11 @@ int is_texture_NO(char *line)
         return (1);
     return (0);
 }
-
+/* 
+    Check if the format for the texture element is right
+    return 1 if is good
+    retunr 0 if is bad
+*/
 int is_texture_SO(char *line)
 {
     while (*line == ' ')
@@ -60,7 +68,11 @@ int is_texture_SO(char *line)
         return (1);
     return (0);
 }
-
+/* 
+    Check if the format for the texture element is right
+    return 1 if is good
+    retunr 0 if is bad
+*/
 int is_texture_WE(char *line)
 {
     while (*line == ' ')
@@ -84,7 +96,11 @@ int is_texture_WE(char *line)
         return (1);
     return (0);
 }
-
+/* 
+    Check if the format for the texture element is right
+    return 1 if is good
+    retunr 0 if is bad
+*/
 int is_texture_EA(char *line)
 {
     while (*line == ' ')
@@ -92,7 +108,6 @@ int is_texture_EA(char *line)
     if (ft_strncmp(line, "EA", 2))
         return (0);
     line += 2;
-
     while (*line == ' ')
         line++;
     if (!*line)

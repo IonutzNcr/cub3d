@@ -11,7 +11,10 @@ int set_sgt_error(int error)
     *sgt_error() = error;
     return (1);
 }
-
+/*
+    print error if there is 
+    return the error or 0 if there is no error
+*/
 int print_error()
 {
     int error;
@@ -27,7 +30,10 @@ int print_error()
         write(2, "ERROR: Empty scene\n", 19);
     return (error);
 }
-//RETURN 0 if everything is good return > 0 if error
+/*
+    RETURN 0 if everything is good return > 0 if error
+    print_error cos is a manager ...
+*/
 int quick_verif(int argc, char *argv[], char *env[])
 {
     if (argc != 2 && set_sgt_error(1));
@@ -67,7 +73,11 @@ int wgnl(char **line, int fd)
     *line = get_next_line(fd);
     return (*line);
 }
-
+/*
+    should return 0 if good
+    return err if error...
+    print err that it...
+*/
 int hard_verif(int argc, char *argv[], char *env[])
 {
     int fd;
@@ -92,20 +102,25 @@ int hard_verif(int argc, char *argv[], char *env[])
         } 
         else
         {
-            if (asset_checker(liste, line))
+            if (!asset_checker(liste, line))
             {
                 if(!asset_parser(liste, line))
-                    return (free(line), print_error());
+                    return (free(line), empty_gnl(fd), print_error());
             }
             else
-                return (free(line), print_error());
+                return (free(line), empty_gnl(fd), print_error());
         }
         free(line);
     }
+    //TODO:: ici je dois faire plus de verif car potentiellement problematique
     checked_list(liste);//maybe need also to have check map...
     return (print_error());
 }
 
+/*
+    return 0 if success
+    return err if fail
+*/
 int controller_parser(int argc, char *argv[], char *env[])
 {
     int *error;
@@ -115,4 +130,5 @@ int controller_parser(int argc, char *argv[], char *env[])
         return (*error);
     if (hard_verif(argc, argv, env))
         return (*error);
+    return (0);
 }

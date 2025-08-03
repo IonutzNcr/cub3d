@@ -15,7 +15,9 @@ enum e_err
     NO_ENV,
     INV_EXT,
     E_SCENE,
-
+    E_DUPLI,
+    INV_LN,
+    EM_FILE
 };
 
 typedef int(*check)(char *line);
@@ -44,12 +46,14 @@ int *sgt_error();
 int *sgt_line();
 int sgt_assets();
 
+/*this is ok...*/
 int   is_texture_NO(char *line);
 int   is_texture_SO(char *line);
 int   is_texture_WE(char *line);
 int   is_texture_EA(char *line);
 int is_ceiling(char *line);
 int is_floor(char *line);
+
 int asset_checker(t_task *liste, char *line);
 
 int checked_list(t_task *liste[6]);
@@ -62,7 +66,6 @@ int parse_WE(char *line);
 int parse_EA(char *line);
 int asset_parser(t_task *liste[6], char *line);
 int is_invalid_space(char ch);
-
 
 
 #endif

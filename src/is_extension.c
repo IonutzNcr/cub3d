@@ -1,5 +1,10 @@
 #include "checker.h"
 
+/*
+    check extension is .cub
+    print errors...
+    used in quick_verif
+*/
 int is_extension(int argc, char *argv[], char *env[])
 {
     char *pathfile;
@@ -7,7 +12,7 @@ int is_extension(int argc, char *argv[], char *env[])
     pathfile = argv[1];
     (void)argc;
     (void)env;
-    while (*pathfile != '.')
+    while (*pathfile && *pathfile != '.')
             pathfile++;
     if (pathfile == '\0')
         return (printf("Error: No extension found\n"), 0);

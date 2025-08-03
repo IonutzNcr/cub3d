@@ -1,6 +1,10 @@
 #include "checker.h"
 
-
+/*
+    return 0 if is good
+    return err if is bad
+    does not set up error because it is managed by the parses func.
+*/
 int asset_parser(t_task *liste[6], char *line)
 {
     int i;
@@ -11,12 +15,12 @@ int asset_parser(t_task *liste[6], char *line)
         if (liste[i]->done == 1)
         {
             if (liste[i]->parse(line))
-                return (print_error(), 0);
+                return (*sgt_error());
             liste[i]->done++;
-            return(1);
+            return(0);
         }
         i++;
     }
-    set_sgt_error(12);//asset parser error means duplicata i guess...
-    return (0);
+    set_sgt_error(E_DUPLI);//asset parser error means duplicata i guess...
+    return (*sgt_error());
 }
