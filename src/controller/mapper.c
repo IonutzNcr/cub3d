@@ -8,6 +8,7 @@ int mapper(char *line, int fd)
 {
     if (map_parser(line))
         return(free(line), empty_gnl(fd), print_error());
+    free(line);
     while (wgnl(&line, fd))
     {
         if (*line == '\0' && set_sgt_error(13)) // empty line in map

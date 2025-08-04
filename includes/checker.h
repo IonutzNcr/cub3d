@@ -22,6 +22,7 @@ enum e_err
 };
 
 typedef int(*check)(char *line);
+typedef int (*mapf)(void);
 
 typedef struct s_task
 {
@@ -29,6 +30,11 @@ typedef struct s_task
     check parse;
     int done;
 } t_task;
+
+typedef struct s_map_task
+{
+    check func;
+} t_map_task;
 
 typedef struct s_assets {
     char file_NO;
@@ -81,5 +87,8 @@ int mapper(char *line, int fd);
 int add_line(char *line);
 int remove_map();
 void *ft_remalloc(void *old, int n_size, int old_size);
+
+int map_parser(char *line);
+int map_checker();
 
 #endif

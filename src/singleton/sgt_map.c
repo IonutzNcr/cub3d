@@ -2,7 +2,7 @@
 
 /*
     remalloc and copy the old array content inside a new one 
-    return the new one
+    return the new one or NULL if fail
     note: does not free the old one is your job to free it
 */
 void *ft_remalloc(void *old, int n_size, int old_size)
