@@ -77,4 +77,9 @@ int quick_verif(int argc, char *argv[], char *env[]);
 int hard_verif(char *argv[]);
 int empty_gnl(int fd);
 int mapper(char *line, int fd);
+
+int add_line(char *line);
+int remove_map();
+void *ft_remalloc(void *old, int n_size, int old_size);
+
 #endif
