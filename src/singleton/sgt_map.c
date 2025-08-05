@@ -11,6 +11,8 @@ void *ft_remalloc(void *old, int n_size, int old_size)
     unsigned char *dest;
     unsigned char *src;  
 
+    if (n_size == 0)
+        return (0);
     src = old;
     map = malloc(n_size);
     if (!map)
@@ -18,7 +20,7 @@ void *ft_remalloc(void *old, int n_size, int old_size)
     dest = map;
     while (old_size--)
         dest[old_size] = src[old_size];
-    return (map); 
+    return (dest); 
 }
 
 /*
@@ -72,7 +74,7 @@ int add_line(char *line)
         map = malloc(sizeof(char *) * (1 + 1));
         if (!map)
             return (10);//malloc fail
-        *map = line;
+        *map = ft_strdup(line);
         *(map + 1) = 0;
         *sgt_map() = map;
     }
@@ -83,8 +85,8 @@ int add_line(char *line)
         if (!map)
             return (10);//malloc fail
         free(*sgt_map());
-        map[nb] = line;
-        map[nb+1] = 0;
+        *(map + nb) = ft_strdup(line);
+        *(map + nb+1) = 0;
         *sgt_map() = map;
     }
     return(0);
