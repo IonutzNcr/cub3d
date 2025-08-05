@@ -23,7 +23,7 @@ int print_error()
 /*
     wrapper to getnextline to win some lines
 */
-int wgnl(char **line, int fd)
+char *wgnl(char **line, int fd)
 {
     *line = get_next_line(fd);
     return (*line);
@@ -53,7 +53,7 @@ int empty_gnl(int fd)
 {
     char *line;
 
-    while (wgnl(&line))
+    while (wgnl(&line, fd))
         free(line);
     return (0);
 }

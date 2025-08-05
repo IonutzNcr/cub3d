@@ -12,7 +12,7 @@ int parser(int argc, char *argv[], char *env[])
     error = sgt_error();
     if (quick_verif(argc, argv, env))
         return (*error);
-    if (hard_verif(argc, argv, env))
+    if (hard_verif(argv))
         return (*error);
     return (0);
 }

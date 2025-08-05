@@ -91,16 +91,20 @@ int check_walls()
     return (0);
 }
 
-
+static void init_map_list(mapf *liste)
+{
+    liste[0] = check_walls;
+    liste[1] = check_characters;
+}
 
 int map_checker()
 {
-    mapf liste[5];
+    mapf liste[2];
     int i;
 
     i = 0;
     init_map_list(liste);
-    while (i < 5)
+    while (i < 2)
         if (liste[i++]())
             return (*sgt_error());
     return (0);

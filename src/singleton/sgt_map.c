@@ -78,7 +78,7 @@ int add_line(char *line)
     }
     else
     {
-        nb = count_element(*sgt_map());
+        nb = count_elements(*sgt_map());
         map = ft_remalloc(*sgt_map(), (nb + 1) * sizeof(char *), nb * sizeof(char *));
         if (!map)
             return (10);//malloc fail

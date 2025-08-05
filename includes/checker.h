@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 
 
@@ -76,7 +76,7 @@ int asset_parser(t_task *liste[6], char *line);
 int is_invalid_space(char ch);
 int print_error();
 void init_list(t_task *list[6]);
-int wgnl(char **line, int fd);
+char *wgnl(char **line, int fd);
 int parser(int argc, char *argv[], char *env[]);
 int last_verif(t_task *liste[6]);
 int quick_verif(int argc, char *argv[], char *env[]);
