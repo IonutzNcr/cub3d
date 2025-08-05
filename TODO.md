@@ -1,9 +1,9 @@
 
 
-[] create the empty_gnl function
+[x] create the empty_gnl function
 [x] map singleton
-[] map parser
-[] map checker
-[] map manager ==>mapper()
-[] function utilitaire a map
+[x] map parser
+[x] map checker
+[x] map manager ==>mapper()
+[x] function utilitaire a map
 [] better file structure

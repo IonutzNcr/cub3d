@@ -6,7 +6,7 @@
 #    By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 16:19:15 by kjullien          #+#    #+#              #
-#    Updated: 2025/08/05 17:05:06 by yoyo             ###   ########.fr        #
+#    Updated: 2025/08/05 19:07:19 by yoyo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC_FILES = $(SRC_DIR)/main.c\
 			$(SRC_DIR)/controller/checked_list.c\
 			$(SRC_DIR)/controller/check_characters.c\
 			$(SRC_DIR)/controller/map_fixer.c\
+			$(SRC_DIR)/controller/map_parser.c\
 			$(SRC_DIR)/controller/map_checker.c\
 			$(SRC_DIR)/controller/mapper.c\
 			$(SRC_DIR)/controller/parse_assets.func.c\
