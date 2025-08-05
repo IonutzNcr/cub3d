@@ -1,24 +1,5 @@
 #include "checker.h"
 
-void free_split(char **arg)
-{
-    int i;
-
-    i = 0;
-    while (arg[i])
-        free(arg[i++]);
-    free(arg);
-}
-
-static int count_elements(char **argv)
-{
-    int i;
-
-    i = 0;
-    while (argv[i])
-        i++;
-    return (i);
-}
 /*
     return 1 if is good 
     retunr 0 if is bad

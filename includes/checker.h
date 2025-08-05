@@ -52,7 +52,7 @@ int set_sgt_error(int error);
 int *sgt_error();
 int *sgt_line();
 int sgt_assets();
-char **sgt_map();
+char ***sgt_map();
 
 /*this is ok...*/
 int   is_texture_NO(char *line);
@@ -90,5 +90,8 @@ void *ft_remalloc(void *old, int n_size, int old_size);
 
 int map_parser(char *line);
 int map_checker();
+int count_elements(char **argv);
+
+int check_characters();
 
 #endif

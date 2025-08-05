@@ -1,22 +1,33 @@
 #include "checker.h"
 
 
-
+/*
+    check the last colon to see if is only composed by 1 = wall
+    return 0 if succes
+    return 1 if failure
+*/
 int is_lc_wall()
 {
     char **map;
     int i;
     int k;
+    int j;
 
     k = count_elements(map);
     i = 0;
     map = *sgt_map();
-    while (map[k][i])
-        if(map[k][i++] != 1)
+    j = ft_strlen(map[0]);
+    while (i < k)
+        if(map[i++][j] != 1)
             return (1);
     return (0);
 }
 
+/*
+    check the first colon to see if is only composed by 1 = wall
+    return 0 if succes
+    return 1 if failure
+*/
 int is_c1_wall()
 {
     char **map;
@@ -29,7 +40,11 @@ int is_c1_wall()
             return (1);
     return (0);
 }
-
+/*
+    check the last row to see if is only composed by 1 = wall
+    return 0 if succes
+    return 1 if failure
+*/
 int is_lr_wall()
 {
     char **map;
@@ -44,7 +59,11 @@ int is_lr_wall()
             return (1);
     return (0);
 }
-
+/*
+    check the first row to see if is only composed by 1 = wall
+    return 0 if succes
+    return 1 if failure
+*/
 int is_r1_wall()
 {
     char **map;
@@ -82,7 +101,7 @@ int map_checker()
     i = 0;
     init_map_list(liste);
     while (i < 5)
-        if (liste[i]())
+        if (liste[i++]())
             return (*sgt_error());
     return (0);
 }
