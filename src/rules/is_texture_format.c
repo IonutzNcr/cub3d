@@ -6,7 +6,7 @@
 /*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:55:22 by yoyo              #+#    #+#             */
-/*   Updated: 2025/08/05 22:15:58 by yoyo             ###   ########.fr       */
+/*   Updated: 2025/08/05 22:23:45 by yoyo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int is_texture_NO(char *line)
         return (0);
     if (ft_strncmp(line, "./", 2) && ft_strncmp(line, "/", 1))
         return (0);
-    while(is_invalid_space(*line))
+    while(*line && !is_invalid_space(*line))
         line++;
     if (!*line)
         return (1);
@@ -54,7 +54,7 @@ int is_texture_SO(char *line)
         return (0);
     if (ft_strncmp(line, "./", 2) && ft_strncmp(line, "/", 1))
         return (0);
-    while(is_invalid_space(*line))
+    while(*line && !is_invalid_space(*line))
         line++;
     if (!*line)
         return (1);
@@ -78,7 +78,7 @@ int is_texture_WE(char *line)
         return (0);
     if (ft_strncmp(line, "./", 2) && ft_strncmp(line, "/", 1))
         return (0);
-    while(is_invalid_space(*line))
+    while(*line && !is_invalid_space(*line))
         line++;
     if (!*line)
         return (1);
@@ -102,7 +102,7 @@ int is_texture_EA(char *line)
         return (0);
     if (ft_strncmp(line, "./", 2) && ft_strncmp(line, "/", 1))
         return (0);
-    while(is_invalid_space(*line))
+    while(*line && !is_invalid_space(*line))
         line++;
     if (!*line)
         return (1);
