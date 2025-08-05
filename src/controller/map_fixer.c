@@ -61,7 +61,7 @@ static void replace_space()
     char **map;
     char *row;
 
-    map = sgt_map();
+    map = *sgt_map();
     while (*map)
     {
         row = *map;

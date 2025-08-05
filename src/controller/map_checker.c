@@ -13,10 +13,10 @@ int is_lc_wall()
     int k;
     int j;
 
-    k = count_elements(map);
     i = 0;
     map = *sgt_map();
     j = ft_strlen(map[0]);
+    k = count_elements(map);
     while (i < k)
         if(map[i++][j] != 1)
             return (1);
@@ -33,8 +33,8 @@ int is_c1_wall()
     char **map;
     int k;
 
-    k = count_elements(map);
     map = *sgt_map();
+    k = count_elements(map);
     while (k--)
         if(map[k][0] != 1)
             return (1);
@@ -51,9 +51,9 @@ int is_lr_wall()
     int i;
     int k;
 
-    k = count_elements(map);
     i = 0;
     map = *sgt_map();
+    k = count_elements(map);
     while (map[k][i])
         if(map[k][i++] != 1)
             return (1);

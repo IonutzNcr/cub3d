@@ -1,3 +1,5 @@
+#include "checker.h"
+
 void free_split(char **arg)
 {
     int i;

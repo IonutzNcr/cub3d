@@ -6,7 +6,7 @@
 /*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 17:57:16 by yoyo              #+#    #+#             */
-/*   Updated: 2025/08/05 16:51:28 by yoyo             ###   ########.fr       */
+/*   Updated: 2025/08/05 20:01:17 by yoyo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int   main(int argc, char **argv, char **env)
 {
-    if (parser(argc, argv, argv))
+    if (parser(argc, argv, env))
         return (1);
     return (0);
 }

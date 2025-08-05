@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <fcntl.h>
 #include <errno.h>
 # include "../libft/libft.h"
@@ -37,10 +38,10 @@ typedef struct s_map_task
 } t_map_task;
 
 typedef struct s_assets {
-    char file_NO;
-    char file_SO;
-    char file_WE;
-    char file_EA;
+    char *file_NO;
+    char *file_SO;
+    char *file_WE;
+    char *file_EA;
     int floor;
     int ceiling;
 } t_assets;
@@ -51,7 +52,7 @@ int is_file_empty(char *file);
 int set_sgt_error(int error);
 int *sgt_error();
 int *sgt_line();
-int sgt_assets();
+t_assets *sgt_assets();
 char ***sgt_map();
 
 /*this is ok...*/
@@ -75,7 +76,7 @@ int parse_EA(char *line);
 int asset_parser(t_task *liste[6], char *line);
 int is_invalid_space(char ch);
 int print_error();
-void init_list(t_task *list[6]);
+void init_list(t_task list[6]);
 char *wgnl(char **line, int fd);
 int parser(int argc, char *argv[], char *env[]);
 int last_verif(t_task *liste[6]);

@@ -1,6 +1,6 @@
 #include "checker.h"
 
-int sgt_assets()
+t_assets *sgt_assets()
 {
     static t_assets assets;
     return &assets;

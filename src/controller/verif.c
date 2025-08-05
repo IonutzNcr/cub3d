@@ -6,7 +6,7 @@
 */
 int quick_verif(int argc, char *argv[], char *env[])
 {
-    if (argc != 2 && set_sgt_error(1));
+    if (argc != 2 && set_sgt_error(1))
         return (print_error());// Invalid parameter number
     if (!env && set_sgt_error(2))
         return (print_error());// No env found
@@ -40,7 +40,7 @@ int last_verif(t_task *liste[6])
 int hard_verif(char *argv[])
 {
     int fd;
-    t_task *liste[6];
+    t_task liste[6];
     char *line;
 
     init_list(liste);

@@ -16,7 +16,7 @@ int is_extension(int argc, char *argv[], char *env[])
     (void)env;
     while (*pathfile && *pathfile != '.')
             pathfile++;
-    if (pathfile == '\0')
+    if (*pathfile == '\0')
         return (write(2,"Error: No extension found\n", 26), 0);
     if (!ft_strncmp(pathfile, ".cub", 4) && ft_strlen(pathfile) == 4)
         return (1);

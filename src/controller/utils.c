@@ -29,25 +29,25 @@ char *wgnl(char **line, int fd)
     return (*line);
 }
 
-void init_list(t_task *list[6])
+void init_list(t_task list[6])
 {
     int i;
 
     i = 0;
     while (i < 6)
-        list[i]->done = 0;
-    list[0]->func = is_texture_NO;
-    list[0]->parse = parse_NO;
-    list[1]->func = is_texture_SO;
-    list[1]->parse = parse_SO;
-    list[2]->func = is_texture_WE;
-    list[2]->parse = parse_WE;
-    list[3]->func = is_texture_EA;
-    list[3]->parse = parse_EA;
-    list[4]->func = is_ceiling;
-    list[4]->parse = parse_ceiling;
-    list[5]->func = is_floor;
-    list[5]->parse = is_floor;
+        list[i++].done = 0;
+    list[0].func = is_texture_NO;
+    list[0].parse = parse_NO;
+    list[1].func = is_texture_SO;
+    list[1].parse = parse_SO;
+    list[2].func = is_texture_WE;
+    list[2].parse = parse_WE;
+    list[3].func = is_texture_EA;
+    list[3].parse = parse_EA;
+    list[4].func = is_ceiling;
+    list[4].parse = parse_ceiling;
+    list[5].func = is_floor;
+    list[5].parse = is_floor;
 }
 int empty_gnl(int fd)
 {
