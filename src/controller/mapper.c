@@ -17,7 +17,7 @@ int mapper(char *line, int fd)
             return(free(line), empty_gnl(fd), print_error());
         free(line);
     }
-    if (map_checker())
+    if (map_fixer() || map_checker())
         return (remove_map(), print_error());
     return (0);
 }
