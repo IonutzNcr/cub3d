@@ -26,6 +26,8 @@ int print_error()
 char *wgnl(char **line, int fd)
 {
     *line = get_next_line(fd);
+    if (*line)
+        (*line)[ft_strlen(*line) - 1] = '\0';
     return (*line);
 }
 
