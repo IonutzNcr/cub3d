@@ -87,6 +87,7 @@ int add_line(char *line)
         map[nb+1] = 0;
         *sgt_map() = map;
     }
+    return(0);
 }
 
 /*

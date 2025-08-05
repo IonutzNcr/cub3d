@@ -23,7 +23,7 @@ int quick_verif(int argc, char *argv[], char *env[])
     return 1 if fail
     set error to corresponding error
 */
-int last_verif(t_task *liste[6])
+int last_verif(t_task liste[6])
 {
     if(!checked_list(liste))
         return (set_sgt_error(10));// incomplete config file;

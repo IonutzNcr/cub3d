@@ -65,7 +65,7 @@ int is_floor(char *line);
 
 int asset_checker(t_task *liste, char *line);
 
-int checked_list(t_task *liste[6]);
+int checked_list(t_task liste[6]);
 void free_split(char **arg);
 int parse_floor(char *line);
 int parse_ceiling(char *line);
@@ -73,13 +73,13 @@ int parse_NO(char *line);
 int parse_SO(char *line);
 int parse_WE(char *line);
 int parse_EA(char *line);
-int asset_parser(t_task *liste[6], char *line);
+int asset_parser(t_task liste[6], char *line);
 int is_invalid_space(char ch);
 int print_error();
 void init_list(t_task list[6]);
 char *wgnl(char **line, int fd);
 int parser(int argc, char *argv[], char *env[]);
-int last_verif(t_task *liste[6]);
+int last_verif(t_task liste[6]);
 int quick_verif(int argc, char *argv[], char *env[]);
 int hard_verif(char *argv[]);
 int empty_gnl(int fd);
