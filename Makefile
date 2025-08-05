@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+         #
+#    By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 16:19:15 by kjullien          #+#    #+#              #
-#    Updated: 2025/08/03 20:35:54 by inicoara         ###   ########.fr        #
+#    Updated: 2025/08/05 16:48:37 by yoyo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ NAME = minishell
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+
+# CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -g
 
 # Directories
 SRC_DIR = src
@@ -26,10 +28,16 @@ SRC_FILES = $(SRC_DIR)/main.c\
 			$(SRC_DIR)/controller/asset_checker.c\
 			$(SRC_DIR)/controller/asset_parser.c\
 			$(SRC_DIR)/controller/checked_list.c\
+			$(SRC_DIR)/controller/checked_characters.c\
+			$(SRC_DIR)/controller/map_checker.c\
+			$(SRC_DIR)/controller/map_fixer.c\
+			$(SRC_DIR)/controller/map_checker.c\
+			$(SRC_DIR)/controller/mapper.c\
 			$(SRC_DIR)/controller/parse_assets.func.c\
 			$(SRC_DIR)/controller/parse_cf.func.c\
 			$(SRC_DIR)/controller/parser.c\
 			$(SRC_DIR)/controller/utils.c\
+			$(SRC_DIR)/controller/utility.c\
 			$(SRC_DIR)/controller/verif.c\
 			$(SRC_DIR)/rules/is_cf_format.c\
 			$(SRC_DIR)/rules/is_extension.c\
