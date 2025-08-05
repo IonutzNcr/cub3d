@@ -1,4 +1,4 @@
-
+#include "checker.h"
 
 /*
     remalloc and copy the old array content inside a new one 
@@ -19,6 +19,23 @@ void *ft_remalloc(void *old, int n_size, int old_size)
     while (old_size--)
         dest[old_size] = src[old_size];
     return (map); 
+}
+
+/*
+    return l'addresse du pointeur de la row.. 
+    return null if row not inside the map...
+
+*/
+char **get_row(int row)
+{
+    char **map;
+    int k;
+
+    map = *sgt_map();
+    k = count_elements(map);
+    if (row > k - 1)
+        return (NULL);
+    return (&map[row]);
 }
 
 /*
@@ -80,3 +97,4 @@ char ***sgt_map()
     static char **map;
     return (&map);
 }
+
