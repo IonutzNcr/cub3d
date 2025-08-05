@@ -94,5 +94,6 @@ int count_elements(char **argv);
 
 int check_characters();
 char **get_row(int row);
+int map_fixer();
 
 #endif
