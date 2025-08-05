@@ -1,6 +1,34 @@
 #include "checker.h"
 
 
+static int find_max_lenght(char **map)
+{
+    int max;
+    int l;
+
+    max = 0;
+    while (map && *map)
+    {
+        l = ft_strlen(*map);
+        if (l > max)
+            max = l;
+        map++;
+    }
+    return (max);
+}
+
+static void fill_row(char *dest, int max)
+{
+    int i;
+
+    i = 0;
+    while (dest[i])
+        i++;
+    while (i < max)
+        dest[i++] = '1';
+    dest[i] = '\0';
+}
+
 static int fix_length()
 {
     int max_lenght;
