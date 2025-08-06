@@ -12,12 +12,12 @@ int mapper(char *line, int fd)
     while (wgnl(&line, fd))
     {
         if (*line == '\0' && set_sgt_error(13)) // empty line in map
-            return (*sgt_error());
+            return (free_singleton() ,*sgt_error());
         if (map_parser(line))
-            return(free(line), empty_gnl(fd), print_error());
+            return(free_singleton() ,free(line), empty_gnl(fd), print_error());
         free(line);
     }
     if (map_fixer() || map_checker())
-        return (remove_map(), print_error());
+        return (free_singleton(), print_error());
     return (0);
 }

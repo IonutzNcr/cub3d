@@ -6,7 +6,7 @@
 /*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 17:57:16 by yoyo              #+#    #+#             */
-/*   Updated: 2025/08/05 21:15:21 by yoyo             ###   ########.fr       */
+/*   Updated: 2025/08/06 23:59:18 by yoyo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@ int   main(int argc, char **argv, char **env)
 {
     if (parser(argc, argv, env))
         return (1);
+    free_singleton();
     return (0);
 }

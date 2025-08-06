@@ -64,14 +64,14 @@ int hard_verif(char *argv[])
             if (!asset_checker(liste, line))
             {
                 if(asset_parser(liste, line))
-                    return (free(line), empty_gnl(fd), print_error());
+                    return (remove_assets() ,free(line), empty_gnl(fd), print_error());
             }
             else
-                return (free(line), empty_gnl(fd), print_error());
+                return (remove_assets(), free(line), empty_gnl(fd), print_error());
             free(line);
         }
     }
     if(last_verif(liste))
-        return (remove_map(), print_error());
+        return (free_singleton(), print_error());
     return (0);
 }

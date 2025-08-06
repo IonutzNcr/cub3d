@@ -19,3 +19,9 @@ int count_elements(char **argv)
         i++;
     return (i);
 }
+
+void free_singleton()
+{
+    remove_map();
+    remove_assets();
+}

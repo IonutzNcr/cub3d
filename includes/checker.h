@@ -93,6 +93,8 @@ int mapper(char *line, int fd);
 
 int add_line(char *line);
 int remove_map();
+void remove_assets();
+void free_singleton();
 void *ft_remalloc(void *old, int n_size, int old_size);
 
 int map_parser(char *line);
