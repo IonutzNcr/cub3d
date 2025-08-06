@@ -81,12 +81,13 @@ int add_line(char *line)
     else
     {
         nb = count_elements(*sgt_map());
-        map = ft_remalloc(*sgt_map(), (nb + 1) * sizeof(char *), nb * sizeof(char *));
+        printf("nb cannot be 0 ==> %d\n", nb);
+        map = ft_remalloc(*sgt_map(), (nb + 2) * sizeof(char *), (nb + 1) * sizeof(char *));
         if (!map)
             return (10);//malloc fail
         free(*sgt_map());
         *(map + nb) = ft_strdup(line);
-        *(map + nb+1) = 0;
+        *(map + nb + 1) = 0;
         *sgt_map() = map;
     }
     return(0);

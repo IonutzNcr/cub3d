@@ -42,7 +42,7 @@ static int fix_length()
     while(*map)
     {
         curr_lenght = ft_strlen(*map);
-        row = ft_remalloc(*map, max_lenght, curr_lenght);
+        row = ft_remalloc(*map, max_lenght + 1, curr_lenght + 1);
         if (!row && set_sgt_error(12))// malloc fail...
             return(12);
         fill_row(row, max_lenght);
