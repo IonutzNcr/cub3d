@@ -18,7 +18,7 @@ int is_lc_wall()
     j = ft_strlen(map[0]);
     k = count_elements(map);
     while (i < k)
-        if(map[i++][j] != 1)
+        if(map[i++][j - 1] != '1')
             return (1);
     return (0);
 }
@@ -36,7 +36,7 @@ int is_c1_wall()
     map = *sgt_map();
     k = count_elements(map);
     while (k--)
-        if(map[k][0] != 1)
+        if(map[k][0] != '1')
             return (1);
     return (0);
 }
@@ -54,8 +54,8 @@ int is_lr_wall()
     i = 0;
     map = *sgt_map();
     k = count_elements(map);
-    while (map[k][i])
-        if(map[k][i++] != 1)
+    while (map[k - 1][i])
+        if(map[k - 1][i++] != '1')
             return (1);
     return (0);
 }
@@ -72,7 +72,7 @@ int is_r1_wall()
     i = 0;
     map = *sgt_map();
     while (map[0][i])
-        if(map[0][i++] != 1)
+        if(map[0][i++] != '1')
             return (1);
     return (0);
 }
