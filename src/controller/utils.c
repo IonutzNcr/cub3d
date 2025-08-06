@@ -34,7 +34,7 @@ int print_error()
     if (error == NO_PLY)
         write(2, "ERROR: No player detected\n", 26); 
     if (error > 12)
-        printf("ERROR %d not detected yet\n");
+        printf("ERROR %d not detected yet\n", error);
     return (error);
 }
 

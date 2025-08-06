@@ -72,6 +72,6 @@ int hard_verif(char *argv[])
         }
     }
     if(last_verif(liste))
-        return (print_error());
+        return (remove_map(), print_error());
     return (0);
 }
