@@ -85,7 +85,7 @@ int check_walls()
 {
     if (is_r1_wall() || is_lr_wall() || is_c1_wall() || is_lc_wall())
     {
-        set_sgt_error(15);// Missing walls;
+        set_sgt_error(NO_WALL);// Missing walls;
         return (*sgt_error());
     }
     return (0);

@@ -36,7 +36,6 @@ static int fix_length()
     char *row;
     int curr_lenght;
 
-
     map = *sgt_map();
     max_lenght = find_max_lenght(map);
     while(*map)

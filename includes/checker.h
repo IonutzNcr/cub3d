@@ -19,7 +19,13 @@ enum e_err
     E_DUPLI,
     INV_LN,
     EM_FILE,
-    F_MALL
+    F_MALL,
+    NO_WALL,
+    INV_CH,
+    PLY_NB,
+    NO_PLY
+
+
 };
 
 typedef int(*check)(char *line);

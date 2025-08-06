@@ -17,6 +17,24 @@ int print_error()
         write(2, "ERROR: Invalid file extension\n", 30);
     if (error == E_SCENE)
         write(2, "ERROR: Empty scene\n", 19);
+    if (error == E_DUPLI)
+        write(2, "ERROR: Double config detected\n", 30);
+    if (error == INV_LN)
+        write(2, "ERROR: Invalid Line\n", 20);
+    if (error == EM_FILE)
+        write(2, "ERROR: Empty file detected\n", 27);
+    if (error == F_MALL)
+        write(2, "ERROR: Malloc Fail\n", 19);
+    if (error == NO_WALL)
+        write(2, "ERROR: NO WALL DETECTED\n", 24);
+    if (error == INV_CH)
+        write(2, "ERROR: Invalid character in map\n", 32); 
+    if (error == PLY_NB)
+        write(2, "ERROR: Too many players\n", 24); 
+    if (error == NO_PLY)
+        write(2, "ERROR: No player detected\n", 26); 
+    if (error > 12)
+        printf("ERROR %d not detected yet\n");
     return (error);
 }
 
