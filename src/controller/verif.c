@@ -6,13 +6,13 @@
 */
 int quick_verif(int argc, char *argv[], char *env[])
 {
-    if (argc != 2 && set_sgt_error(1))
+    if (argc != 2 && set_sgt_error(P_NUM))
         return (print_error());// Invalid parameter number
-    if (!env && set_sgt_error(2))
+    if (!env && set_sgt_error(NO_ENV))
         return (print_error());// No env found
-    if (!is_extension(argc, argv, env) && set_sgt_error(3))
+    if (!is_extension(argc, argv, env) && set_sgt_error(INV_EXT))
         return (print_error()); // Invalid file extensioin
-    if (is_file_empty(argv[1]) && set_sgt_error(4))//potentiellement pb car je check pas s fd fail...
+    if (is_file_empty(argv[1]) && set_sgt_error(E_SCENE))//potentiellement pb car je check pas s fd fail...
         return (print_error()); // Empty Scene
     return (0);
 }
