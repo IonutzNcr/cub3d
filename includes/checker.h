@@ -23,7 +23,8 @@ enum e_err
     NO_WALL,
     INV_CH,
     PLY_NB,
-    NO_PLY
+    NO_PLY,
+    NO_FILE,
 
 
 };
