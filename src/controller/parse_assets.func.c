@@ -14,7 +14,6 @@ int parse_NO(char *line)
     while(*line && (*line != '/' && *line != '.' ))
         line++;
     fd = open(line, O_RDONLY);
-    printf("file to open: %s\n", line);
     if (fd == -1 && set_sgt_error(NO_FILE))// FAIIL TO OPEN ASSETS
         return (*sgt_error());
     if (is_file_empty(line) && set_sgt_error(EM_FILE))//empty .xmp file
@@ -39,13 +38,11 @@ int parse_SO(char *line)
 
     while(*line && (*line != '/' && *line != '.' ))
         line++;
-    printf("file to open: %s\n", line);
     fd = open(line, O_RDONLY);
     if (fd == -1 && set_sgt_error(NO_FILE))// FAIIL TO OPEN ASSETS
         return (*sgt_error());
     if (is_file_empty(line) && set_sgt_error(EM_FILE))//empty .xmp file
         return (close(fd), *sgt_error());
-    printf("000000\n");
     close(fd);
     assets = sgt_assets();
     assets->file_SO = ft_strdup(line);
@@ -67,7 +64,6 @@ int parse_WE(char *line)
     while(*line && (*line != '/' && *line != '.' ))
         line++;
     fd = open(line, O_RDONLY);
-    printf("file to open: %s\n", line);
     if (fd == -1 && set_sgt_error(NO_FILE))// FAIIL TO OPEN ASSETS
         return (*sgt_error());
     if (is_file_empty(line) && set_sgt_error(EM_FILE))//empty .xmp file
@@ -92,11 +88,9 @@ int parse_EA(char *line)
 
     while(*line && (*line != '/' && *line != '.' ))
         line++;
-    printf("file to open: %s\n", line);
     fd = open(line, O_RDONLY);
     if (fd == -1 && set_sgt_error(NO_FILE))// FAIIL TO OPEN ASSETS
         return (*sgt_error());
-    printf("000000\n");
     if (is_file_empty(line) && set_sgt_error(EM_FILE))//empty .xmp file
         return (close(fd), *sgt_error());
     close(fd);

@@ -15,3 +15,14 @@ for map_file in maps/invalid/*; do
     
     echo -e "---\n" 
 done
+ 
+echo -e "-------------------\n" 
+
+for map_file in maps/valid/*; do
+    echo ">>> Testing $map_file" 
+
+    valgrind --leak-check=full --show-leak-kinds=all ./cub3d "$map_file" 2>&1 \
+        | awk '/HEAP SUMMARY:/, /^==.*ERROR SUMMARY:/ { print }' 
+    
+    echo -e "---\n" 
+done

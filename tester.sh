@@ -12,3 +12,10 @@ for map_file in maps/invalid/*; do
     ./cub3d "$map_file" 
     echo -e "\n---\n" 
 done
+
+# Lancer chaque fichier de map dans map/invalid avec cub3d
+for map_file in maps/valid/*; do
+    echo ">>> Testing $map_file"
+    ./cub3d "$map_file" 
+    echo -e "\n---\n" 
+done

@@ -81,7 +81,6 @@ int add_line(char *line)
     else
     {
         nb = count_elements(*sgt_map());
-        printf("nb cannot be 0 ==> %d\n", nb);
         map = ft_remalloc(*sgt_map(), (nb + 2) * sizeof(char *), (nb + 1) * sizeof(char *));
         if (!map)
             return (10);//malloc fail
