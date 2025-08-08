@@ -1,29 +1,12 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/03/12 16:19:15 by kjullien          #+#    #+#              #
-#    Updated: 2025/08/08 17:55:50 by yoyo             ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = cub3d
 
-# Compiler and flags
-CC = cc
+CC       = cc
+CFLAGS   = -Wall -Wextra -Iincludes -Imlx_linux -Ilibft -g 
 
-# CFLAGS = -Wall -Wextra -Werror -g
-CFLAGS = -Wall -Wextra -g
-
-# Directories
 SRC_DIR = src
 INC_DIR = includes
 OBJ_DIR = obj
 
-# Source files
 SRC_FILES = $(SRC_DIR)/main.c\
 			$(SRC_DIR)/parser/controller/asset_checker.c\
 			$(SRC_DIR)/parser/controller/asset_parser.c\
@@ -47,58 +30,33 @@ SRC_FILES = $(SRC_DIR)/main.c\
 			$(SRC_DIR)/singleton/sgt_assets.c\
 			$(SRC_DIR)/singleton/sgt_error.c\
 			$(SRC_DIR)/singleton/sgt_line.c\
-			$(SRC_DIR)/singleton/sgt_map.c\
-          
-# All C files for linting and formatting
-C_FILES = $(SRC_FILES)
-H_FILES = 	$(INC_DIR)/checker.h \
-	
-			
-			
+			$(SRC_DIR)/singleton/sgt_map.c
 
-
-# Object files
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
-# Header files
-INC_FILES = -I$(INC_DIR)/
+H_FILES = $(INC_DIR)/checker.h
 
-# Readline
-
-
-
-# Rules
 all: $(NAME)
 
+# Single canonical rule: creates obj subdirs and compiles
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(H_FILES)
-	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS)  -c $< -o $@
 
 $(NAME): $(OBJ_FILES)
-	$(MAKE) -C ./libft
-	$(CC) $(OBJ_FILES) -Lmlx_linux -lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -L./libft -lft -o $(NAME) -g3
-
-# Linting with norminette
-lint:
-	@echo "Running norminette on all source files..."
-	@norminette $(C_FILES)
-	@echo "Running norminette on all header files..."
-	@norminette $(H_FILES)
-
-# Formatting with c_formatter_42
-format:
-	@echo "Formatting source files with c_formatter_42..."
-	@c_formatter_42 $(C_FILES)
-	@echo "Formatting header files with c_formatter_42..."
-	@c_formatter_42 $(H_FILES)
+	$(MAKE) -C libft
+	$(MAKE) -C mlx_linux
+	$(CC) $(OBJ_FILES) -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -Llibft -lft -o $(NAME) -g3
 
 clean:
-	$(MAKE) -C ./libft clean
+	$(MAKE) -C libft clean
+	$(MAKE) -C mlx_linux clean
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	$(MAKE) -C ./libft fclean
+	$(MAKE) -C libft fclean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re lint format
+.PHONY: all clean fclean re
