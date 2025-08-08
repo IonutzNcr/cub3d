@@ -6,7 +6,7 @@
 #    By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 16:19:15 by kjullien          #+#    #+#              #
-#    Updated: 2025/08/08 16:16:49 by yoyo             ###   ########.fr        #
+#    Updated: 2025/08/08 17:39:39 by yoyo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,11 +72,10 @@ all: $(NAME)
 
 $(NAME): $(OBJ_FILES)
 	$(MAKE) -C ./libft
-	$(CC) $(CFLAGS)  $(OBJ_FILES) -L./libft -lft -I./includes -o $(NAME) -g3
+	$(CC) $(CFLAGS)  $(OBJ_FILES) -Lmlx_linux -lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -L./libft -lft -o $(NAME) -g3
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(H_FILES)
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INC_FILES) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC_FILES) -Imlx_linux -O3 -c $< -o $@
 
 # Linting with norminette
 lint:
