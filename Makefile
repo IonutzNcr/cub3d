@@ -6,7 +6,7 @@
 #    By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 16:19:15 by kjullien          #+#    #+#              #
-#    Updated: 2025/08/05 19:07:19 by yoyo             ###   ########.fr        #
+#    Updated: 2025/08/08 16:16:49 by yoyo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,25 +25,25 @@ OBJ_DIR = obj
 
 # Source files
 SRC_FILES = $(SRC_DIR)/main.c\
-			$(SRC_DIR)/controller/asset_checker.c\
-			$(SRC_DIR)/controller/asset_parser.c\
-			$(SRC_DIR)/controller/checked_list.c\
-			$(SRC_DIR)/controller/check_characters.c\
-			$(SRC_DIR)/controller/map_fixer.c\
-			$(SRC_DIR)/controller/map_parser.c\
-			$(SRC_DIR)/controller/map_checker.c\
-			$(SRC_DIR)/controller/mapper.c\
-			$(SRC_DIR)/controller/parse_assets.func.c\
-			$(SRC_DIR)/controller/parse_cf.func.c\
-			$(SRC_DIR)/controller/parser.c\
-			$(SRC_DIR)/controller/utils.c\
-			$(SRC_DIR)/controller/utility.c\
-			$(SRC_DIR)/controller/verif.c\
-			$(SRC_DIR)/rules/is_cf_format.c\
-			$(SRC_DIR)/rules/is_extension.c\
-			$(SRC_DIR)/rules/is_file_empty.c\
-			$(SRC_DIR)/rules/is_invalid_space.c\
-			$(SRC_DIR)/rules/is_texture_format.c\
+			$(SRC_DIR)/parser/controller/asset_checker.c\
+			$(SRC_DIR)/parser/controller/asset_parser.c\
+			$(SRC_DIR)/parser/controller/checked_list.c\
+			$(SRC_DIR)/parser/controller/check_characters.c\
+			$(SRC_DIR)/parser/controller/map_fixer.c\
+			$(SRC_DIR)/parser/controller/map_parser.c\
+			$(SRC_DIR)/parser/controller/map_checker.c\
+			$(SRC_DIR)/parser/controller/mapper.c\
+			$(SRC_DIR)/parser/controller/parse_assets.func.c\
+			$(SRC_DIR)/parser/controller/parse_cf.func.c\
+			$(SRC_DIR)/parser/controller/parser.c\
+			$(SRC_DIR)/parser/controller/utils.c\
+			$(SRC_DIR)/parser/controller/utility.c\
+			$(SRC_DIR)/parser/controller/verif.c\
+			$(SRC_DIR)/parser/rules/is_cf_format.c\
+			$(SRC_DIR)/parser/rules/is_extension.c\
+			$(SRC_DIR)/parser/rules/is_file_empty.c\
+			$(SRC_DIR)/parser/rules/is_invalid_space.c\
+			$(SRC_DIR)/parser/rules/is_texture_format.c\
 			$(SRC_DIR)/singleton/sgt_assets.c\
 			$(SRC_DIR)/singleton/sgt_error.c\
 			$(SRC_DIR)/singleton/sgt_line.c\
