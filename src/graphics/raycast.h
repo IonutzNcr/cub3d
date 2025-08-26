@@ -1,0 +1,78 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/27 00:20:52 by leothoma          #+#    #+#             */
+/*   Updated: 2025/08/27 00:20:54 by leothoma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+// a modifier plus tard
+#define MAP_WIDTH 24
+#define MAP_HEIGHT 24
+
+#define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH 640
+
+//
+typedef struct s_game
+{
+	int	move_forward;
+	int	move_backward;
+	int	rotation_left;
+	int	rotation_right;
+
+	double	move_speed;
+	double	rotation_speed;
+
+	double	pos_x;
+	double	pos_y;
+
+	double	dir_x;
+	double	dir_y;
+
+	double	plane_y;
+	double	plane_x;
+
+	int	map_width;
+	int	map_height;
+	char	**world_map;
+}	t_game;
+
+typedef struct s_ray
+{
+	double	time;
+	double	oldtime;
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		color;
+}	t_ray;
+
+void	render_single_frame(t_game *game, t_mlx *mlx);
+void	cast_ray(t_game *game, int i, t_mlx *mlx);
+void	draw_walls(t_game *game, t_ray *r, int i, t_mlx *mlx);
+void	calculate_wall_distance(t_ray *r);
+void	execute_dda(t_game *game, t_ray *r);
+void	calculate_distances(t_game *game, t_ray *r);
+void	init_ray(t_game *game, t_ray *r, int i);
+void	ft_verline(t_mlx *mlx, int x, int drawStart, int drawEnd, int color);
+void	start_game_loop(t_game *game, t_mlx *mlx);
+

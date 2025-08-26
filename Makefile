@@ -14,92 +14,83 @@ NAME = cub3d
 
 # Compiler and flags
 CC = cc
-
-# CFLAGS = -Wall -Wextra -Werror -g
 CFLAGS = -Wall -Wextra -g
 
 # Directories
 SRC_DIR = src
 INC_DIR = includes
 OBJ_DIR = obj
+MLX_DIR = minilibx-linux
+LIBFT_DIR = libft
+
+# MiniLibX flags (Linux)
+MLX_FLAGS = -I$(MLX_DIR) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 # Source files
-SRC_FILES = $(SRC_DIR)/main.c\
-			$(SRC_DIR)/parser/controller/asset_checker.c\
-			$(SRC_DIR)/parser/controller/asset_parser.c\
-			$(SRC_DIR)/parser/controller/checked_list.c\
-			$(SRC_DIR)/parser/controller/check_characters.c\
-			$(SRC_DIR)/parser/controller/map_fixer.c\
-			$(SRC_DIR)/parser/controller/map_parser.c\
-			$(SRC_DIR)/parser/controller/map_checker.c\
-			$(SRC_DIR)/parser/controller/mapper.c\
-			$(SRC_DIR)/parser/controller/parse_assets.func.c\
-			$(SRC_DIR)/parser/controller/parse_cf.func.c\
-			$(SRC_DIR)/parser/controller/parser.c\
-			$(SRC_DIR)/parser/controller/utils.c\
-			$(SRC_DIR)/parser/controller/utility.c\
-			$(SRC_DIR)/parser/controller/verif.c\
-			$(SRC_DIR)/parser/rules/is_cf_format.c\
-			$(SRC_DIR)/parser/rules/is_extension.c\
-			$(SRC_DIR)/parser/rules/is_file_empty.c\
-			$(SRC_DIR)/parser/rules/is_invalid_space.c\
-			$(SRC_DIR)/parser/rules/is_texture_format.c\
-			$(SRC_DIR)/singleton/sgt_assets.c\
-			$(SRC_DIR)/singleton/sgt_error.c\
-			$(SRC_DIR)/singleton/sgt_line.c\
-			$(SRC_DIR)/singleton/sgt_map.c\
-          
-# All C files for linting and formatting
-C_FILES = $(SRC_FILES)
-H_FILES = 	$(INC_DIR)/checker.h \
-	
-			
-			
-
+SRC_FILES = $(SRC_DIR)/main.c \
+			$(SRC_DIR)/parser/controller/asset_checker.c \
+			$(SRC_DIR)/parser/controller/asset_parser.c \
+			$(SRC_DIR)/parser/controller/checked_list.c \
+			$(SRC_DIR)/parser/controller/check_characters.c \
+			$(SRC_DIR)/parser/controller/map_fixer.c \
+			$(SRC_DIR)/parser/controller/map_parser.c \
+			$(SRC_DIR)/parser/controller/map_checker.c \
+			$(SRC_DIR)/parser/controller/mapper.c \
+			$(SRC_DIR)/parser/controller/parse_assets.func.c \
+			$(SRC_DIR)/parser/controller/parse_cf.func.c \
+			$(SRC_DIR)/parser/controller/parser.c \
+			$(SRC_DIR)/parser/controller/utils.c \
+			$(SRC_DIR)/parser/controller/utility.c \
+			$(SRC_DIR)/parser/controller/verif.c \
+			$(SRC_DIR)/parser/rules/is_cf_format.c \
+			$(SRC_DIR)/parser/rules/is_extension.c \
+			$(SRC_DIR)/parser/rules/is_file_empty.c \
+			$(SRC_DIR)/parser/rules/is_invalid_space.c \
+			$(SRC_DIR)/parser/rules/is_texture_format.c \
+			$(SRC_DIR)/singleton/sgt_assets.c \
+			$(SRC_DIR)/singleton/sgt_error.c \
+			$(SRC_DIR)/singleton/sgt_line.c \
+			$(SRC_DIR)/singleton/sgt_map.c \
+			$(SRC_DIR)/graphics/render_single_frame.c \
 
 # Object files
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
-# Header files
-INC_FILES = -I$(INC_DIR)/
+# Include paths
+INC_FLAGS = -I$(INC_DIR) -I$(MLX_DIR)
 
-# Readline
-
-
-
-# Rules
+# Default rule
 all: $(NAME)
 
+# Build executable
 $(NAME): $(OBJ_FILES)
-	$(MAKE) -C ./libft
-	$(CC) $(CFLAGS)  $(OBJ_FILES) -L./libft -lft -I./includes -o $(NAME) -g3
+	$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C $(MLX_DIR)
+	$(CC) $(CFLAGS) $(OBJ_FILES) -L$(LIBFT_DIR) -lft $(MLX_FLAGS) -I$(INC_DIR) -o $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(H_FILES)
+# Build object files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INC_FILES) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@
 
-# Linting with norminette
-lint:
-	@echo "Running norminette on all source files..."
-	@norminette $(C_FILES)
-	@echo "Running norminette on all header files..."
-	@norminette $(H_FILES)
-
-# Formatting with c_formatter_42
-format:
-	@echo "Formatting source files with c_formatter_42..."
-	@c_formatter_42 $(C_FILES)
-	@echo "Formatting header files with c_formatter_42..."
-	@c_formatter_42 $(H_FILES)
-
+# Cleaning rules
 clean:
-	$(MAKE) -C ./libft clean
+	$(MAKE) -C $(LIBFT_DIR) clean
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	$(MAKE) -C ./libft fclean
+	$(MAKE) -C $(LIBFT_DIR) fclean
 	rm -f $(NAME)
 
 re: fclean all
+
+# Extra rules
+lint:
+	@echo "Running norminette..."
+	@norminette $(SRC_FILES) $(INC_DIR)/*.h
+
+format:
+	@echo "Formatting..."
+	@c_formatter_42 $(SRC_FILES) $(INC_DIR)/*.h
 
 .PHONY: all clean fclean re lint format
