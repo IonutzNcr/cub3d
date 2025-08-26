@@ -30,11 +30,13 @@ SRC_FILES = $(SRC_DIR)/main.c\
 			$(SRC_DIR)/singleton/sgt_assets.c\
 			$(SRC_DIR)/singleton/sgt_error.c\
 			$(SRC_DIR)/singleton/sgt_line.c\
-			$(SRC_DIR)/singleton/sgt_map.c
+			$(SRC_DIR)/singleton/sgt_map.c\
+			$(SRC_DIR)/minimap/init_mini_map.c
+
 
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
-H_FILES = $(INC_DIR)/checker.h
+H_FILES = $(INC_DIR)/checker.h $(INC_DIR)/minimap.h 
 
 all: $(NAME)
 
@@ -47,6 +49,8 @@ $(NAME): $(OBJ_FILES)
 	$(MAKE) -C libft
 	$(MAKE) -C mlx_linux
 	$(CC) $(OBJ_FILES) -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -Llibft -lft -o $(NAME) -g3
+	
+	
 
 clean:
 	$(MAKE) -C libft clean

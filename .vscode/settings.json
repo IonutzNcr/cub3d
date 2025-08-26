@@ -8,6 +8,7 @@
     },
     "files.associations": {
         "checker.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "minimap.h": "c"
     }
 }
