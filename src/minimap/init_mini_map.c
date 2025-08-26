@@ -17,10 +17,10 @@ int init_mini_map()
     int l = count_elements(map);
     printf("L = %d l = %d\n", L , l );
     // 2. Création d'une fenêtre 800x600 qui s'appelle "Ma fenêtre"
-    win_ptr = mlx_new_window(mlx_ptr, L *15 , l*15, "Ma fenetre");
+    win_ptr = mlx_new_window(mlx_ptr, L *30 , l*30, "Ma fenetre");
     if (win_ptr == NULL)
         return (1);
-    printf("succccccccccc\n");
+    render_2dMap(mlx_ptr, win_ptr);
     // 3. Boucle infinie pour garder la fenêtre ouverte
     mlx_loop(mlx_ptr);
 

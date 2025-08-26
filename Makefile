@@ -31,7 +31,12 @@ SRC_FILES = $(SRC_DIR)/main.c\
 			$(SRC_DIR)/singleton/sgt_error.c\
 			$(SRC_DIR)/singleton/sgt_line.c\
 			$(SRC_DIR)/singleton/sgt_map.c\
-			$(SRC_DIR)/minimap/init_mini_map.c
+			$(SRC_DIR)/minimap/init_mini_map.c\
+			$(SRC_DIR)/minimap/img.c\
+			$(SRC_DIR)/minimap/render_2dMap.c\
+			$(SRC_DIR)/minimap/img_try.c
+			
+			
 
 
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
