@@ -12,9 +12,10 @@
 
 #include "../header_main.h"
 
-int	**temp_map(void)
+void	init_map(t_game *game)
 {
-	int	map[24][24] =
+
+	int	temp_map[24][24] =
 	{
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -41,13 +42,31 @@ int	**temp_map(void)
 		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
-	return (map);
+
+    game->world_map = malloc(24 * sizeof(int *));
+    if (!game->world_map)
+        exit(1);
+
+    for (int y = 0; y < 24; y++) {
+        game->world_map[y] = malloc(24 * sizeof(int));
+        if (!game->world_map[y])
+            exit(1);
+        memcpy(game->world_map[y], temp_map[y], 24 * sizeof(int));
+	}
+}
+
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
 }
 
 void	ft_verline(t_mlx *mlx, int x, int drawStart, int drawEnd, int color)
 {
 	for (int y = drawStart; y <= drawEnd; y++)
-		mlx_pixel_put(mlx->mlx, mlx->mlx_win, x, y, color);
+		my_mlx_pixel_put(mlx->img, x, y, color);
 }
 
 void	init_ray(t_game *game, t_ray *r, int i)
@@ -99,8 +118,9 @@ void	execute_dda(t_game *game, t_ray *r)
 	i = 0;
 	while (r->hit == 0)
 	{
-		if (r->side_dist_y < r->side_dist_x)
+		if (r->side_dist_x < r->side_dist_y)
 		{
+			printf("oui\n");
 			r->side_dist_x += r->delta_dist_x;
 			r->map_x += r->step_x;
 			r->side = 0;
@@ -109,10 +129,12 @@ void	execute_dda(t_game *game, t_ray *r)
 		{
 			r->side_dist_y += r->delta_dist_y;
 			r->map_y += r->step_y;
-			r->side = 0;
+			r->side = 1;
 		}
-		if (game->world_map[r->map_x][r->map_y] > 0)
-			r->hit = 0;
+		printf("%ld x\n", r->map_x);
+		printf("%ld y\n", r->map_y);
+		if (game->world_map[r->map_y][r->map_x] > 0)
+			r->hit = 1;
 	}
 }
 
@@ -153,6 +175,7 @@ void	cast_ray(t_game *game, int i, t_mlx *mlx)
 	t_ray	ray;
 
 	ft_bzero(&ray, sizeof(ray));
+	init_ray(game, &ray, i);
 	calculate_distances(game, &ray);
 	execute_dda(game, &ray);
 	calculate_wall_distance(&ray);
@@ -174,9 +197,20 @@ void	render_single_frame(t_game *game, t_mlx *mlx)
 
 void	start_game_loop(t_game *game, t_mlx *mlx)
 {
+
+	
+game->pos_x = 12.0;
+game->pos_y = 12.0;
+game->dir_x = -1.0;   // looking left
+game->dir_y = 0.0;
+game->plane_x = 0.0;
+game->plane_y = 0.66; // FOV 66°
+	init_map(game);
 	while (1)
 	{
 		render_single_frame(game, mlx);
-		usleep(10000);
+		mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img->img, 0, 0);
+		printf("yo\n");
+		usleep(1000000);
 	}
 }
