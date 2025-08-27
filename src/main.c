@@ -24,8 +24,8 @@ void	init_t_mlx(t_mlx *mlx)
 
 int   main(int argc, char **argv, char **env)
 {
-//	if (parser(argc, argv, env))
-//		return (1);
+	if (parser(argc, argv, env))
+		return (1);
 	t_game	game;
 	t_mlx	mlx;
 

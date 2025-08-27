@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include "../header_main.h"
-
 void	init_map(t_game *game)
 {
-
+	char **map = *sgt_map();
+/*
 	int	temp_map[24][24] =
 	{
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -43,16 +43,19 @@ void	init_map(t_game *game)
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
 
-    game->world_map = malloc(24 * sizeof(int *));
-    if (!game->world_map)
-        exit(1);
+	game->world_map = malloc(24 * sizeof(int *));
+	if (!game->world_map)
+		exit(1);
 
-    for (int y = 0; y < 24; y++) {
-        game->world_map[y] = malloc(24 * sizeof(int));
-        if (!game->world_map[y])
-            exit(1);
-        memcpy(game->world_map[y], temp_map[y], 24 * sizeof(int));
+	for (int y = 0; y < 24; y++) {
+		game->world_map[y] = malloc(24 * sizeof(int));
+		if (!game->world_map[y])
+			exit(1);
+		memcpy(game->world_map[y], temp_map[y], 24 * sizeof(int));
 	}
+	*/
+	game->world_map = map;
+
 }
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
@@ -120,7 +123,6 @@ void	execute_dda(t_game *game, t_ray *r)
 	{
 		if (r->side_dist_x < r->side_dist_y)
 		{
-			printf("oui\n");
 			r->side_dist_x += r->delta_dist_x;
 			r->map_x += r->step_x;
 			r->side = 0;
@@ -131,9 +133,7 @@ void	execute_dda(t_game *game, t_ray *r)
 			r->map_y += r->step_y;
 			r->side = 1;
 		}
-		printf("%ld x\n", r->map_x);
-		printf("%ld y\n", r->map_y);
-		if (game->world_map[r->map_y][r->map_x] > 0)
+		if (game->world_map[r->map_y][r->map_x] > '0')
 			r->hit = 1;
 	}
 }
@@ -155,13 +155,13 @@ void	draw_walls(t_game *game, t_ray *r, int i, t_mlx *mlx)
 	r->draw_end = r->line_height / 2 + SCREEN_HEIGHT / 2;
 	if (r->draw_end >= SCREEN_HEIGHT)
 		r->draw_end = SCREEN_HEIGHT - 1;
-	else if (game->world_map[r->map_x][r->map_y] == 1)
+	else if (game->world_map[r->map_x][r->map_y] == '1')
 		r->color = 0xFF0000;
-	else if (game->world_map[r->map_x][r->map_y] == 2)
+	else if (game->world_map[r->map_x][r->map_y] == '2')
 		r->color = 0xCCFFCC;
-	else if (game->world_map[r->map_x][r->map_y] == 3)
+	else if (game->world_map[r->map_x][r->map_y] == '3')
 		r->color = 0x0000FF;
-	else if (game->world_map[r->map_x][r->map_y] == 4)
+	else if (game->world_map[r->map_x][r->map_y] == '4')
 		r->color = 0xFFFFFF;
 	else
 		r->color = 0xFFDE21;
@@ -195,22 +195,36 @@ void	render_single_frame(t_game *game, t_mlx *mlx)
 	}
 }
 
-void	start_game_loop(t_game *game, t_mlx *mlx)
+int	key_hook(int keycode, t_mlx *mlx)
 {
 
-	
-game->pos_x = 12.0;
-game->pos_y = 12.0;
-game->dir_x = -1.0;   // looking left
-game->dir_y = 0.0;
-game->plane_x = 0.0;
-game->plane_y = 0.66; // FOV 66°
+	if (keycode == 119)
+		printf("W pressed\n");
+	else if (keycode == 97)
+		printf("A pressed\n");
+	else if (keycode == 115)
+		printf("S pressed\n");
+	else if (keycode == 100)
+		printf("D pressed\n");
+	else if (keycode == 65307)
+		exit(0);
+	return (0);
+}
+
+void	start_game_loop(t_game *game, t_mlx *mlx)
+{
+	game->pos_x = 3.0;
+	game->pos_y = 3.0;
+	game->dir_x = -1.0;   // looking left
+	game->dir_y = 0.0;
+	game->plane_x = 0.0;
+	game->plane_y = 0.66; // FOV 66°
 	init_map(game);
 	while (1)
 	{
+		//mlx_key_hook(mlx->mlx_win, key_hook, &mlx);
 		render_single_frame(game, mlx);
 		mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img->img, 0, 0);
-		printf("yo\n");
-		usleep(1000000);
+		//mlx_loop(mlx->mlx);
 	}
 }

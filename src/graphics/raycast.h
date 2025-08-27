@@ -39,7 +39,7 @@ typedef struct s_game
 
 	int	map_width;
 	int	map_height;
-	int	**world_map;
+	char	**world_map;
 }	t_game;
 
 typedef struct s_ray
