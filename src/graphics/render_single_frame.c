@@ -14,48 +14,7 @@
 void	init_map(t_game *game)
 {
 	char **map = *sgt_map();
-/*
-	int	temp_map[24][24] =
-	{
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-	};
-
-	game->world_map = malloc(24 * sizeof(int *));
-	if (!game->world_map)
-		exit(1);
-
-	for (int y = 0; y < 24; y++) {
-		game->world_map[y] = malloc(24 * sizeof(int));
-		if (!game->world_map[y])
-			exit(1);
-		memcpy(game->world_map[y], temp_map[y], 24 * sizeof(int));
-	}
-	*/
 	game->world_map = map;
-
 }
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
@@ -155,13 +114,13 @@ void	draw_walls(t_game *game, t_ray *r, int i, t_mlx *mlx)
 	r->draw_end = r->line_height / 2 + SCREEN_HEIGHT / 2;
 	if (r->draw_end >= SCREEN_HEIGHT)
 		r->draw_end = SCREEN_HEIGHT - 1;
-	else if (game->world_map[r->map_x][r->map_y] == '1')
+	if (game->world_map[r->map_y][r->map_x] == '1')
 		r->color = 0xFF0000;
-	else if (game->world_map[r->map_x][r->map_y] == '2')
+	else if (game->world_map[r->map_y][r->map_x] == '2')
 		r->color = 0xCCFFCC;
-	else if (game->world_map[r->map_x][r->map_y] == '3')
+	else if (game->world_map[r->map_y][r->map_x] == '3')
 		r->color = 0x0000FF;
-	else if (game->world_map[r->map_x][r->map_y] == '4')
+	else if (game->world_map[r->map_y][r->map_x] == '4')
 		r->color = 0xFFFFFF;
 	else
 		r->color = 0xFFDE21;
@@ -170,61 +129,134 @@ void	draw_walls(t_game *game, t_ray *r, int i, t_mlx *mlx)
 	ft_verline(mlx, i, r->draw_start, r->draw_end, r->color);
 }
 
-void	cast_ray(t_game *game, int i, t_mlx *mlx)
+void	handle_time(t_ray *ray, struct timeval *tv)
 {
-	t_ray	ray;
+	ray->oldtime = ray->time;
+	gettimeofday(tv, NULL);
+	ray->time = tv->tv_sec * 1000 + tv->tv_usec / 1000;
+	ray->frametime = (ray->time - ray->oldtime) / 1000.0;
+	//printf("frametime %f\n", ray->frametime);
+}
 
-	ft_bzero(&ray, sizeof(ray));
-	init_ray(game, &ray, i);
-	calculate_distances(game, &ray);
-	execute_dda(game, &ray);
-	calculate_wall_distance(&ray);
-	draw_walls(game, &ray, i, mlx);
+void reset_ray(t_ray *r)
+{
+    r->camera_x = 0;
+    r->ray_dir_x = 0;
+    r->ray_dir_y = 0;
+    r->map_x = 0;
+    r->map_y = 0;
+    r->side_dist_x = 0;
+    r->side_dist_y = 0;
+    r->delta_dist_x = 0;
+    r->delta_dist_y = 0;
+    r->perp_wall_dist = 0;
+    r->step_x = 0;
+    r->step_y = 0;
+    r->hit = 0;
+    r->side = 0;
 }
 
 
-void	render_single_frame(t_game *game, t_mlx *mlx)
+void	cast_ray(t_game *game, int i, t_mlx *mlx, t_ray *ray)
+{
+	//reset_ray(ray);
+	ft_bzero(ray, sizeof(ray));
+	init_ray(game, ray, i);
+	calculate_distances(game, ray);
+	execute_dda(game, ray);
+	calculate_wall_distance(ray);
+	draw_walls(game, ray, i, mlx);
+}
+
+void	render_single_frame(t_game *game, t_mlx *mlx, t_ray *ray)
 {
 	int	i;
-
+	struct timeval tv;
+ft_bzero(mlx->img->addr, SCREEN_WIDTH * SCREEN_HEIGHT * (mlx->img->bits_per_pixel / 8));
 	i = 0;
 	while (i < SCREEN_WIDTH)
 	{
-		cast_ray(game, i, mlx);
+		cast_ray(game, i, mlx, ray);
 		i++;
 	}
+	handle_time(ray, &tv);
 }
 
-int	key_hook(int keycode, t_mlx *mlx)
-{
 
-	if (keycode == 119)
-		printf("W pressed\n");
-	else if (keycode == 97)
-		printf("A pressed\n");
-	else if (keycode == 115)
-		printf("S pressed\n");
-	else if (keycode == 100)
-		printf("D pressed\n");
-	else if (keycode == 65307)
+int	key_hook(int keycode, t_ctx *ctx)
+{
+	double move_speed = 0.1;
+	double rot_speed = 0.05;
+	double old_dir_x, old_plane_x;
+
+	if (keycode == 119) // W
+	{
+		if (ctx->game->world_map[(int)ctx->game->pos_y][(int)(ctx->game->pos_x + ctx->game->dir_x * move_speed)] == '0')
+			ctx->game->pos_x += ctx->game->dir_x * move_speed;
+		if (ctx->game->world_map[(int)(ctx->game->pos_y + ctx->game->dir_y * move_speed)][(int)ctx->game->pos_x] == '0')
+			ctx->game->pos_y += ctx->game->dir_y * move_speed;
+	}
+	else if (keycode == 115) // S (backwards)
+	{
+		double new_x = ctx->game->pos_x - ctx->game->dir_x * move_speed;
+		double new_y = ctx->game->pos_y - ctx->game->dir_y * move_speed;
+
+		if (ctx->game->world_map[(int)ctx->game->pos_y][(int)new_x] == '0')
+			ctx->game->pos_x = new_x;
+		if (ctx->game->world_map[(int)new_y][(int)ctx->game->pos_x] == '0')
+			ctx->game->pos_y = new_y;
+	}
+	else if (keycode == 97) // A (rotate left)
+	{
+		old_dir_x = ctx->game->dir_x;
+		ctx->game->dir_x = ctx->game->dir_x * cos(rot_speed) - ctx->game->dir_y * sin(rot_speed);
+		ctx->game->dir_y = old_dir_x * sin(rot_speed) + ctx->game->dir_y * cos(rot_speed);
+		old_plane_x = ctx->game->plane_x;
+		ctx->game->plane_x = ctx->game->plane_x * cos(rot_speed) - ctx->game->plane_y * sin(rot_speed);
+		ctx->game->plane_y = old_plane_x * sin(rot_speed) + ctx->game->plane_y * cos(rot_speed);
+	}
+	else if (keycode == 100) // D (rotate right)
+	{
+		old_dir_x = ctx->game->dir_x;
+		ctx->game->dir_x = ctx->game->dir_x * cos(-rot_speed) - ctx->game->dir_y * sin(-rot_speed);
+		ctx->game->dir_y = old_dir_x * sin(-rot_speed) + ctx->game->dir_y * cos(-rot_speed);
+		old_plane_x = ctx->game->plane_x;
+		ctx->game->plane_x = ctx->game->plane_x * cos(-rot_speed) - ctx->game->plane_y * sin(-rot_speed);
+		ctx->game->plane_y = old_plane_x * sin(-rot_speed) + ctx->game->plane_y * cos(-rot_speed);
+	}
+	else if (keycode == 65307) // ESC
 		exit(0);
+
+	return (0);
+}
+
+int	loop_hook(t_ctx *ctx)
+{
+	render_single_frame(ctx->game, ctx->mlx, ctx->ray);
+	mlx_put_image_to_window(ctx->mlx->mlx, ctx->mlx->mlx_win, ctx->mlx->img->img, 0, 0);
 	return (0);
 }
 
 void	start_game_loop(t_game *game, t_mlx *mlx)
 {
+	t_ray	ray;
+	t_ctx	ctx;
+
+	ctx.game = game;
+	ctx.mlx = mlx;
+	ctx.ray = &ray;
 	game->pos_x = 3.0;
 	game->pos_y = 3.0;
 	game->dir_x = -1.0;   // looking left
 	game->dir_y = 0.0;
 	game->plane_x = 0.0;
 	game->plane_y = 0.66; // FOV 66°
+	
+	ray.time = 0;
+	ray.oldtime = 0;
+	ray.frametime = 0;
 	init_map(game);
-	while (1)
-	{
-		//mlx_key_hook(mlx->mlx_win, key_hook, &mlx);
-		render_single_frame(game, mlx);
-		mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img->img, 0, 0);
-		//mlx_loop(mlx->mlx);
-	}
+	mlx_key_hook(mlx->mlx_win, key_hook, &ctx);
+	mlx_loop_hook(mlx->mlx, loop_hook, &ctx);
+	mlx_loop(mlx->mlx);
 }

@@ -17,6 +17,7 @@
 # define screenWidth 640
 # define screenHeight 480
 # include <math.h>
+# include <sys/time.h>
 # include <stdio.h>
 # include <mlx.h>
 # include "checker.h"
