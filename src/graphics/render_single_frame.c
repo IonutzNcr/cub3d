@@ -11,6 +11,13 @@
 /* ************************************************************************** */
 
 #include "../header_main.h"
+
+#define W 119
+#define S 115
+#define A 97
+#define D 100
+#define ESC 65307
+
 void	init_map(t_game *game)
 {
 	char **map = *sgt_map();
@@ -172,7 +179,7 @@ void	render_single_frame(t_game *game, t_mlx *mlx, t_ray *ray)
 {
 	int	i;
 	struct timeval tv;
-ft_bzero(mlx->img->addr, SCREEN_WIDTH * SCREEN_HEIGHT * (mlx->img->bits_per_pixel / 8));
+	ft_bzero(mlx->img->addr, SCREEN_WIDTH * SCREEN_HEIGHT * (mlx->img->bits_per_pixel / 8));
 	i = 0;
 	while (i < SCREEN_WIDTH)
 	{
@@ -182,31 +189,60 @@ ft_bzero(mlx->img->addr, SCREEN_WIDTH * SCREEN_HEIGHT * (mlx->img->bits_per_pixe
 	handle_time(ray, &tv);
 }
 
-
-int	key_hook(int keycode, t_ctx *ctx)
+int key_press(int keycode, t_ctx *ctx)
 {
-	double move_speed = 0.1;
-	double rot_speed = 0.05;
+	if (keycode == 119)
+		ctx->mlx->w = 1;
+	else if (keycode == 115)
+		ctx->mlx->s = 1;
+	else if (keycode == 97)
+		ctx->mlx->a = 1;
+	else if (keycode == 100)
+		ctx->mlx->d = 1;
+	else if (keycode == 65307)
+		exit(0);
+	return (0);
+}
+
+int key_release(int keycode, t_ctx *ctx)
+{
+	if (keycode == 119)
+		ctx->mlx->w = 0;
+	else if (keycode == 115)
+		ctx->mlx->s = 0;
+	else if (keycode == 97)
+		ctx->mlx->a = 0;
+	else if (keycode == 100)
+		ctx->mlx->d = 0;
+	else if (keycode == 65307)
+		exit(0);
+	return (0);
+}
+
+
+int	handle_movement(t_ctx *ctx)
+{
+	t_mlx	*m = ctx->mlx;
+	double move_speed = 0.005;
+	double rot_speed = 0.005;
 	double old_dir_x, old_plane_x;
 
-	if (keycode == 119) // W
+	if (m->w)
 	{
 		if (ctx->game->world_map[(int)ctx->game->pos_y][(int)(ctx->game->pos_x + ctx->game->dir_x * move_speed)] == '0')
 			ctx->game->pos_x += ctx->game->dir_x * move_speed;
 		if (ctx->game->world_map[(int)(ctx->game->pos_y + ctx->game->dir_y * move_speed)][(int)ctx->game->pos_x] == '0')
 			ctx->game->pos_y += ctx->game->dir_y * move_speed;
 	}
-	else if (keycode == 115) // S (backwards)
+	if (m->s)
 	{
-		double new_x = ctx->game->pos_x - ctx->game->dir_x * move_speed;
-		double new_y = ctx->game->pos_y - ctx->game->dir_y * move_speed;
+		if (ctx->game->world_map[(int)ctx->game->pos_y][(int)(ctx->game->pos_x - ctx->game->dir_x * move_speed)] == '0')
+			ctx->game->pos_x -= ctx->game->dir_x * move_speed;
+		if (ctx->game->world_map[(int)(ctx->game->pos_y - ctx->game->dir_y * move_speed)][(int)ctx->game->pos_x] == '0')
+			ctx->game->pos_y -= ctx->game->dir_y * move_speed;
 
-		if (ctx->game->world_map[(int)ctx->game->pos_y][(int)new_x] == '0')
-			ctx->game->pos_x = new_x;
-		if (ctx->game->world_map[(int)new_y][(int)ctx->game->pos_x] == '0')
-			ctx->game->pos_y = new_y;
 	}
-	else if (keycode == 97) // A (rotate left)
+	if (ctx->mlx->a)
 	{
 		old_dir_x = ctx->game->dir_x;
 		ctx->game->dir_x = ctx->game->dir_x * cos(rot_speed) - ctx->game->dir_y * sin(rot_speed);
@@ -215,7 +251,7 @@ int	key_hook(int keycode, t_ctx *ctx)
 		ctx->game->plane_x = ctx->game->plane_x * cos(rot_speed) - ctx->game->plane_y * sin(rot_speed);
 		ctx->game->plane_y = old_plane_x * sin(rot_speed) + ctx->game->plane_y * cos(rot_speed);
 	}
-	else if (keycode == 100) // D (rotate right)
+	if (ctx->mlx->d)
 	{
 		old_dir_x = ctx->game->dir_x;
 		ctx->game->dir_x = ctx->game->dir_x * cos(-rot_speed) - ctx->game->dir_y * sin(-rot_speed);
@@ -224,14 +260,12 @@ int	key_hook(int keycode, t_ctx *ctx)
 		ctx->game->plane_x = ctx->game->plane_x * cos(-rot_speed) - ctx->game->plane_y * sin(-rot_speed);
 		ctx->game->plane_y = old_plane_x * sin(-rot_speed) + ctx->game->plane_y * cos(-rot_speed);
 	}
-	else if (keycode == 65307) // ESC
-		exit(0);
-
 	return (0);
 }
 
 int	loop_hook(t_ctx *ctx)
 {
+	handle_movement(ctx);
 	render_single_frame(ctx->game, ctx->mlx, ctx->ray);
 	mlx_put_image_to_window(ctx->mlx->mlx, ctx->mlx->mlx_win, ctx->mlx->img->img, 0, 0);
 	return (0);
@@ -256,7 +290,9 @@ void	start_game_loop(t_game *game, t_mlx *mlx)
 	ray.oldtime = 0;
 	ray.frametime = 0;
 	init_map(game);
-	mlx_key_hook(mlx->mlx_win, key_hook, &ctx);
+
+	mlx_hook(mlx->mlx_win, 2, 1L<<0, key_press, &ctx);
+	mlx_hook(mlx->mlx_win, 3, 1L<<1, key_release, &ctx);
 	mlx_loop_hook(mlx->mlx, loop_hook, &ctx);
 	mlx_loop(mlx->mlx);
 }

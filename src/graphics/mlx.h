@@ -26,5 +26,8 @@ typedef struct s_mlx
 	void	*mlx;
 	void	*mlx_win;
 	t_img	*img;
-
+	int	w;
+	int	a;
+	int	s;
+	int	d;
 }	t_mlx;
