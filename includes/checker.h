@@ -53,6 +53,12 @@ typedef struct s_assets {
     int ceiling;
 } t_assets;
 
+typedef struct s_player
+{
+    double x;
+    double y;
+    double orientation;
+} t_player;
 
 int is_extension(int argc, char *argv[], char *env[]);
 int is_file_empty(char *file);
@@ -105,5 +111,8 @@ int count_elements(char **argv);
 int check_characters();
 char **get_row(int row);
 int map_fixer();
+
+int get_player_info();
+t_player *sgt_player();
 
 #endif
