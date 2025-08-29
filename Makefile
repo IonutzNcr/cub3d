@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+         #
+#    By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 16:19:15 by kjullien          #+#    #+#              #
-#    Updated: 2025/08/08 16:16:49 by yoyo             ###   ########.fr        #
+#    Updated: 2025/08/29 23:53:12 by inicoara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRC_FILES = $(SRC_DIR)/main.c\
 			$(SRC_DIR)/parser/controller/parser.c\
 			$(SRC_DIR)/parser/controller/utils.c\
 			$(SRC_DIR)/parser/controller/utility.c\
+			$(SRC_DIR)/parser/controller/get_player_info.c\
 			$(SRC_DIR)/parser/controller/verif.c\
 			$(SRC_DIR)/parser/rules/is_cf_format.c\
 			$(SRC_DIR)/parser/rules/is_extension.c\
@@ -48,6 +49,7 @@ SRC_FILES = $(SRC_DIR)/main.c\
 			$(SRC_DIR)/singleton/sgt_error.c\
 			$(SRC_DIR)/singleton/sgt_line.c\
 			$(SRC_DIR)/singleton/sgt_map.c\
+			$(SRC_DIR)/singleton/sgt_player.c
           
 # All C files for linting and formatting
 C_FILES = $(SRC_FILES)

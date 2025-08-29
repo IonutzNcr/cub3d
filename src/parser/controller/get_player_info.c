@@ -20,7 +20,7 @@ static double get_player_orientation(char p)
 int get_player_info()
 {
     t_player *player = sgt_player();
-    char **map = sgt_map();
+    char **map = *sgt_map();
     int k = count_elements(map);
     int i = 0;
     int p = 0;
@@ -28,8 +28,10 @@ int get_player_info()
     {
         while (map[p][i])
         {
+            printf("p = %d | i = %d | char = %c \n", p, i, map[p][i]);
             if (is_player(map[p][i]))
             {
+                printf("i found the player\n");
                 player->x = i;
                 player->y = p;
                 player->orientation = get_player_orientation(map[p][i]);
@@ -38,6 +40,7 @@ int get_player_info()
             i++;
         }
         p++;
+        i = 0;
     }
     return (1);
 }

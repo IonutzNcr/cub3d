@@ -2,6 +2,6 @@
 
 t_player *sgt_player()
 {
-    t_player player;
+    static t_player player;
     return (&player);
 }
