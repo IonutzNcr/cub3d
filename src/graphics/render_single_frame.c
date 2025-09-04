@@ -167,7 +167,7 @@ void reset_ray(t_ray *r)
 void	cast_ray(t_game *game, int i, t_mlx *mlx, t_ray *ray)
 {
 	//reset_ray(ray);
-	ft_bzero(ray, sizeof(ray));
+	ft_bzero(ray, sizeof(t_ray));
 	init_ray(game, ray, i);
 	calculate_distances(game, ray);
 	execute_dda(game, ray);
@@ -219,12 +219,11 @@ int key_release(int keycode, t_ctx *ctx)
 	return (0);
 }
 
-
 int	handle_movement(t_ctx *ctx)
 {
 	t_mlx	*m = ctx->mlx;
-	double move_speed = 0.005;
-	double rot_speed = 0.005;
+	double move_speed = 0.05;
+	double rot_speed = 0.02;
 	double old_dir_x, old_plane_x;
 
 	if (m->w)
