@@ -34,8 +34,14 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 
 void	ft_verline(t_mlx *mlx, int x, int drawStart, int drawEnd, int color)
 {
-	for (int y = drawStart; y <= drawEnd; y++)
+	int	y;
+
+	y = drawStart;
+	while (y < drawEnd)
+	{
 		my_mlx_pixel_put(mlx->img, x, y, color);
+		y++;
+	}
 }
 
 void	init_ray(t_game *game, t_ray *r, int i)
@@ -99,7 +105,7 @@ void	execute_dda(t_game *game, t_ray *r)
 			r->map_y += r->step_y;
 			r->side = 1;
 		}
-		if (game->world_map[r->map_y][r->map_x] > '0')
+		if (game->world_map[r->map_y][r->map_x] != '0')
 			r->hit = 1;
 	}
 }
@@ -145,28 +151,8 @@ void	handle_time(t_ray *ray, struct timeval *tv)
 	//printf("frametime %f\n", ray->frametime);
 }
 
-void reset_ray(t_ray *r)
-{
-    r->camera_x = 0;
-    r->ray_dir_x = 0;
-    r->ray_dir_y = 0;
-    r->map_x = 0;
-    r->map_y = 0;
-    r->side_dist_x = 0;
-    r->side_dist_y = 0;
-    r->delta_dist_x = 0;
-    r->delta_dist_y = 0;
-    r->perp_wall_dist = 0;
-    r->step_x = 0;
-    r->step_y = 0;
-    r->hit = 0;
-    r->side = 0;
-}
-
-
 void	cast_ray(t_game *game, int i, t_mlx *mlx, t_ray *ray)
 {
-	//reset_ray(ray);
 	ft_bzero(ray, sizeof(t_ray));
 	init_ray(game, ray, i);
 	calculate_distances(game, ray);
@@ -175,12 +161,35 @@ void	cast_ray(t_game *game, int i, t_mlx *mlx, t_ray *ray)
 	draw_walls(game, ray, i, mlx);
 }
 
+void	fill_background(t_mlx *mlx, t_game *game)
+{
+	//haut de l'ecrant
+	game->floor_color = sgt_assets()->floor;
+	game->ceiling_color= sgt_assets()->ceiling;
+	for (int i = 0; i < SCREEN_HEIGHT / 2; i++)
+	{
+		for(int j = 0; j < SCREEN_WIDTH; j++)
+		{
+			my_mlx_pixel_put(mlx->img, j, i, game->floor_color);
+		}
+	}
+	//bas de l'ecrant
+	for (int i = SCREEN_HEIGHT / 2; i < SCREEN_HEIGHT; i++)
+	{
+		for (int j = 0; j < SCREEN_WIDTH; j++)
+		{
+			my_mlx_pixel_put(mlx->img, j, i, game->ceiling_color);
+		}
+	}
+}
+
 void	render_single_frame(t_game *game, t_mlx *mlx, t_ray *ray)
 {
 	int	i;
 	struct timeval tv;
 	ft_bzero(mlx->img->addr, SCREEN_WIDTH * SCREEN_HEIGHT * (mlx->img->bits_per_pixel / 8));
 	i = 0;
+	fill_background(mlx, game);
 	while (i < SCREEN_WIDTH)
 	{
 		cast_ray(game, i, mlx, ray);
@@ -222,45 +231,58 @@ int key_release(int keycode, t_ctx *ctx)
 int	handle_movement(t_ctx *ctx)
 {
 	t_mlx	*m = ctx->mlx;
-	double move_speed = 0.05;
-	double rot_speed = 0.02;
+	t_game	*g = ctx->game;
+	//double move_speed = 0.05;
+	//double rot_speed = 0.02;
+	double	move_speed = 0.1;
+	double	rot_speed = 0.1;
 	double old_dir_x, old_plane_x;
+	double	new_x;
+	double	new_y;
 
 	if (m->w)
 	{
-		if (ctx->game->world_map[(int)ctx->game->pos_y][(int)(ctx->game->pos_x + ctx->game->dir_x * move_speed)] == '0')
-			ctx->game->pos_x += ctx->game->dir_x * move_speed;
-		if (ctx->game->world_map[(int)(ctx->game->pos_y + ctx->game->dir_y * move_speed)][(int)ctx->game->pos_x] == '0')
-			ctx->game->pos_y += ctx->game->dir_y * move_speed;
+		new_x = g->pos_x + g->dir_x * move_speed;
+		new_y = g->pos_y + g->dir_y * move_speed;
+		if (g->world_map[(int)g->pos_y][(int)new_x] == '0')
+		{
+			g->pos_x = new_x;
+		}
+		if (g->world_map[(int)new_y][(int)g->pos_x] == '0')
+		{
+			g->pos_y = new_y;
+		}
 	}
 	if (m->s)
 	{
-		if (ctx->game->world_map[(int)ctx->game->pos_y][(int)(ctx->game->pos_x - ctx->game->dir_x * move_speed)] == '0')
-			ctx->game->pos_x -= ctx->game->dir_x * move_speed;
-		if (ctx->game->world_map[(int)(ctx->game->pos_y - ctx->game->dir_y * move_speed)][(int)ctx->game->pos_x] == '0')
-			ctx->game->pos_y -= ctx->game->dir_y * move_speed;
-
+		new_x = g->pos_x - g->dir_x * move_speed;
+		new_y = g->pos_y - g->dir_y * move_speed;
+		if (g->world_map[(int)g->pos_y][(int)new_x] == '0')
+			g->pos_x = new_x;
+		if (g->world_map[(int)new_y][(int)g->pos_x] == '0')
+			g->pos_y = new_y;
 	}
-	if (ctx->mlx->a)
+	if (m->a)
 	{
-		old_dir_x = ctx->game->dir_x;
-		ctx->game->dir_x = ctx->game->dir_x * cos(rot_speed) - ctx->game->dir_y * sin(rot_speed);
-		ctx->game->dir_y = old_dir_x * sin(rot_speed) + ctx->game->dir_y * cos(rot_speed);
-		old_plane_x = ctx->game->plane_x;
-		ctx->game->plane_x = ctx->game->plane_x * cos(rot_speed) - ctx->game->plane_y * sin(rot_speed);
-		ctx->game->plane_y = old_plane_x * sin(rot_speed) + ctx->game->plane_y * cos(rot_speed);
+		old_dir_x = g->dir_x;
+		g->dir_x = g->dir_x * cos(rot_speed) - g->dir_y * sin(rot_speed);
+		g->dir_y = old_dir_x * sin(rot_speed) + g->dir_y * cos(rot_speed);
+		old_plane_x = g->plane_x;
+		g->plane_x = g->plane_x * cos(rot_speed) - g->plane_y * sin(rot_speed);
+		g->plane_y = old_plane_x * sin(rot_speed) + g->plane_y * cos(rot_speed);
 	}
-	if (ctx->mlx->d)
+	if (m->d)
 	{
-		old_dir_x = ctx->game->dir_x;
-		ctx->game->dir_x = ctx->game->dir_x * cos(-rot_speed) - ctx->game->dir_y * sin(-rot_speed);
-		ctx->game->dir_y = old_dir_x * sin(-rot_speed) + ctx->game->dir_y * cos(-rot_speed);
-		old_plane_x = ctx->game->plane_x;
-		ctx->game->plane_x = ctx->game->plane_x * cos(-rot_speed) - ctx->game->plane_y * sin(-rot_speed);
-		ctx->game->plane_y = old_plane_x * sin(-rot_speed) + ctx->game->plane_y * cos(-rot_speed);
+		old_dir_x = g->dir_x;
+		g->dir_x = g->dir_x * cos(-rot_speed) - g->dir_y * sin(-rot_speed);
+		g->dir_y = old_dir_x * sin(-rot_speed) + g->dir_y * cos(-rot_speed);
+		old_plane_x = g->plane_x;
+		g->plane_x = g->plane_x * cos(-rot_speed) - g->plane_y * sin(-rot_speed);
+		g->plane_y = old_plane_x * sin(-rot_speed) + g->plane_y * cos(-rot_speed);
 	}
 	return (0);
 }
+
 
 int	loop_hook(t_ctx *ctx)
 {
@@ -270,21 +292,36 @@ int	loop_hook(t_ctx *ctx)
 	return (0);
 }
 
+void	load_textures(t_game *game)
+{
+	t_assets	*assets;
+	void	*images[4];
+
+	assets = sgt_assets();
+	images[0] = assets->file_NO;
+	images[1] = assets->file_SO;
+	images[2] = assets->file_WE;
+	images[3] = assets->file_EA;
+	game->textures = images;
+}
+
 void	start_game_loop(t_game *game, t_mlx *mlx)
 {
 	t_ray	ray;
 	t_ctx	ctx;
-
+	printf("%f\n", sgt_player()->x);
 	ctx.game = game;
 	ctx.mlx = mlx;
 	ctx.ray = &ray;
-	game->pos_x = 3.0;
-	game->pos_y = 3.0;
-	game->dir_x = -1.0;   // looking left
-	game->dir_y = 0.0;
-	game->plane_x = 0.0;
-	game->plane_y = 0.66; // FOV 66°
+	game->pos_x = sgt_player()->x + 0.5;
+	game->pos_y = sgt_player()->y + 0.5;
+	game->dir_x = cos(sgt_player()->orientation * M_PI / 180);   // looking left
+	game->dir_y = sin(sgt_player()->orientation * M_PI / 180);
+	game->plane_x = -game->dir_y * 0.66;
+	game->plane_y = game->dir_x * 0.66; // FOV 66°
 	
+	load_textures(game);
+	printf("%p\n", game->textures);
 	ray.time = 0;
 	ray.oldtime = 0;
 	ray.frametime = 0;
