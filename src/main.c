@@ -35,6 +35,5 @@ int   main(int argc, char **argv, char **env)
 	init_t_mlx(&mlx);
 	start_game_loop(&game, &mlx);
 	free_singleton();
-	printf("SUCCESS\n");
 	return (0);
 }

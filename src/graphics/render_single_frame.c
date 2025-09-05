@@ -148,7 +148,6 @@ void	handle_time(t_ray *ray, struct timeval *tv)
 	gettimeofday(tv, NULL);
 	ray->time = tv->tv_sec * 1000 + tv->tv_usec / 1000;
 	ray->frametime = (ray->time - ray->oldtime) / 1000.0;
-	//printf("frametime %f\n", ray->frametime);
 }
 
 void	cast_ray(t_game *game, int i, t_mlx *mlx, t_ray *ray)
@@ -315,7 +314,6 @@ void	start_game_loop(t_game *game, t_mlx *mlx)
 {
 	t_ray	ray;
 	t_ctx	ctx;
-	printf("%f\n", sgt_player()->x);
 	ctx.game = game;
 	ctx.mlx = mlx;
 	ctx.ray = &ray;
@@ -327,7 +325,6 @@ void	start_game_loop(t_game *game, t_mlx *mlx)
 	game->plane_y = game->dir_x * 0.66; // FOV 66°
 	
 	load_textures(game);
-	printf("%p\n", game->textures);
 	ray.time = 0;
 	ray.oldtime = 0;
 	ray.frametime = 0;

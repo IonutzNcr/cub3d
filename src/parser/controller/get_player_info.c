@@ -28,10 +28,8 @@ int get_player_info()
     {
         while (map[p][i])
         {
-            printf("p = %d | i = %d | char = %c \n", p, i, map[p][i]);
             if (is_player(map[p][i]))
             {
-                printf("i found the player\n");
                 player->x = i;
                 player->y = p;
                 player->orientation = get_player_orientation(map[p][i]);
