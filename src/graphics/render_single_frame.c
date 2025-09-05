@@ -262,24 +262,30 @@ int	handle_movement(t_ctx *ctx)
 		if (g->world_map[(int)new_y][(int)g->pos_x] == '0')
 			g->pos_y = new_y;
 	}
-	if (m->a)
-	{
-		old_dir_x = g->dir_x;
-		g->dir_x = g->dir_x * cos(rot_speed) - g->dir_y * sin(rot_speed);
-		g->dir_y = old_dir_x * sin(rot_speed) + g->dir_y * cos(rot_speed);
-		old_plane_x = g->plane_x;
-		g->plane_x = g->plane_x * cos(rot_speed) - g->plane_y * sin(rot_speed);
-		g->plane_y = old_plane_x * sin(rot_speed) + g->plane_y * cos(rot_speed);
-	}
-	if (m->d)
-	{
-		old_dir_x = g->dir_x;
-		g->dir_x = g->dir_x * cos(-rot_speed) - g->dir_y * sin(-rot_speed);
-		g->dir_y = old_dir_x * sin(-rot_speed) + g->dir_y * cos(-rot_speed);
-		old_plane_x = g->plane_x;
-		g->plane_x = g->plane_x * cos(-rot_speed) - g->plane_y * sin(-rot_speed);
-		g->plane_y = old_plane_x * sin(-rot_speed) + g->plane_y * cos(-rot_speed);
-	}
+
+if (m->a) // rotate left
+{
+    double angle = -rot_speed; // 👈 inversion
+    old_dir_x = g->dir_x;
+    g->dir_x = g->dir_x * cos(angle) - g->dir_y * sin(angle);
+    g->dir_y = old_dir_x * sin(angle) + g->dir_y * cos(angle);
+
+    old_plane_x = g->plane_x;
+    g->plane_x = g->plane_x * cos(angle) - g->plane_y * sin(angle);
+    g->plane_y = old_plane_x * sin(angle) + g->plane_y * cos(angle);
+}
+
+if (m->d) // rotate right
+{
+    double angle = rot_speed; // 👈 normal
+    old_dir_x = g->dir_x;
+    g->dir_x = g->dir_x * cos(angle) - g->dir_y * sin(angle);
+    g->dir_y = old_dir_x * sin(angle) + g->dir_y * cos(angle);
+
+    old_plane_x = g->plane_x;
+    g->plane_x = g->plane_x * cos(angle) - g->plane_y * sin(angle);
+    g->plane_y = old_plane_x * sin(angle) + g->plane_y * cos(angle);
+}
 	return (0);
 }
 
