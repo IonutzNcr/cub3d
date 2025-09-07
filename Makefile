@@ -14,7 +14,7 @@ NAME = cub3d
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -Werror -g
 
 # Directories
 SRC_DIR = src
@@ -39,6 +39,7 @@ SRC_FILES = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/parser/controller/parse_assets.func.c \
 			$(SRC_DIR)/parser/controller/parse_cf.func.c \
 			$(SRC_DIR)/parser/controller/parser.c \
+			$(SRC_DIR)/parser/controller/get_player_info.c \
 			$(SRC_DIR)/parser/controller/utils.c \
 			$(SRC_DIR)/parser/controller/utility.c \
 			$(SRC_DIR)/parser/controller/verif.c \
@@ -51,6 +52,7 @@ SRC_FILES = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/singleton/sgt_error.c \
 			$(SRC_DIR)/singleton/sgt_line.c \
 			$(SRC_DIR)/singleton/sgt_map.c \
+			$(SRC_DIR)/singleton/sgt_player.c \
 			$(SRC_DIR)/graphics/render_single_frame.c \
 
 # Object files

@@ -1,8 +1,8 @@
 #include "checker.h"
 
-static is_player(char p)
+static	int is_player(char p)
 {
-    if (p == 'S' || p == 'N' || p == 'E' || p == "W")
+    if (p == 'S' || p == 'N' || p == 'E' || p == 'W')
         return (1);
     return (0);
 }
@@ -28,13 +28,12 @@ int get_player_info()
     {
         while (map[p][i])
         {
-            printf("p = %d | i = %d | char = %c \n", p, i, map[p][i]);
             if (is_player(map[p][i]))
             {
-                printf("i found the player\n");
                 player->x = i;
                 player->y = p;
                 player->orientation = get_player_orientation(map[p][i]);
+		map[p][i] = '0';
                 return (0);
             }
             i++;

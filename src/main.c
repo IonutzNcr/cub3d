@@ -26,6 +26,7 @@ int   main(int argc, char **argv, char **env)
 {
 	if (parser(argc, argv, env))
 		return (1);
+	get_player_info();
 	t_game	game;
 	t_mlx	mlx;
 
@@ -34,6 +35,5 @@ int   main(int argc, char **argv, char **env)
 	init_t_mlx(&mlx);
 	start_game_loop(&game, &mlx);
 	free_singleton();
-	printf("SUCCESS\n");
 	return (0);
 }

@@ -40,6 +40,10 @@ typedef struct s_game
 	int	map_width;
 	int	map_height;
 	char	**world_map;
+
+	int	ceiling_color;
+	int	floor_color;
+	void	*textures;
 }	t_game;
 
 typedef struct s_ray
@@ -83,4 +87,3 @@ void	calculate_distances(t_game *game, t_ray *r);
 void	init_ray(t_game *game, t_ray *r, int i);
 void	ft_verline(t_mlx *mlx, int x, int drawStart, int drawEnd, int color);
 void	start_game_loop(t_game *game, t_mlx *mlx);
-

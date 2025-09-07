@@ -67,6 +67,8 @@ int *sgt_error();
 int *sgt_line();
 t_assets *sgt_assets();
 char ***sgt_map();
+int get_player_info();
+t_player *sgt_player();
 
 /*this is ok...*/
 int   is_texture_NO(char *line);
@@ -112,7 +114,5 @@ int check_characters();
 char **get_row(int row);
 int map_fixer();
 
-int get_player_info();
-t_player *sgt_player();
 
 #endif
