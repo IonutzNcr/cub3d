@@ -30,4 +30,6 @@ typedef struct s_mlx
 	int	a;
 	int	s;
 	int	d;
+	int	left_arrow;
+	int	right_arrow;
 }	t_mlx;
