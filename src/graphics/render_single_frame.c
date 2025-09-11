@@ -142,16 +142,16 @@ void draw_walls(t_game *game, t_ray *r, int i, t_mlx *mlx)
 	if (r->side == 0)
 	{
 		if (r->ray_dir_x > 0)
-			tex_num = 0;
+			tex_num = rand() % 4;
 		else
-			tex_num = 1;
+			tex_num = rand() % 4;
 	}
 	else
 	{
 		if (r->ray_dir_y > 0)
-			tex_num = 2;
+			tex_num = rand() % 4;
 		else
-			tex_num = 3;
+			tex_num = rand() % 4;
 	}
 	tex_x = (int)(wall_x * (double)game->tex_width[tex_num]);
 	if ((r->side == 0 && r->ray_dir_x < 0) || (r->side == 1 && r->ray_dir_y > 0))
@@ -166,7 +166,7 @@ void draw_walls(t_game *game, t_ray *r, int i, t_mlx *mlx)
 		if (r->side == 1)
 			color = (color >> 1) & 8355711;
 		my_mlx_pixel_put(mlx->img, i, y, color);
-    }
+	}
 }
 
 void	handle_time(t_ray *ray, struct timeval *tv)
@@ -280,9 +280,6 @@ int	handle_movement(t_ctx *ctx)
 	double	new_x;
 	double	new_y;
 	double	radius = 0.25;
-
-	printf("ray_dir_x %f\n", ctx->ray->ray_dir_x);
-	printf("ray_dir_y %f\n", ctx->ray->ray_dir_y);
 
 	if (m->w)
 	{
@@ -414,6 +411,7 @@ void	load_textures(t_ctx *ctx)
 	ctx->game->textures = images;
 }
 */
+
 void	start_game_loop(t_game *game, t_mlx *mlx)
 {
 	t_ray	ray;

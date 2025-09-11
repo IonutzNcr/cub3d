@@ -26,7 +26,6 @@ int   main(int argc, char **argv, char **env)
 {
 	if (parser(argc, argv, env))
 		return (1);
-	printf("hello\n");
 	get_player_info();
 	t_game	game;
 	t_mlx	mlx;
