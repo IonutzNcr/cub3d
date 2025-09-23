@@ -20,6 +20,7 @@ void	init_t_mlx(t_mlx *mlx)
 	mlx->img->img = mlx_new_image(mlx->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	mlx->img->addr = mlx_get_data_addr(mlx->img->img, &mlx->img->bits_per_pixel,
 		&mlx->img->line_length, &mlx->img->endian);
+	*sgt_mlx() = mlx;
 }
 
 int   main(int argc, char **argv, char **env)

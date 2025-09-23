@@ -17,6 +17,8 @@
 #define SCREEN_HEIGHT 1080
 #define SCREEN_WIDTH 1920
 
+#define TEXTURE_COUNT 4
+
 //
 typedef struct s_game
 {
@@ -43,7 +45,14 @@ typedef struct s_game
 
 	int	ceiling_color;
 	int	floor_color;
-	void	*textures;
+
+	void	*textures[TEXTURE_COUNT];
+	char	*tex_addr[TEXTURE_COUNT];
+	int	bits_per_pixel[TEXTURE_COUNT];
+	int	line_length[TEXTURE_COUNT];
+	int	endian[TEXTURE_COUNT];
+	int	tex_width[TEXTURE_COUNT];
+	int	tex_height[TEXTURE_COUNT];
 }	t_game;
 
 typedef struct s_ray
@@ -78,6 +87,7 @@ typedef struct s_ctx
 	t_game *game;
 }	t_ctx;
 
+t_mlx	**sgt_mlx();
 void	render_single_frame(t_game *game, t_mlx *mlx, t_ray *ray);
 void	cast_ray(t_game *game, int i, t_mlx *mlx, t_ray *ray);
 void	draw_walls(t_game *game, t_ray *r, int i, t_mlx *mlx);
