@@ -142,16 +142,16 @@ void draw_walls(t_game *game, t_ray *r, int i, t_mlx *mlx)
 	if (r->side == 0)
 	{
 		if (r->ray_dir_x > 0)
-			tex_num = rand() % 4;
+			tex_num = 0;
 		else
-			tex_num = rand() % 4;
+			tex_num = 1;
 	}
 	else
 	{
 		if (r->ray_dir_y > 0)
-			tex_num = rand() % 4;
+			tex_num = 2;
 		else
-			tex_num = rand() % 4;
+			tex_num = 3;
 	}
 	tex_x = (int)(wall_x * (double)game->tex_width[tex_num]);
 	if ((r->side == 0 && r->ray_dir_x < 0) || (r->side == 1 && r->ray_dir_y > 0))
@@ -240,7 +240,10 @@ int key_press(int keycode, t_ctx *ctx)
 	else if (keycode == 65363)
 		ctx->mlx->right_arrow = 1;
 	else if (keycode == 65307)
+	{
+		clear_all(ctx);
 		exit(0);
+	}
 	return (0);
 }
 
@@ -359,6 +362,7 @@ int	handle_movement(t_ctx *ctx)
 int	loop_hook(t_ctx *ctx)
 {
 	handle_movement(ctx);
+	mlx_clear_window(ctx->mlx->mlx, ctx->mlx->mlx_win);
 	render_single_frame(ctx->game, ctx->mlx, ctx->ray);
 	mlx_put_image_to_window(ctx->mlx->mlx, ctx->mlx->mlx_win, ctx->mlx->img->img, 0, 0);
 	return (0);
@@ -412,6 +416,39 @@ void	load_textures(t_ctx *ctx)
 }
 */
 
+t_mlx	**sgt_mlx()
+{
+	static	void *sgt_mlx;
+	return (&sgt_mlx);
+}
+
+void	clear_all(t_ctx *ctx)
+{
+	t_mlx	*mlx;
+
+	remove_map();
+	remove_assets();
+	mlx = *sgt_mlx();
+	mlx_destroy_image(mlx->mlx, ctx->game->textures[0]);
+	mlx_destroy_image(mlx->mlx, ctx->game->textures[1]);
+	mlx_destroy_image(mlx->mlx, ctx->game->textures[2]);
+	mlx_destroy_image(mlx->mlx, ctx->game->textures[3]);
+	mlx_clear_window(mlx->mlx, mlx->mlx_win);
+	mlx_destroy_image(mlx->mlx, mlx->img->img);
+	mlx_destroy_window(mlx->mlx, mlx->mlx_win);
+	mlx_destroy_display(mlx->mlx);
+	mlx_loop_end(mlx->mlx);
+	free(mlx->img);
+	free(mlx->mlx);
+	//TODO FREE ALL
+	exit(0);
+}
+
+void	mouse_press(t_ctx *ctx)
+{
+	clear_all(ctx);
+}
+
 void	start_game_loop(t_game *game, t_mlx *mlx)
 {
 	t_ray	ray;
@@ -434,6 +471,7 @@ void	start_game_loop(t_game *game, t_mlx *mlx)
 
 	mlx_hook(mlx->mlx_win, 2, 1L<<0, key_press, &ctx);
 	mlx_hook(mlx->mlx_win, 3, 1L<<1, key_release, &ctx);
+	mlx_hook(mlx->mlx_win, 17, 0, mouse_press, &ctx);
 	mlx_loop_hook(mlx->mlx, loop_hook, &ctx);
 	mlx_loop(mlx->mlx);
 }
