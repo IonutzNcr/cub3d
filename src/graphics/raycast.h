@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:20:52 by leothoma          #+#    #+#             */
-/*   Updated: 2025/08/27 00:20:54 by leothoma         ###   ########.fr       */
+/*   Updated: 2025/09/29 11:37:58 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,3 +97,5 @@ void	calculate_distances(t_game *game, t_ray *r);
 void	init_ray(t_game *game, t_ray *r, int i);
 void	ft_verline(t_mlx *mlx, int x, int drawStart, int drawEnd, int color);
 void	start_game_loop(t_game *game, t_mlx *mlx);
+void	clear_all(t_ctx *ctx);
+

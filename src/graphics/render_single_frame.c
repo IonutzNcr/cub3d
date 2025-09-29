@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_single_frame.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:20:43 by leothoma          #+#    #+#             */
-/*   Updated: 2025/08/27 00:20:44 by leothoma         ###   ########.fr       */
+/*   Updated: 2025/09/29 12:57:39 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,52 +121,65 @@ void	calculate_wall_distance(t_ray *r)
 
 void draw_walls(t_game *game, t_ray *r, int i, t_mlx *mlx)
 {
-	int	tex_num;
-	double	wall_x;
-	int     tex_x;
-	int     tex_y;
-	int     y;
+    int tex_num;
+    double wall_x;
+    int tex_x, tex_y;
+    int y;
 
-	r->line_height = (int)(SCREEN_HEIGHT / r->perp_wall_dist);
-	r->draw_start = -r->line_height / 2 + SCREEN_HEIGHT / 2;
-	if (r->draw_start < 0)
-		r->draw_start = 0;
-	r->draw_end = r->line_height / 2 + SCREEN_HEIGHT / 2;
-	if (r->draw_end >= SCREEN_HEIGHT)
-		r->draw_end = SCREEN_HEIGHT - 1;
-	if (r->side == 0)
-		wall_x = game->pos_y + r->perp_wall_dist * r->ray_dir_y;
-	else
-		wall_x = game->pos_x + r->perp_wall_dist * r->ray_dir_x;
-	wall_x -= floor(wall_x);
-	if (r->side == 0)
-	{
-		if (r->ray_dir_x > 0)
-			tex_num = 0;
-		else
-			tex_num = 1;
-	}
-	else
-	{
-		if (r->ray_dir_y > 0)
-			tex_num = 2;
-		else
-			tex_num = 3;
-	}
-	tex_x = (int)(wall_x * (double)game->tex_width[tex_num]);
-	if ((r->side == 0 && r->ray_dir_x < 0) || (r->side == 1 && r->ray_dir_y > 0))
-		tex_x = game->tex_width[tex_num] - tex_x - 1;
-	for (y = r->draw_start; y < r->draw_end; y++)
-	{
-		int d = (y * 256 - SCREEN_HEIGHT * 128 + r->line_height * 128);
-		tex_y = ((d * game->tex_height[tex_num]) / r->line_height) / 256;
-		char *tex_ptr = game->tex_addr[tex_num] + (tex_y * game->line_length[tex_num]
-			+ tex_x * (game->bits_per_pixel[tex_num] / 8));
-		int color = *(unsigned int *)tex_ptr;
-		if (r->side == 1)
-			color = (color >> 1) & 8355711;
-		my_mlx_pixel_put(mlx->img, i, y, color);
-	}
+    // 1) Protéger contre dist = 0
+    if (r->perp_wall_dist <= 1e-6)
+        r->perp_wall_dist = 1e-6;
+
+    r->line_height = (int)(SCREEN_HEIGHT / r->perp_wall_dist);
+
+    r->draw_start = -r->line_height / 2 + SCREEN_HEIGHT / 2;
+    if (r->draw_start < 0) r->draw_start = 0;
+
+    r->draw_end = r->line_height / 2 + SCREEN_HEIGHT / 2;
+    if (r->draw_end >= SCREEN_HEIGHT) r->draw_end = SCREEN_HEIGHT - 1;
+
+    // 2) Calcul du point de contact sur l’axe "mur"
+    if (r->side == 0)
+        wall_x = game->pos_y + r->perp_wall_dist * r->ray_dir_y;
+    else
+        wall_x = game->pos_x + r->perp_wall_dist * r->ray_dir_x;
+    wall_x -= floor(wall_x); // garder la frac
+
+    // 3) Sélection texture (E/W/N/S)
+    if (r->side == 0)
+        tex_num = (r->ray_dir_x > 0) ? 0 : 1;
+    else
+        tex_num = (r->ray_dir_y > 0) ? 2 : 3;
+
+    // 4) tex_x + clamp
+    tex_x = (int)(wall_x * (double)game->tex_width[tex_num]);
+    if (tex_x < 0) tex_x = 0;
+    if (tex_x >= game->tex_width[tex_num]) tex_x = game->tex_width[tex_num] - 1;
+
+    if ((r->side == 0 && r->ray_dir_x < 0) || (r->side == 1 && r->ray_dir_y > 0))
+        tex_x = game->tex_width[tex_num] - tex_x - 1;
+
+    // 5) Boucle Y avec clamp de tex_y et garde-fou sur i
+    if (i < 0 || i >= SCREEN_WIDTH) return; // éviter tout débordement horizontal
+
+    for (y = r->draw_start; y <= r->draw_end; y++) // <= pour inclure la dernière ligne
+    {
+        int d = (y * 256 - SCREEN_HEIGHT * 128 + r->line_height * 128);
+        tex_y = ((long long)d * game->tex_height[tex_num] / r->line_height) / 256;
+
+        // clamp tex_y
+        if (tex_y < 0) tex_y = 0;
+        if (tex_y >= game->tex_height[tex_num]) tex_y = game->tex_height[tex_num] - 1;
+
+        char *tex_ptr = game->tex_addr[tex_num]
+            + (tex_y * game->line_length[tex_num] + tex_x * (game->bits_per_pixel[tex_num] / 8));
+
+        unsigned int color = *(unsigned int *)tex_ptr;
+        if (r->side == 1)
+            color = (color >> 1) & 0x7F7F7F;
+
+        my_mlx_pixel_put(mlx->img, i, y, color);
+    }
 }
 
 void	handle_time(t_ray *ray, struct timeval *tv)
@@ -214,7 +227,7 @@ void	render_single_frame(t_game *game, t_mlx *mlx, t_ray *ray)
 	int	i;
 	struct timeval tv;
 
-	ft_bzero(mlx->img->addr, SCREEN_WIDTH * SCREEN_HEIGHT * (mlx->img->bits_per_pixel / 8));
+	ft_bzero(mlx->img->addr, game->map_width * game->map_height * (mlx->img->bits_per_pixel / 8));
 	i = 0;
 	fill_background(mlx, game);
 	while (i < SCREEN_WIDTH)
@@ -273,90 +286,93 @@ int	check_wall_colision(double *wall_dist)
 	return (1);
 }
 
-int	handle_movement(t_ctx *ctx)
-{
-	t_mlx	*m = ctx->mlx;
-	t_game	*g = ctx->game;
-	double	move_speed = 0.05;
-	double	rot_speed = 0.05;
-	double old_dir_x, old_plane_x;
-	double	new_x;
-	double	new_y;
-	double	radius = 0.25;
+static inline int tile_x(double x) { return (int)floor(x); }
+static inline int tile_y(double y) { return (int)floor(y); }
 
-	if (m->w)
-	{
-		new_x = g->pos_x + g->dir_x * move_speed;
-		new_y = g->pos_y + g->dir_y * move_speed;
-		if (g->dir_x > 0)
-		{
-			if (g->world_map[(int)g->pos_y][(int)(new_x + radius)] == '0')
-				g->pos_x = new_x;
-		}
-		else
-		{
-			if (g->world_map[(int)g->pos_y][(int)(new_x - radius)] == '0')
-				g->pos_x = new_x;
-		}
-		if (g->dir_y > 0)
-		{
-			if (g->world_map[(int)(new_y + radius)][(int)g->pos_x] == '0')
-				g->pos_y = new_y;
-		}
-		else
-		{
-			if (g->world_map[(int)(new_y - radius)][(int)g->pos_x] == '0')
-				g->pos_y = new_y;
-		}
-	}
-	if (m->s)
-	{
-		new_x = g->pos_x - g->dir_x * move_speed;
-		new_y = g->pos_y - g->dir_y * move_speed;
-		if (g->world_map[(int)g->pos_y][(int)new_x] == '0')
-			g->pos_x = new_x;
-		if (g->world_map[(int)new_y][(int)g->pos_x] == '0')
-			g->pos_y = new_y;
-	}
-	if (m->a)
-	{
-		new_x = g->pos_x - g->plane_x * move_speed;
-		new_y = g->pos_y - g->plane_y * move_speed;
-		if (g->world_map[(int)g->pos_y][(int)new_x] == '0')
-			g->pos_x = new_x;
-		if (g->world_map[(int)new_y][(int)g->pos_x] == '0')
-			g->pos_y = new_y;
-	}
-	if (m->d)
-	{
-		new_x = g->pos_x + g->plane_x * move_speed;
-		new_y = g->pos_y + g->plane_y * move_speed;
-		if (g->world_map[(int)g->pos_y][(int)new_x] == '0')
-			g->pos_x = new_x;
-		if (g->world_map[(int)new_y][(int)g->pos_x] == '0')
-			g->pos_y = new_y;
-	}
-	if (m->left_arrow)
-	{
-		double angle = -rot_speed;
-		old_dir_x = g->dir_x;
-		g->dir_x = g->dir_x * cos(angle) - g->dir_y * sin(angle);
-		g->dir_y = old_dir_x * sin(angle) + g->dir_y * cos(angle);
-		old_plane_x = g->plane_x;
-		g->plane_x = g->plane_x * cos(angle) - g->plane_y * sin(angle);
-		g->plane_y = old_plane_x * sin(angle) + g->plane_y * cos(angle);
-	}
-	if (m->right_arrow)
-	{
-		double angle = rot_speed;
-		old_dir_x = g->dir_x;
-		g->dir_x = g->dir_x * cos(angle) - g->dir_y * sin(angle);
-		g->dir_y = old_dir_x * sin(angle) + g->dir_y * cos(angle);
-		old_plane_x = g->plane_x;
-		g->plane_x = g->plane_x * cos(angle) - g->plane_y * sin(angle);
-		g->plane_y = old_plane_x * sin(angle) + g->plane_y * cos(angle);
-	}
-	return (0);
+static inline int is_open_cell(t_game *g, int my, int mx)
+{
+    if (my < 0 || mx < 0) return 0;
+    printf("map_height: %d\n map_width: %d\n", g->map_height, g->map_width);
+    if (my >= g->map_height || mx >= g->map_width) return 0;
+    return g->world_map[my][mx] == '0';
+}
+
+// Test de déplacement avec "rayon" pour éviter de s'accrocher aux coins.
+// dx/dy = vecteur de déplacement (nouvelle position - ancienne position)
+static void try_move_with_radius(t_game *g, double new_x, double new_y,
+                                 double dx, double dy, double radius)
+{
+    double off_x = (dx > 0.0) ? radius : (dx < 0.0 ? -radius : 0.0);
+    double off_y = (dy > 0.0) ? radius : (dy < 0.0 ? -radius : 0.0);
+
+    // Test axe X
+    int test_mx = tile_x(new_x + off_x);
+    int cur_my  = tile_y(g->pos_y);
+    if (is_open_cell(g, cur_my, test_mx))
+        g->pos_x = new_x;
+
+    // Test axe Y (en utilisant pos_x possiblement mis à jour pour permettre le "sliding")
+    int test_my = tile_y(new_y + off_y);
+    int cur_mx  = tile_x(g->pos_x);
+    if (is_open_cell(g, test_my, cur_mx))
+        g->pos_y = new_y;
+}
+
+
+int handle_movement(t_ctx *ctx)
+{
+    t_mlx  *m = ctx->mlx;
+    t_game *g = ctx->game;
+
+    // Utilise les vitesses du jeu si elles sont renseignées, sinon des défauts
+    double move_speed = (g->move_speed     > 0.0) ? g->move_speed     : 0.05;
+    double rot_speed  = (g->rotation_speed > 0.0) ? g->rotation_speed : 0.05;
+    double radius = 0.25;
+
+    double old_dir_x, old_plane_x;
+
+    // --- Avancer (W)
+    if (m->w) {
+        double dx = g->dir_x * move_speed;
+        double dy = g->dir_y * move_speed;
+        try_move_with_radius(g, g->pos_x + dx, g->pos_y + dy, dx, dy, radius);
+    }
+
+    // --- Reculer (S)
+    if (m->s) {
+        double dx = -g->dir_x * move_speed;
+        double dy = -g->dir_y * move_speed;
+        try_move_with_radius(g, g->pos_x + dx, g->pos_y + dy, dx, dy, radius);
+    }
+
+    // --- Strafe gauche (A) : utilise le plan (perpendiculaire à dir)
+    if (m->a) {
+        double dx = -g->plane_x * move_speed;
+        double dy = -g->plane_y * move_speed;
+        try_move_with_radius(g, g->pos_x + dx, g->pos_y + dy, dx, dy, radius);
+    }
+
+    // --- Strafe droit (D)
+    if (m->d) {
+        double dx =  g->plane_x * move_speed;
+        double dy =  g->plane_y * move_speed;
+        try_move_with_radius(g, g->pos_x + dx, g->pos_y + dy, dx, dy, radius);
+    }
+
+    // --- Rotation
+    if (m->left_arrow || m->right_arrow) {
+        double angle = m->left_arrow ? -rot_speed : rot_speed;
+
+        old_dir_x   = g->dir_x;
+        g->dir_x    = g->dir_x * cos(angle) - g->dir_y * sin(angle);
+        g->dir_y    = old_dir_x * sin(angle) + g->dir_y * cos(angle);
+
+        old_plane_x = g->plane_x;
+        g->plane_x  = g->plane_x * cos(angle) - g->plane_y * sin(angle);
+        g->plane_y  = old_plane_x * sin(angle) + g->plane_y * cos(angle);
+    }
+
+    return 0;
 }
 
 int	loop_hook(t_ctx *ctx)
@@ -462,7 +478,8 @@ void	start_game_loop(t_game *game, t_mlx *mlx)
 	game->dir_y = sin(sgt_player()->orientation * M_PI / 180);
 	game->plane_x = -game->dir_y * 0.66;
 	game->plane_y = game->dir_x * 0.66; // FOV 66°
-	
+	game->map_width = ft_strlen(**sgt_map());
+    game->map_height = count_elements(*sgt_map());
 	load_textures(&ctx);
 	ray.time = 0;
 	ray.oldtime = 0;
@@ -473,5 +490,5 @@ void	start_game_loop(t_game *game, t_mlx *mlx)
 	mlx_hook(mlx->mlx_win, 3, 1L<<1, key_release, &ctx);
 	mlx_hook(mlx->mlx_win, 17, 0, mouse_press, &ctx);
 	mlx_loop_hook(mlx->mlx, loop_hook, &ctx);
-	mlx_loop(mlx->mlx);
+	mlx_loop(mlx->mlx); 
 }

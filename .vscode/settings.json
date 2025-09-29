@@ -8,6 +8,7 @@
     },
     "files.associations": {
         "checker.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "header_main.h": "c"
     }
 }
