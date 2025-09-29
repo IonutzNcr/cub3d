@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:20:43 by leothoma          #+#    #+#             */
-/*   Updated: 2025/09/29 12:57:39 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/09/29 13:28:16 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,61 +62,65 @@ void	init_ray(t_game *game, t_ray *r, int i)
 	r->hit = 0;
 }
 
-void	calculate_distances(t_game *game, t_ray *r)
+void calculate_wall_distance(t_game *g, t_ray *r)
 {
-	if (r->ray_dir_x < 0)
-	{
-		r->step_x = -1;
-		r->side_dist_x = (game->pos_x - r->map_x) * r->delta_dist_x;
-	}
-	else
-	{
-		r->step_x = 1;
-		r->side_dist_x = (r->map_x + 1.0 - game->pos_x) * r->delta_dist_x;
-	}
-	if (r->ray_dir_y < 0)
-	{
-		r->step_y = -1;
-		r->side_dist_y = (game->pos_y - r->map_y) * r->delta_dist_y;
-	}
-	else
-	{
-		r->step_y = 1;
-		r->side_dist_y = (r->map_y + 1.0 - game->pos_y) * r->delta_dist_y;
-	}
+    // éviter divisions par 0 si un rayon est parfaitement vertical/horizontal
+    const double BIG = 1e30;
+
+    if (r->side == 0) {
+        double denom = (r->ray_dir_x != 0.0) ? r->ray_dir_x : (1.0 / BIG);
+        r->perp_wall_dist = (r->map_x - g->pos_x + (1 - r->step_x) * 0.5) / denom;
+    } else {
+        double denom = (r->ray_dir_y != 0.0) ? r->ray_dir_y : (1.0 / BIG);
+        r->perp_wall_dist = (r->map_y - g->pos_y + (1 - r->step_y) * 0.5) / denom;
+    }
+
+    if (r->perp_wall_dist < 1e-6) r->perp_wall_dist = 1e-6; // garde-fou
+}
+void execute_dda(t_game *game, t_ray *r)
+{
+    // dimensions de la map
+    int h = game->map_height;
+    int w = game->map_width;
+
+    // Sécurité: limite d’itérations pour éviter une boucle infinie si map invalide
+    for (int k = 0; k < w * h + 10 && r->hit == 0; ++k)
+    {
+        // tie-break explicite pour l'égalité (optionnel mais propre)
+        if (r->side_dist_x < r->side_dist_y || 
+           (r->side_dist_x == r->side_dist_y && fabs(r->ray_dir_x) > fabs(r->ray_dir_y)))
+        {
+            r->side_dist_x += r->delta_dist_x;
+            r->map_x += r->step_x;
+            r->side = 0;
+        }
+        else
+        {
+            r->side_dist_y += r->delta_dist_y;
+            r->map_y += r->step_y;
+            r->side = 1;
+        }
+
+        // bornes: si on sort, on arrête proprement
+        if (r->map_x < 0 || r->map_x >= w || r->map_y < 0 || r->map_y >= h) {
+            r->hit = 1;
+            // distance grande pour que rien ne s'affiche (ou gères ça comme "rien touché")
+            r->perp_wall_dist = 1e9;
+            break;
+        }
+
+        if (game->world_map[r->map_y][r->map_x] != '0')
+            r->hit = 1;
+    }
 }
 
-void	execute_dda(t_game *game, t_ray *r)
-{
-	int	i;
-
-	i = 0;
-	while (r->hit == 0)
-	{
-		if (r->side_dist_x < r->side_dist_y)
-		{
-			r->side_dist_x += r->delta_dist_x;
-			r->map_x += r->step_x;
-			r->side = 0;
-		}
-		else
-		{
-			r->side_dist_y += r->delta_dist_y;
-			r->map_y += r->step_y;
-			r->side = 1;
-		}
-		if (game->world_map[r->map_y][r->map_x] != '0')
-			r->hit = 1;
-	}
-}
-
-void	calculate_wall_distance(t_ray *r)
+/* void	calculate_wall_distance(t_ray *r)
 {
 	if (r->side == 0)
 		r->perp_wall_dist = r->side_dist_x - r->delta_dist_x;
 	else
 		r->perp_wall_dist = r->side_dist_y - r->delta_dist_y;
-}
+} */
 
 
 void draw_walls(t_game *game, t_ray *r, int i, t_mlx *mlx)
@@ -190,13 +194,38 @@ void	handle_time(t_ray *ray, struct timeval *tv)
 	ray->frametime = (ray->time - ray->oldtime) / 1000.0;
 }
 
+void	calculate_distances(t_game *game, t_ray *r)
+{
+	if (r->ray_dir_x < 0)
+	{
+		r->step_x = -1;
+		r->side_dist_x = (game->pos_x - r->map_x) * r->delta_dist_x;
+	}
+	else
+	{
+		r->step_x = 1;
+		r->side_dist_x = (r->map_x + 1.0 - game->pos_x) * r->delta_dist_x;
+	}
+	if (r->ray_dir_y < 0)
+	{
+		r->step_y = -1;
+		r->side_dist_y = (game->pos_y - r->map_y) * r->delta_dist_y;
+	}
+	else
+	{
+		r->step_y = 1;
+		r->side_dist_y = (r->map_y + 1.0 - game->pos_y) * r->delta_dist_y;
+	}
+}
+
+
 void	cast_ray(t_game *game, int i, t_mlx *mlx, t_ray *ray)
 {
 	ft_bzero(ray, sizeof(t_ray));
 	init_ray(game, ray, i);
 	calculate_distances(game, ray);
 	execute_dda(game, ray);
-	calculate_wall_distance(ray);
+	calculate_wall_distance(game, ray);
 	draw_walls(game, ray, i, mlx);
 }
 
