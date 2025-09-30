@@ -44,6 +44,7 @@ SRC_FILES = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/parser/controller/get_player_info.c \
 			$(SRC_DIR)/parser/controller/utils.c \
 			$(SRC_DIR)/parser/controller/utility.c \
+			$(SRC_DIR)/parser/controller/hard_verif.c \
 			$(SRC_DIR)/parser/controller/verif.c \
 			$(SRC_DIR)/parser/rules/is_cf_format.c \
 			$(SRC_DIR)/parser/rules/is_extension.c \
