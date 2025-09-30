@@ -80,7 +80,7 @@ static void	draw_wall_column(t_game *game, t_ray *r, int i, t_mlx *mlx)
 	while (++y <= r->draw_end)
 	{
 		d = y * 256 - SCREEN_HEIGHT * 128 + r->line_height * 128;
-		tex_y = ((long long)d * game->tex_height[r->tex_num]) / r->line_height / 256;
+		tex_y = d * game->tex_height[r->tex_num] / r->line_height / 256;
 		if (tex_y < 0)
 			tex_y = 0;
 		if (tex_y >= game->tex_height[r->tex_num])

@@ -90,7 +90,7 @@ int parse_WE(char *line);
 int parse_EA(char *line);
 int asset_parser(t_task liste[6], char *line);
 int is_invalid_space(char ch);
-int print_error();
+int print_error(void);
 void init_list(t_task list[6]);
 char *wgnl(char **line, int fd);
 int parser(int argc, char *argv[], char *env[]);

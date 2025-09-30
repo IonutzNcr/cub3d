@@ -1,10 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checked_list.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 00:58:17 by leothoma          #+#    #+#             */
+/*   Updated: 2025/10/01 00:58:21 by leothoma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
-/*
-	return 1 if all task in the list has been done ...abort
-	return 0 if there are at least one task undone
-	does not set error or print error
-*/
 int	checked_list(t_task liste[6])
 {
 	int i;

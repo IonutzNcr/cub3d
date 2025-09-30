@@ -12,16 +12,12 @@
 
 #ifndef HEADER_MAIN_H
 # define HEADER_MAIN_H
-# define mapWidth 24
-# define mapHeight 24
-# define screenWidth 1920
-# define screenHeight 1080
 # include <math.h>
 # include <sys/time.h>
 # include <stdio.h>
 # include <mlx.h>
 # include "checker.h"
-# include "graphics/mlx.h"
+# include "graphics/my_mlx.h"
 # include "graphics/raycast.h"
 # include "graphics/struct.h"
 

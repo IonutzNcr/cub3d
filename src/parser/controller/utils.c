@@ -1,9 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 01:03:56 by leothoma          #+#    #+#             */
+/*   Updated: 2025/10/01 01:04:10 by leothoma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
-/*
-	print error if there is
-	return the error or 0 if there is no error
-*/
+static void	print_error_2(int error)
+{
+	if (error == F_MALL)
+		write(2, "ERROR: Malloc Fail\n", 19);
+	if (error == NO_WALL)
+		write(2, "ERROR: NO WALL DETECTED\n", 24);
+	if (error == INV_CH)
+		write(2, "ERROR: Invalid character in map\n", 32);
+	if (error == PLY_NB)
+		write(2, "ERROR: Too many players\n", 24);
+	if (error == NO_PLY)
+		write(2, "ERROR: No player detected\n", 26);
+	if (error == NO_FILE)
+		write(2, "ERROR: INVALID FILE\n", 20);
+	if (error > 13)
+		printf("ERROR %d not detected yet\n", error);
+}
+
 int	print_error(void)
 {
 	int	error;
@@ -23,26 +49,10 @@ int	print_error(void)
 		write(2, "ERROR: Invalid Line\n", 20);
 	if (error == EM_FILE)
 		write(2, "ERROR: Empty file detected\n", 27);
-	if (error == F_MALL)
-		write(2, "ERROR: Malloc Fail\n", 19);
-	if (error == NO_WALL)
-		write(2, "ERROR: NO WALL DETECTED\n", 24);
-	if (error == INV_CH)
-		write(2, "ERROR: Invalid character in map\n", 32);
-	if (error == PLY_NB)
-		write(2, "ERROR: Too many players\n", 24);
-	if (error == NO_PLY)
-		write(2, "ERROR: No player detected\n", 26);
-	if (error == NO_FILE)
-		write(2, "ERROR: INVALID FILE\n", 20);
-	if (error > 13)
-		printf("ERROR %d not detected yet\n", error);
+	print_error_2(error);
 	return (error);
 }
 
-/*
-	wrapper to getnextline to win some lines
-*/
 char	*wgnl(char **line, int fd)
 {
 	*line = get_next_line(fd);
@@ -71,9 +81,10 @@ void	init_list(t_task list[6])
 	list[5].func = is_floor;
 	list[5].parse = is_floor;
 }
+
 int	empty_gnl(int fd)
 {
-	char *line;
+	char	*line;
 
 	while (wgnl(&line, fd))
 		free(line);

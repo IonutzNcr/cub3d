@@ -16,14 +16,14 @@ int	init_t_mlx(t_mlx *mlx)
 {
 	mlx->mlx = mlx_init();
 	if (!mlx->mlx)
-		return(0);
+		return (0);
 	mlx->img = malloc(sizeof(t_img));
 	if (!mlx->img)
-		return(0);
+		return (0);
 	mlx->mlx_win = mlx_new_window(mlx->mlx,
 			SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
 	if (!mlx->mlx_win)
-		return(0);
+		return (0);
 	mlx->img->img = mlx_new_image(mlx->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!mlx->img->img)
 		return (0);
@@ -38,8 +38,7 @@ int	init_t_mlx(t_mlx *mlx)
 void	free_mlx(t_mlx *mlx)
 {
 	if (!mlx)
-		return;
-
+		return ;
 	if (mlx->img)
 	{
 		if (mlx->img->img)

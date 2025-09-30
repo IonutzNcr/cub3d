@@ -1,10 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   asset_parser.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 00:57:30 by leothoma          #+#    #+#             */
+/*   Updated: 2025/10/01 00:57:36 by leothoma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
-/*
-	return 0 if is good
-	return err if is bad
-	does not set up error because it is managed by the parses func.
-*/
 int	asset_parser(t_task liste[6], char *line)
 {
 	int i;

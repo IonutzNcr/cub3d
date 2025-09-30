@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# define MLX_H
+#ifndef MY_MLX_H
+# define MY_MLX_H
 # include "../header_main.h"
 
 typedef struct s_img
@@ -34,3 +35,4 @@ typedef struct s_mlx
 	int			left_arrow;
 	int			right_arrow;
 }	t_mlx;
+#endif

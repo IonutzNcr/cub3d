@@ -1,11 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   asset_checker.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 00:56:54 by leothoma          #+#    #+#             */
+/*   Updated: 2025/10/01 00:57:00 by leothoma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
-/*
-return 0 si checker good
-return > 0 if eror found...
-set singleton error
-doestn print error
-*/
 int	asset_checker(t_task *liste, char *line)
 {
 	int	i;

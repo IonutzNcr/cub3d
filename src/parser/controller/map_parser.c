@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parser.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 00:59:25 by leothoma          #+#    #+#             */
+/*   Updated: 2025/10/01 00:59:31 by leothoma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
 int	map_parser(char *line)
 {
-	if (add_line(line) && sgt_error(10)) // fail malloc
+	if (add_line(line) && sgt_error(10))
 		return (*sgt_error());
 	return (0);
 }

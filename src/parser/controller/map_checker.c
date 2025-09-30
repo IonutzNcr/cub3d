@@ -1,10 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_checker.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 00:58:45 by leothoma          #+#    #+#             */
+/*   Updated: 2025/10/01 00:58:49 by leothoma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
-/*
-	check the last colon to see if is only composed by 1 = wall
-	return 0 if succes
-	return 1 if failure
-*/
 int	is_lc_wall(void)
 {
 	char	**map;

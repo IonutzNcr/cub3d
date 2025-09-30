@@ -23,7 +23,8 @@ void	calculate_wall_distance(t_game *g, t_ray *r)
 			denom = r->ray_dir_x;
 		else
 			denom = 1.0 / big;
-		r->perp_wall_dist = (r->map_x - g->pos_x + (1 - r->step_x) * 0.5) / denom;
+		r->perp_wall_dist = (r->map_x - g->pos_x
+				+ (1 - r->step_x) * 0.5) / denom;
 	}
 	else
 	{
@@ -31,7 +32,8 @@ void	calculate_wall_distance(t_game *g, t_ray *r)
 			denom = r->ray_dir_y;
 		else
 			denom = 1.0 / big;
-		r->perp_wall_dist = (r->map_y - g->pos_y + (1 - r->step_y) * 0.5) / denom;
+		r->perp_wall_dist = (r->map_y - g->pos_y
+				+ (1 - r->step_y) * 0.5) / denom;
 	}
 	if (r->perp_wall_dist < 1e-6)
 		r->perp_wall_dist = 1e-6;
