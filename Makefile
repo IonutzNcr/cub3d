@@ -15,6 +15,7 @@ NAME = cub3d
 # Compiler and flags
 CC = cc
 CFLAGS = -Wall -Wextra -g
+#-fsanitize=address,undefined -fsanitize-address-use-after-scope -fno-omit-frame-pointer -g3
 
 # Directories
 SRC_DIR = src
