@@ -94,7 +94,7 @@ t_mlx			**sgt_mlx(void);
 void			render_single_frame(t_game *game, t_mlx *mlx, t_ray *ray);
 void			cast_ray(t_game *game, int i, t_mlx *mlx, t_ray *ray);
 void			draw_walls(t_game *game, t_ray *r, int i, t_mlx *mlx);
-void			calculate_wall_distance(t_ray *r);
+void			calculate_wall_distance(t_game *g, t_ray *r);
 void			execute_dda(t_game *game, t_ray *r);
 void			calculate_distances(t_game *game, t_ray *r);
 void			init_ray(t_game *game, t_ray *r, int i);

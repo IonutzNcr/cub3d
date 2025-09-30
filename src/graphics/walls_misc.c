@@ -12,7 +12,7 @@
 
 #include "../header_main.h"
 
-void	calculate_wall_distance(t_ray *r)
+void	calculate_wall_distance(t_game *g, t_ray *r)
 {
 	const double		big = 1e30;
 	double				denom;
@@ -20,16 +20,18 @@ void	calculate_wall_distance(t_ray *r)
 	if (r->side == 0)
 	{
 		if (r->ray_dir_x != 0.0)
-				denom = r->ray_dir_x;
+			denom = r->ray_dir_x;
 		else
-				denom = 1.0 / big;
+			denom = 1.0 / big;
+		r->perp_wall_dist = (r->map_x - g->pos_x + (1 - r->step_x) * 0.5) / denom;
 	}
 	else
 	{
 		if (r->ray_dir_y != 0.0)
-				denom = r->ray_dir_y;
+			denom = r->ray_dir_y;
 		else
-				denom = 1.0 / big;
+			denom = 1.0 / big;
+		r->perp_wall_dist = (r->map_y - g->pos_y + (1 - r->step_y) * 0.5) / denom;
 	}
 	if (r->perp_wall_dist < 1e-6)
 		r->perp_wall_dist = 1e-6;
