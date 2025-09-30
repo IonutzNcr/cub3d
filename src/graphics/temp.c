@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:50:04 by inicoara          #+#    #+#             */
-/*   Updated: 2025/09/30 17:04:41 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:07:10 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ static int	resolve_neighborhood(t_game *g, Vec2 *c, double radius)
 	}
 	return (changed_any);
 }
+
 void	fix_position_near_walls(t_game *g, double radius)
 {
 	Vec2	c;
