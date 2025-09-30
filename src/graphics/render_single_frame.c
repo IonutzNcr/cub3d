@@ -48,7 +48,7 @@ void	cast_ray(t_game *game, int i, t_mlx *mlx, t_ray *ray)
 	init_ray(game, ray, i);
 	calculate_distances(game, ray);
 	execute_dda(game, ray);
-	calculate_wall_distance(game, ray);
+	calculate_wall_distance(ray);
 	draw_walls(game, ray, i, mlx);
 }
 

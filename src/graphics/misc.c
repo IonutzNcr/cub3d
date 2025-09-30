@@ -24,5 +24,5 @@ t_mlx	**sgt_mlx(void)
 {
 	static void	*sgt_mlx;
 
-	return (&sgt_mlx);
+	return ((t_mlx **)&sgt_mlx);
 }

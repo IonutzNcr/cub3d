@@ -53,8 +53,6 @@ typedef struct s_game
 	int			tex_width[TEXTURE_COUNT];
 	int			tex_height[TEXTURE_COUNT];
 
-	int			tex_num;
-	int			tex_x;
 }	t_game;
 
 typedef struct s_ray
@@ -80,6 +78,9 @@ typedef struct s_ray
 	int			draw_start;
 	int			draw_end;
 	int			color;
+	double			wall_x;
+	int			tex_num;
+	int			tex_x;
 }				t_ray;
 
 typedef struct s_ctx
@@ -93,7 +94,7 @@ t_mlx			**sgt_mlx(void);
 void			render_single_frame(t_game *game, t_mlx *mlx, t_ray *ray);
 void			cast_ray(t_game *game, int i, t_mlx *mlx, t_ray *ray);
 void			draw_walls(t_game *game, t_ray *r, int i, t_mlx *mlx);
-void			calculate_wall_distance(t_game *g, t_ray *r);
+void			calculate_wall_distance(t_ray *r);
 void			execute_dda(t_game *game, t_ray *r);
 void			calculate_distances(t_game *game, t_ray *r);
 void			init_ray(t_game *game, t_ray *r, int i);
@@ -125,5 +126,15 @@ void			try_move_with_radius(t_game *g, t_vec2 new_pos, t_vec2 dir,
 void			move_with_dir(t_game *g, t_vec2 dir, double speed,
 					double radius);
 void			rotate_player(t_game *g, double angle);
+int	key_press(int keycode, t_ctx *ctx);
+int	key_release(int keycode, t_ctx *ctx);
+int	mouse_press(void *param);
+void	init_map(t_game *game);
+void	init_ray(t_game *game, t_ray *r, int i);
+void	load_textures(t_ctx *ctx);
+void	fill_background(t_mlx *mlx, t_game *game);
+void	handle_time(t_ray *ray, struct timeval *tv);
+void	fix_position_near_walls(t_game *g, double radius);
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 #endif

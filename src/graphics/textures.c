@@ -32,7 +32,7 @@ void	load_textures(t_ctx *ctx)
 	while (++i < TEXTURE_COUNT)
 	{
 		if (!ctx->game->textures[i])
-			clear_all();
+			clear_all(ctx);
 		ctx->game->tex_addr[i] = mlx_get_data_addr(ctx->game->textures[i],
 				&ctx->game->bits_per_pixel[i],
 				&ctx->game->line_length[i],

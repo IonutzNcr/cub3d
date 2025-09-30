@@ -53,7 +53,11 @@ int	key_release(int keycode, t_ctx *ctx)
 	return (0);
 }
 
-void	mouse_press(t_ctx *ctx)
+int	mouse_press(void *param)
 {
+	t_ctx	*ctx;
+
+	ctx = (t_ctx *)param;
 	clear_all(ctx);
+	return (0);
 }

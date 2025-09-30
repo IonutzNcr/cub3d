@@ -12,7 +12,7 @@
 
 #include "../header_main.h"
 
-void	calculate_wall_distance(t_game *g, t_ray *r)
+void	calculate_wall_distance(t_ray *r)
 {
 	const double		big = 1e30;
 	double				denom;
