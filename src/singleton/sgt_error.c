@@ -1,13 +1,13 @@
 
 
+int	*sgt_error(void)
+{
+	static int	error;
 
-int *sgt_error()
-{
-    static int error;
-    return &error;
+	return (&error);
 }
-int set_sgt_error(int error)
+int	set_sgt_error(int error)
 {
-    *sgt_error() = error;
-    return (1);
+	*sgt_error() = error;
+	return (1);
 }

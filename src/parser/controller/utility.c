@@ -1,27 +1,27 @@
 #include "checker.h"
 
-void free_split(char **arg)
+void	free_split(char **arg)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (arg[i])
-        free(arg[i++]);
-    free(arg);
+	i = 0;
+	while (arg[i])
+		free(arg[i++]);
+	free(arg);
 }
 
-int count_elements(char **argv)
+int	count_elements(char **argv)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (argv[i])
-        i++;
-    return (i);
+	i = 0;
+	while (argv[i])
+		i++;
+	return (i);
 }
 
-void free_singleton()
+void	free_singleton(void)
 {
-    remove_map();
-    remove_assets();
+	remove_map();
+	remove_assets();
 }

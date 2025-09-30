@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   is_invalid_space.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:54:50 by yoyo              #+#    #+#             */
-/*   Updated: 2025/07/29 18:54:58 by yoyo             ###   ########.fr       */
+/*   Updated: 2025/09/30 22:11:20 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int is_invalid_space(char ch)
+int	is_invalid_space(char ch)
 {
-    if (ch == 9 || ch == 10 || ch == 11 || ch == 12 || ch == 13)
-        return (1);
-    return (0);
+	if (ch == 9 || ch == 10 || ch == 11 || ch == 12 || ch == 13)
+		return (1);
+	return (0);
 }
