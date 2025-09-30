@@ -6,14 +6,14 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:50:04 by inicoara          #+#    #+#             */
-/*   Updated: 2025/09/30 17:07:10 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:51:27 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header_main.h"
 #define EPSILON 1e-6
 
-static int	handle_normal_push(Vec2 *c, Penetration *pn, double radius)
+static int	handle_normal_push(t_vec2 *c, t_penetration *pn, double radius)
 {
 	double	dist;
 	double	push_len;
@@ -27,10 +27,10 @@ static int	handle_normal_push(Vec2 *c, Penetration *pn, double radius)
 	return (1);
 }
 
-static void	resolve_degenerate(Vec2 *c, double radius, AABB box)
+static void	resolve_degenerate(t_vec2 *c, double radius, t_aabb box)
 {
-	Vec2	box_center;
-	Vec2	axis_delta;
+	t_vec2	box_center;
+	t_vec2	axis_delta;
 
 	compute_box_center(box, &box_center);
 	compute_axis_delta(c, &box_center, &axis_delta);
@@ -50,10 +50,10 @@ static void	resolve_degenerate(Vec2 *c, double radius, AABB box)
 	}
 }
 
-static int	push_out_of_wall(Vec2 *c, double radius, AABB box)
+static int	push_out_of_wall(t_vec2 *c, double radius, t_aabb box)
 {
-	ClosestPoint	cp;
-	Penetration		pn;
+	t_closestPoint	cp;
+	t_penetration	pn;
 
 	cp = closest_point_on_aabb(c->x, c->y, box);
 	pn = make_penetration(c->x, c->y, cp, radius);
@@ -65,13 +65,13 @@ static int	push_out_of_wall(Vec2 *c, double radius, AABB box)
 	return (1);
 }
 
-static int	resolve_neighborhood(t_game *g, Vec2 *c, double radius)
+static int	resolve_neighborhood(t_game *g, t_vec2 *c, double radius)
 {
-	GridBounds	gb;
-	int			changed_any;
-	int			my;
-	int			mx;
-	AABB		b;
+	t_gridBounds	gb;
+	int				changed_any;
+	int				my;
+	int				mx;
+	t_aabb			b;
 
 	gb = compute_grid_bounds(c->x, c->y, radius);
 	changed_any = 0;
@@ -96,7 +96,7 @@ static int	resolve_neighborhood(t_game *g, Vec2 *c, double radius)
 
 void	fix_position_near_walls(t_game *g, double radius)
 {
-	Vec2	c;
+	t_vec2	c;
 	int		iter;
 	int		changed;
 

@@ -6,15 +6,15 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:44:30 by inicoara          #+#    #+#             */
-/*   Updated: 2025/09/30 17:06:46 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:51:03 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header_main.h"
 
-AABB	aabb_from_cell(int mx, int my)
+t_aabb	aabb_from_cell(int mx, int my)
 {
-	AABB	b;
+	t_aabb	b;
 
 	b.x0 = (double)mx;
 	b.y0 = (double)my;
@@ -23,9 +23,9 @@ AABB	aabb_from_cell(int mx, int my)
 	return (b);
 }
 
-GridBounds	compute_grid_bounds(double cx, double cy, double r)
+t_gridBounds	compute_grid_bounds(double cx, double cy, double r)
 {
-	GridBounds	gb;
+	t_gridBounds	gb;
 
 	gb.min_mx = (int)floor(cx - r) - 1;
 	gb.max_mx = (int)floor(cx + r) + 1;
@@ -34,19 +34,19 @@ GridBounds	compute_grid_bounds(double cx, double cy, double r)
 	return (gb);
 }
 
-ClosestPoint	closest_point_on_aabb(double cx, double cy, AABB b)
+t_closestPoint	closest_point_on_aabb(double cx, double cy, t_aabb b)
 {
-	ClosestPoint	cp;
+	t_closestPoint	cp;
 
 	cp.nx = clampd(cx, b.x0, b.x1);
 	cp.ny = clampd(cy, b.y0, b.y1);
 	return (cp);
 }
 
-Penetration	make_penetration(double cx, double cy, ClosestPoint cp,
+t_penetration	make_penetration(double cx, double cy, t_closestPoint cp,
 		double radius)
 {
-	Penetration	p;
+	t_penetration	p;
 
 	p.vx = cx - cp.nx;
 	p.vy = cy - cp.ny;
@@ -55,7 +55,7 @@ Penetration	make_penetration(double cx, double cy, ClosestPoint cp,
 	return (p);
 }
 
-int	has_overlap(Penetration *pn)
+int	has_overlap(t_penetration *pn)
 {
 	if (pn->d2 >= pn->r2 - 1e-12)
 		return (0);
