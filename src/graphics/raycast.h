@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:20:52 by leothoma          #+#    #+#             */
-/*   Updated: 2025/09/30 18:07:47 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:28:33 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,23 @@ int				is_open_cell(t_game *g, int my, int mx);
 double			clampd(double v, double a, double b);
 int				inside_map(const t_game *g, int my, int mx);
 void			compute_box_center(t_aabb box, t_vec2 *box_center);
-void			compute_axis_delta(t_vec2 *c, t_vec2 *box_center, t_vec2 *axis_delta);
+void			compute_axis_delta(t_vec2 *c, t_vec2 *box_center,
+					t_vec2 *axis_delta);
 t_aabb			aabb_from_cell(int mx, int my);
-t_gridBounds		compute_grid_bounds(double cx, double cy, double r);
+t_gridBounds	compute_grid_bounds(double cx, double cy, double r);
 t_closestPoint	closest_point_on_aabb(double cx, double cy, t_aabb b);
-t_penetration		make_penetration(double cx, double cy, t_closestPoint cp,
+t_penetration	make_penetration(double cx, double cy, t_closestPoint cp,
 					double radius);
 int				has_overlap(t_penetration *pn);
+double			get_move_speed(t_game *g);
+double			get_rot_speed(t_game *g);
+t_offset		compute_offset(double dx, double dy, double radius);
+int				tile_x(double x);
+int				tile_y(double y);
+void			try_move_with_radius(t_game *g, t_vec2 new_pos, t_vec2 dir,
+					double radius);
+void			move_with_dir(t_game *g, t_vec2 dir, double speed,
+					double radius);
+void			rotate_player(t_game *g, double angle);
+
 #endif
