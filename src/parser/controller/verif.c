@@ -1,30 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   verif.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 00:55:44 by inicoara          #+#    #+#             */
+/*   Updated: 2025/10/01 00:58:39 by inicoara         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
-/*
-	RETURN 0 if everything is good return > 0 if error
-	print_error cos is a manager ...
-*/
 int	quick_verif(int argc, char *argv[], char *env[])
 {
 	if (argc != 2 && set_sgt_error(P_NUM))
-		return (print_error()); // Invalid parameter number
-	if (!env && set_sgt_error(NO_ENV))
-		return (print_error()); // No env found
+		return (print_error());
+	if ((!env || !*env) && set_sgt_error(NO_ENV))
+		return (print_error());
 	if (!is_extension(argc, argv, env) && set_sgt_error(INV_EXT))
 		return (print_error());                          
-			// Invalid file extensioin
 	if (is_file_empty(argv[1]) && set_sgt_error(E_SCENE))
-		// potentiellement pb car je check pas s fd fail...
-		return (print_error());                           // Empty Scene
+		return (print_error());
 	return (0);
 }
 
-/*
-	check if the list is complete and if the map exist
-	return 0 if success
-	return 1 if fail
-	set error to corresponding error
-*/
 int	last_verif(t_task liste[6])
 {
 	if (!checked_list(liste))

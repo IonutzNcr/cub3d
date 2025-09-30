@@ -6,7 +6,7 @@
 #    By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 16:19:15 by kjullien          #+#    #+#              #
-#    Updated: 2025/09/30 18:24:39 by inicoara         ###   ########.fr        #
+#    Updated: 2025/10/01 00:49:44 by inicoara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = cub3d
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -g -fsanitize=address
+
 #-fsanitize=address,undefined -fsanitize-address-use-after-scope -fno-omit-frame-pointer -g3
 
 # Directories
