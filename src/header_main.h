@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_main.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:36:06 by leothoma          #+#    #+#             */
-/*   Updated: 2025/08/27 00:36:06 by leothoma         ###   ########.fr       */
+/*   Updated: 2025/09/30 15:35:54 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@
 # include "checker.h"
 # include "graphics/mlx.h"
 # include "graphics/raycast.h"
+# include "graphics/struct.h"
 #endif

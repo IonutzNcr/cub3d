@@ -6,7 +6,7 @@
 #    By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 16:19:15 by kjullien          #+#    #+#              #
-#    Updated: 2025/09/29 13:04:35 by inicoara         ###   ########.fr        #
+#    Updated: 2025/09/30 16:31:53 by inicoara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC_FILES = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/singleton/sgt_map.c \
 			$(SRC_DIR)/singleton/sgt_player.c \
 			$(SRC_DIR)/graphics/render_single_frame.c \
+			$(SRC_DIR)/graphics/temp.c 
 
 # Object files
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
