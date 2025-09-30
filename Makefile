@@ -59,7 +59,16 @@ SRC_FILES = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/graphics/utils_compute2.c\
 			$(SRC_DIR)/graphics/moves.c\
 			$(SRC_DIR)/graphics/utils_moves.c\
-			$(SRC_DIR)/graphics/utils_moves2.c
+			$(SRC_DIR)/graphics/utils_moves2.c\
+			$(SRC_DIR)/graphics/dda.c\
+			$(SRC_DIR)/graphics/events.c\
+			$(SRC_DIR)/graphics/draw_utils.c\
+			$(SRC_DIR)/graphics/memory_management.c\
+			$(SRC_DIR)/graphics/misc.c\
+			$(SRC_DIR)/graphics/init.c\
+			$(SRC_DIR)/graphics/walls_misc.c\
+			$(SRC_DIR)/graphics/walls.c\
+			$(SRC_DIR)/graphics/textures.c\
 			
 
 # Object files
