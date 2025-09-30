@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:20:43 by leothoma          #+#    #+#             */
-/*   Updated: 2025/09/30 18:17:40 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/09/30 21:15:32 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -380,7 +380,7 @@ void	load_textures(t_ctx *ctx)
 
 t_mlx	**sgt_mlx()
 {
-	static	void *sgt_mlx;
+	static	t_mlx *sgt_mlx;
 	return (&sgt_mlx);
 }
 
