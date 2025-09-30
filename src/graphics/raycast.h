@@ -51,6 +51,9 @@ typedef struct s_game
 	int			endian[TEXTURE_COUNT];
 	int			tex_width[TEXTURE_COUNT];
 	int			tex_height[TEXTURE_COUNT];
+
+	int			tex_num;
+	int			tex_x;
 }	t_game;
 
 typedef struct s_ray
