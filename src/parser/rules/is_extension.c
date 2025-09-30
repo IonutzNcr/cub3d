@@ -1,15 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   is_extension.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 01:33:19 by leothoma          #+#    #+#             */
+/*   Updated: 2025/10/01 01:33:20 by leothoma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
-/*
-	check extension is .cub
-	print errors...
-	used in quick_verif
-	return 0 if error
-	retirm 1 if success
-*/
 int	is_extension(int argc, char *argv[], char *env[])
 {
-	char *pathfile;
+	char	*pathfile;
 
 	pathfile = argv[1];
 	(void)argc;

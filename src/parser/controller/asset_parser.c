@@ -14,7 +14,7 @@
 
 int	asset_parser(t_task liste[6], char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 6)
@@ -28,6 +28,6 @@ int	asset_parser(t_task liste[6], char *line)
 		}
 		i++;
 	}
-	set_sgt_error(E_DUPLI); // asset parser error means duplicata i guess...
+	set_sgt_error(E_DUPLI);
 	return (*sgt_error());
 }

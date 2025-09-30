@@ -19,7 +19,7 @@ int	mapper(char *line, int fd)
 	free(line);
 	while (wgnl(&line, fd))
 	{
-		if (*line == '\0' && set_sgt_error(13)) // empty line in map
+		if (*line == '\0' && set_sgt_error(13))
 			return (free_singleton(), *sgt_error());
 		if (map_parser(line))
 			return (free_singleton(), free(line), empty_gnl(fd), print_error());

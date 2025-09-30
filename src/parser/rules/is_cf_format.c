@@ -1,9 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   is_cf_format.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 01:34:16 by leothoma          #+#    #+#             */
+/*   Updated: 2025/10/01 01:34:17 by leothoma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
-/*
-	return 1 if is good
-	retunr 0 if is bad
-*/
 static int	check_values_rgb(char **argv)
 {
 	int	i;
@@ -23,11 +31,6 @@ static int	check_values_rgb(char **argv)
 	return (1);
 }
 
-/*
-	return 0 if everything is good
-	return 1 if error found
-	****set error singleton on error****bad idea...
-*/
 static int	check_rgb(char *line)
 {
 	char	**rgb;
@@ -51,10 +54,6 @@ static int	check_rgb(char *line)
 	return (0);
 }
 
-/*
-	Return 0 if is bad
-	Return 1 if is good
-*/
 int	is_ceiling(char *line)
 {
 	while (*line && *line == ' ')
@@ -76,10 +75,7 @@ int	is_ceiling(char *line)
 		return (1);
 	return (0);
 }
-/*
-	Return 0 if is bad
-	Return 1 if is good
-*/
+
 int	is_floor(char *line)
 {
 	while (*line == ' ')

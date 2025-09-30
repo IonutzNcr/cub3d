@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sgt_assets.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 01:30:23 by leothoma          #+#    #+#             */
+/*   Updated: 2025/10/01 01:30:31 by leothoma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
 void	remove_assets(void)
@@ -17,6 +29,7 @@ void	remove_assets(void)
 
 t_assets	*sgt_assets(void)
 {
-	static t_assets assets;
+	static t_assets	assets;
+
 	return (&assets);
 }

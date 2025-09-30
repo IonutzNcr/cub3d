@@ -53,7 +53,7 @@ static int	fix_length(void)
 	{
 		curr_lenght = ft_strlen(*map);
 		row = ft_remalloc(*map, max_lenght + 1, curr_lenght + 1);
-		if (!row && set_sgt_error(12)) // malloc fail...
+		if (!row && set_sgt_error(12))
 			return (12);
 		fill_row(row, max_lenght);
 		free(*map);
@@ -63,9 +63,6 @@ static int	fix_length(void)
 	return (0);
 }
 
-/*
-	REPLACE space by 1 inside the map...
-*/
 static void	replace_space(void)
 {
 	char	**map;
@@ -85,10 +82,6 @@ static void	replace_space(void)
 	}
 }
 
-/*
-	ret error if malloc problem or other problem..
-	ret 0 if success
-*/
 int	map_fixer(void)
 {
 	replace_space();

@@ -12,7 +12,7 @@
 
 #include "checker.h"
 
-int	parse_NO(char *line)
+int	parse_no(char *line)
 {
 	int			fd;
 	t_assets	*assets;
@@ -32,7 +32,7 @@ int	parse_NO(char *line)
 	return (0);
 }
 
-int	parse_SO(char *line)
+int	parse_so(char *line)
 {
 	int			fd;
 	t_assets	*assets;
@@ -52,7 +52,7 @@ int	parse_SO(char *line)
 	return (0);
 }
 
-int	parse_WE(char *line)
+int	parse_we(char *line)
 {
 	int			fd;
 	t_assets	*assets;
@@ -72,10 +72,10 @@ int	parse_WE(char *line)
 	return (0);
 }
 
-int	parse_EA(char *line)
+int	parse_ea(char *line)
 {
-	int fd;
-	t_assets *assets;
+	int			fd;
+	t_assets	*assets;
 
 	while (*line && (*line != '/' && *line != '.'))
 		line++;

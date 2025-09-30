@@ -71,10 +71,10 @@ int get_player_info();
 t_player *sgt_player();
 
 /*this is ok...*/
-int   is_texture_NO(char *line);
-int   is_texture_SO(char *line);
-int   is_texture_WE(char *line);
-int   is_texture_EA(char *line);
+int   is_texture_no(char *line);
+int   is_texture_so(char *line);
+int   is_texture_we(char *line);
+int   is_texture_ea(char *line);
 int is_ceiling(char *line);
 int is_floor(char *line);
 
@@ -84,10 +84,10 @@ int checked_list(t_task liste[6]);
 void free_split(char **arg);
 int parse_floor(char *line);
 int parse_ceiling(char *line);
-int parse_NO(char *line);
-int parse_SO(char *line);
-int parse_WE(char *line);
-int parse_EA(char *line);
+int parse_no(char *line);
+int parse_so(char *line);
+int parse_we(char *line);
+int parse_ea(char *line);
 int asset_parser(t_task liste[6], char *line);
 int is_invalid_space(char ch);
 int print_error(void);
@@ -113,6 +113,10 @@ int count_elements(char **argv);
 int check_characters();
 char **get_row(int row);
 int map_fixer();
+int	is_lc_wall(void);
+int	is_c1_wall(void);
+int	is_lr_wall(void);
+int	is_r1_wall(void);
 
 
 #endif

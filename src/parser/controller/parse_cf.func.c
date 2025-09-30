@@ -37,6 +37,7 @@ int	parse_floor(char *line)
 	free_split(rgb);
 	return (0);
 }
+
 int	parse_ceiling(char *line)
 {
 	int			cmb;

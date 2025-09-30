@@ -18,6 +18,7 @@ static int	is_player(char p)
 		return (1);
 	return (0);
 }
+
 static double	get_player_orientation(char p)
 {
 	if (p == 'S')
@@ -27,6 +28,14 @@ static double	get_player_orientation(char p)
 	if (p == 'E')
 		return (0);
 	return (180);
+}
+
+static void	get_player_utils(t_player *player, char **map, int p, int i)
+{
+	player->x = i;
+	player->y = p;
+	player->orientation = get_player_orientation(map[p][i]);
+	map[p][i] = '0';
 }
 
 int	get_player_info(void)
@@ -41,22 +50,18 @@ int	get_player_info(void)
 	map = *sgt_map();
 	k = count_elements(map);
 	i = 0;
-	p = 0;
-	while (p < k)
+	p = -1;
+	while (++p < k)
 	{
 		while (map[p][i])
 		{
 			if (is_player(map[p][i]))
 			{
-				player->x = i;
-				player->y = p;
-				player->orientation = get_player_orientation(map[p][i]);
-				map[p][i] = '0';
+				get_player_utils(player, map, p, i);
 				return (0);
 			}
 			i++;
 		}
-		p++;
 		i = 0;
 	}
 	return (1);

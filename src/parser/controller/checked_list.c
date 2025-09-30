@@ -14,7 +14,7 @@
 
 int	checked_list(t_task liste[6])
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 6)

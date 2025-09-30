@@ -21,7 +21,7 @@ int	asset_checker(t_task *liste, char *line)
 	{
 		if (liste[i].func(line))
 		{
-			if (liste[i].done && set_sgt_error(E_DUPLI)) // duplicata error
+			if (liste[i].done && set_sgt_error(E_DUPLI))
 				return (*sgt_error());
 			else
 			{
@@ -32,6 +32,6 @@ int	asset_checker(t_task *liste, char *line)
 		else
 			continue ;
 	}
-	set_sgt_error(INV_LN); // invalid line
+	set_sgt_error(INV_LN);
 	return (*sgt_error());
 }

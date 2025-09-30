@@ -36,6 +36,7 @@ SRC_FILES = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/parser/controller/map_fixer.c \
 			$(SRC_DIR)/parser/controller/map_parser.c \
 			$(SRC_DIR)/parser/controller/map_checker.c \
+			$(SRC_DIR)/parser/controller/map_checker_2.c \
 			$(SRC_DIR)/parser/controller/mapper.c \
 			$(SRC_DIR)/parser/controller/parse_assets.func.c \
 			$(SRC_DIR)/parser/controller/parse_cf.func.c \

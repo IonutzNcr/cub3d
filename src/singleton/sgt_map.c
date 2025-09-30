@@ -1,10 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sgt_map.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 01:28:50 by leothoma          #+#    #+#             */
+/*   Updated: 2025/10/01 01:29:21 by leothoma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
-/*
-	remalloc and copy the old array content inside a new one
-	return the new one or NULL if fail
-	note: does not free the old one is your job to free it
-*/
 void	*ft_remalloc(void *old, int n_size, int old_size)
 {
 	void			*map;
@@ -23,11 +30,6 @@ void	*ft_remalloc(void *old, int n_size, int old_size)
 	return (dest);
 }
 
-/*
-	return l'addresse du pointeur de la row..
-	return null if row not inside the map...
-
-*/
 char	**get_row(int row)
 {
 	char	**map;
@@ -40,10 +42,6 @@ char	**get_row(int row)
 	return (&map[row]);
 }
 
-/*
-	always return 0
-	solo purpose is to free the map using the singleton
-*/
 int	remove_map(void)
 {
 	char	**map;
@@ -59,11 +57,7 @@ int	remove_map(void)
 	*sgt_map() = 0;
 	return (0);
 }
-/*
-	add a line to the map
-	return err if fail to malloc
-	return 0 in case of success
-*/
+
 int	add_line(char *line)
 {
 	char	**map;
@@ -73,7 +67,7 @@ int	add_line(char *line)
 	{
 		map = malloc(sizeof(char *) * (1 + 1));
 		if (!map)
-			return (10); // malloc fail
+			return (10);
 		*map = ft_strdup(line);
 		*(map + 1) = 0;
 		*sgt_map() = map;
@@ -84,7 +78,7 @@ int	add_line(char *line)
 		map = ft_remalloc(*sgt_map(), (nb + 2) * sizeof(char *), (nb + 1)
 				* sizeof(char *));
 		if (!map)
-			return (10); // malloc fail
+			return (10);
 		free(*sgt_map());
 		*(map + nb) = ft_strdup(line);
 		*(map + nb + 1) = 0;
@@ -93,9 +87,6 @@ int	add_line(char *line)
 	return (0);
 }
 
-/*
-	return the adresse of a pointer to a pointer
-*/
 char	***sgt_map(void)
 {
 	static char	**map;

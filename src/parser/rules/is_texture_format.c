@@ -12,12 +12,7 @@
 
 #include "checker.h"
 
-/*
-	Check if the format for the texture element is right
-	return 1 if is good
-	retunr 0 if is bad
-*/
-int	is_texture_NO(char *line)
+int	is_texture_no(char *line)
 {
 	while (*line == ' ')
 		line++;
@@ -36,12 +31,8 @@ int	is_texture_NO(char *line)
 		return (1);
 	return (0);
 }
-/*
-	Check if the format for the texture element is right
-	return 1 if is good
-	retunr 0 if is bad
-*/
-int	is_texture_SO(char *line)
+
+int	is_texture_so(char *line)
 {
 	while (*line == ' ')
 		line++;
@@ -60,12 +51,8 @@ int	is_texture_SO(char *line)
 		return (1);
 	return (0);
 }
-/*
-	Check if the format for the texture element is right
-	return 1 if is good
-	retunr 0 if is bad
-*/
-int	is_texture_WE(char *line)
+
+int	is_texture_we(char *line)
 {
 	while (*line == ' ')
 		line++;
@@ -84,12 +71,8 @@ int	is_texture_WE(char *line)
 		return (1);
 	return (0);
 }
-/*
-	Check if the format for the texture element is right
-	return 1 if is good
-	retunr 0 if is bad
-*/
-int	is_texture_EA(char *line)
+
+int	is_texture_ea(char *line)
 {
 	while (*line == ' ')
 		line++;
