@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_main.h"
+#ifndef MLX_H
+# define MLX_H
+# include "../header_main.h"
 
 typedef struct s_img
 {
@@ -23,13 +25,14 @@ typedef struct s_img
 
 typedef struct s_mlx
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_img	*img;
-	int	w;
-	int	a;
-	int	s;
-	int	d;
-	int	left_arrow;
-	int	right_arrow;
+	void		*mlx;
+	void		*mlx_win;
+	t_img		*img;
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			left_arrow;
+	int			right_arrow;
 }	t_mlx;
+#endif

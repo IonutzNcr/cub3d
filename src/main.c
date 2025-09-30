@@ -16,21 +16,22 @@ void	init_t_mlx(t_mlx *mlx)
 {
 	mlx->mlx = mlx_init();
 	mlx->img = malloc(sizeof(t_img));
-	mlx->mlx_win = mlx_new_window(mlx->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
+	mlx->mlx_win = mlx_new_window(mlx->mlx,
+			SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
 	mlx->img->img = mlx_new_image(mlx->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	mlx->img->addr = mlx_get_data_addr(mlx->img->img, &mlx->img->bits_per_pixel,
-		&mlx->img->line_length, &mlx->img->endian);
+			&mlx->img->line_length, &mlx->img->endian);
 	*sgt_mlx() = mlx;
 }
 
-int   main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
-	if (parser(argc, argv, env))
-		return (1);
-	get_player_info();
 	t_game	game;
 	t_mlx	mlx;
 
+	if (parser(argc, argv, env))
+		return (1);
+	get_player_info();
 	ft_bzero(&game, sizeof(t_game));
 	ft_bzero(&mlx, sizeof(t_mlx));
 	init_t_mlx(&mlx);
