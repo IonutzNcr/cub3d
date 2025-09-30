@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:36:12 by inicoara          #+#    #+#             */
-/*   Updated: 2025/09/30 18:06:25 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:12:29 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,21 +81,22 @@ static void	rotate_player(t_game *g, double angle)
 	g->plane_x = g->plane_x * cos(angle) - g->plane_y * sin(angle);
 	g->plane_y = old_plane_x * sin(angle) + g->plane_y * cos(angle);
 }
-
-int	handle_movement(t_ctx *ctx)
+static double	get_move_speed(t_game *g)
 {
-	double	move_speed;
-	double	rot_speed;
-	double	radius;
-	double	angle;
+	if (g->move_speed > 0.0)
+		return (g->move_speed);
+	return (0.05);
+}
 
-	move_speed = 0.05;
-	if (ctx->game->move_speed > 0.0)
-		move_speed = ctx->game->move_speed;
-	rot_speed = 0.05;
-	if (ctx->game->rotation_speed > 0.0)
-		rot_speed = ctx->game->rotation_speed;
-	radius = 0.25;
+static double	get_rot_speed(t_game *g)
+{
+	if (g->rotation_speed > 0.0)
+		return (g->rotation_speed);
+	return (0.05);
+}
+
+static void	handle_translation(t_ctx *ctx, double move_speed, double radius)
+{
 	if (ctx->mlx->w)
 		move_with_dir(ctx->game, (t_vec2){ctx->game->dir_x, ctx->game->dir_y},
 			move_speed, radius);
@@ -108,12 +109,30 @@ int	handle_movement(t_ctx *ctx)
 	if (ctx->mlx->d)
 		move_with_dir(ctx->game, (t_vec2){ctx->game->plane_x,
 			ctx->game->plane_y}, move_speed, radius);
-	if (ctx->mlx->left_arrow || ctx->mlx->right_arrow)
-	{
-		angle = rot_speed;
-		if (ctx->mlx->left_arrow)
-			angle = -rot_speed;
-		rotate_player(ctx->game, angle);
-	}
+}
+
+static void	handle_rotation(t_ctx *ctx, double rot_speed)
+{
+	double	angle;
+
+	if (!ctx->mlx->left_arrow && !ctx->mlx->right_arrow)
+		return ;
+	angle = rot_speed;
+	if (ctx->mlx->left_arrow)
+		angle = -rot_speed;
+	rotate_player(ctx->game, angle);
+}
+
+int	handle_movement(t_ctx *ctx)
+{
+	double	move_speed;
+	double	rot_speed;
+	double	radius;
+
+	move_speed = get_move_speed(ctx->game);
+	rot_speed = get_rot_speed(ctx->game);
+	radius = 0.25;
+	handle_translation(ctx, move_speed, radius);
+	handle_rotation(ctx, rot_speed);
 	return (0);
 }
