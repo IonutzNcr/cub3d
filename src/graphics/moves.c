@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:36:12 by inicoara          #+#    #+#             */
-/*   Updated: 2025/09/30 16:38:17 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:06:25 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,90 +21,99 @@ static int	tile_y(double y)
 	return (int)floor(y);
 }
 
-// Test de déplacement avec "rayon" pour éviter de s'accrocher aux coins.
-// dx/dy = vecteur de déplacement (nouvelle position - ancienne position)
-static void	try_move_with_radius(t_game *g, double new_x, double new_y,
-		double dx, double dy, double radius)
+static t_offset	compute_offset(double dx, double dy, double radius)
 {
-	double	off_x;
-	double	off_y;
-	int		test_mx;
-	int		cur_my;
-	int		test_my;
-	int		cur_mx;
+	t_offset	off;
 
-	off_x = (dx > 0.0) ? radius : (dx < 0.0 ? -radius : 0.0);
-	off_y = (dy > 0.0) ? radius : (dy < 0.0 ? -radius : 0.0);
-	// Test axe X
-	test_mx = tile_x(new_x + off_x);
-	cur_my = tile_y(g->pos_y);
-	if (is_open_cell(g, cur_my, test_mx))
-		g->pos_x = new_x;
-	// Test axe Y (en utilisant pos_x possiblement mis à jour pour permettre le "sliding")
-	test_my = tile_y(new_y + off_y);
-	cur_mx = tile_x(g->pos_x);
-	if (is_open_cell(g, test_my, cur_mx))
-		g->pos_y = new_y;
+	off.x = 0.0;
+	off.y = 0.0;
+	if (dx > 0.0)
+		off.x = radius;
+	else if (dx < 0.0)
+		off.x = -radius;
+	if (dy > 0.0)
+		off.y = radius;
+	else if (dy < 0.0)
+		off.y = -radius;
+	return (off);
+}
+
+static void	try_move_with_radius(t_game *g, t_vec2 new_pos, t_vec2 dir,
+		double radius)
+{
+	t_offset	off;
+	t_tilepos	cur;
+	t_tilepos	test;
+
+	off = compute_offset(dir.x, dir.y, radius);
+	test.x = tile_x(new_pos.x + off.x);
+	cur.y = tile_y(g->pos_y);
+	if (is_open_cell(g, cur.y, test.x))
+		g->pos_x = new_pos.x;
+	test.y = tile_y(new_pos.y + off.y);
+	cur.x = tile_x(g->pos_x);
+	if (is_open_cell(g, test.y, cur.x))
+		g->pos_y = new_pos.y;
 	fix_position_near_walls(g, radius);
+}
+
+static void	move_with_dir(t_game *g, t_vec2 dir, double speed, double radius)
+{
+	t_vec2	new_pos;
+	t_vec2	move;
+
+	move.x = dir.x * speed;
+	move.y = dir.y * speed;
+	new_pos.x = g->pos_x + move.x;
+	new_pos.y = g->pos_y + move.y;
+	try_move_with_radius(g, new_pos, move, radius);
+}
+
+static void	rotate_player(t_game *g, double angle)
+{
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = g->dir_x;
+	g->dir_x = g->dir_x * cos(angle) - g->dir_y * sin(angle);
+	g->dir_y = old_dir_x * sin(angle) + g->dir_y * cos(angle);
+	old_plane_x = g->plane_x;
+	g->plane_x = g->plane_x * cos(angle) - g->plane_y * sin(angle);
+	g->plane_y = old_plane_x * sin(angle) + g->plane_y * cos(angle);
 }
 
 int	handle_movement(t_ctx *ctx)
 {
-	t_mlx *m = ctx->mlx;
-	t_game *g = ctx->game;
+	double	move_speed;
+	double	rot_speed;
+	double	radius;
+	double	angle;
 
-	// Utilise les vitesses du jeu si elles sont renseignées, sinon des défauts
-	double move_speed = (g->move_speed > 0.0) ? g->move_speed : 0.05;
-	double rot_speed = (g->rotation_speed > 0.0) ? g->rotation_speed : 0.05;
-	double radius = 0.25;
-
-	double old_dir_x, old_plane_x;
-
-	// --- Avancer (W)
-	if (m->w)
+	move_speed = 0.05;
+	if (ctx->game->move_speed > 0.0)
+		move_speed = ctx->game->move_speed;
+	rot_speed = 0.05;
+	if (ctx->game->rotation_speed > 0.0)
+		rot_speed = ctx->game->rotation_speed;
+	radius = 0.25;
+	if (ctx->mlx->w)
+		move_with_dir(ctx->game, (t_vec2){ctx->game->dir_x, ctx->game->dir_y},
+			move_speed, radius);
+	if (ctx->mlx->s)
+		move_with_dir(ctx->game, (t_vec2){-ctx->game->dir_x, -ctx->game->dir_y},
+			move_speed, radius);
+	if (ctx->mlx->a)
+		move_with_dir(ctx->game, (t_vec2){-ctx->game->plane_x,
+			-ctx->game->plane_y}, move_speed, radius);
+	if (ctx->mlx->d)
+		move_with_dir(ctx->game, (t_vec2){ctx->game->plane_x,
+			ctx->game->plane_y}, move_speed, radius);
+	if (ctx->mlx->left_arrow || ctx->mlx->right_arrow)
 	{
-		double dx = g->dir_x * move_speed;
-		double dy = g->dir_y * move_speed;
-		try_move_with_radius(g, g->pos_x + dx, g->pos_y + dy, dx, dy, radius);
+		angle = rot_speed;
+		if (ctx->mlx->left_arrow)
+			angle = -rot_speed;
+		rotate_player(ctx->game, angle);
 	}
-
-	// --- Reculer (S)
-	if (m->s)
-	{
-		double dx = -g->dir_x * move_speed;
-		double dy = -g->dir_y * move_speed;
-		try_move_with_radius(g, g->pos_x + dx, g->pos_y + dy, dx, dy, radius);
-	}
-
-	// --- Strafe gauche (A) : utilise le plan (perpendiculaire à dir)
-	if (m->a)
-	{
-		double dx = -g->plane_x * move_speed;
-		double dy = -g->plane_y * move_speed;
-		try_move_with_radius(g, g->pos_x + dx, g->pos_y + dy, dx, dy, radius);
-	}
-
-	// --- Strafe droit (D)
-	if (m->d)
-	{
-		double dx = g->plane_x * move_speed;
-		double dy = g->plane_y * move_speed;
-		try_move_with_radius(g, g->pos_x + dx, g->pos_y + dy, dx, dy, radius);
-	}
-
-	// --- Rotation
-	if (m->left_arrow || m->right_arrow)
-	{
-		double angle = m->left_arrow ? -rot_speed : rot_speed;
-
-		old_dir_x = g->dir_x;
-		g->dir_x = g->dir_x * cos(angle) - g->dir_y * sin(angle);
-		g->dir_y = old_dir_x * sin(angle) + g->dir_y * cos(angle);
-
-		old_plane_x = g->plane_x;
-		g->plane_x = g->plane_x * cos(angle) - g->plane_y * sin(angle);
-		g->plane_y = old_plane_x * sin(angle) + g->plane_y * cos(angle);
-	}
-
 	return (0);
 }

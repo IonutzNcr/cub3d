@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:20:52 by leothoma          #+#    #+#             */
-/*   Updated: 2025/09/30 17:12:27 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:07:47 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,12 @@ int				handle_movement(t_ctx *ctx);
 int				is_open_cell(t_game *g, int my, int mx);
 double			clampd(double v, double a, double b);
 int				inside_map(const t_game *g, int my, int mx);
-void			compute_box_center(AABB box, t_vec2 *box_center);
+void			compute_box_center(t_aabb box, t_vec2 *box_center);
 void			compute_axis_delta(t_vec2 *c, t_vec2 *box_center, t_vec2 *axis_delta);
-AABB			aabb_from_cell(int mx, int my);
-GridBounds		compute_grid_bounds(double cx, double cy, double r);
-ClosestPoint	closest_point_on_aabb(double cx, double cy, AABB b);
-Penetration		make_penetration(double cx, double cy, ClosestPoint cp,
+t_aabb			aabb_from_cell(int mx, int my);
+t_gridBounds		compute_grid_bounds(double cx, double cy, double r);
+t_closestPoint	closest_point_on_aabb(double cx, double cy, t_aabb b);
+t_penetration		make_penetration(double cx, double cy, t_closestPoint cp,
 					double radius);
-int				has_overlap(Penetration *pn);
+int				has_overlap(t_penetration *pn);
 #endif

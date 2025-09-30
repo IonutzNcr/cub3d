@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:25:39 by inicoara          #+#    #+#             */
-/*   Updated: 2025/09/30 17:51:31 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:56:42 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,18 @@ typedef struct s_penetration
 	double	d2;
 	double	r2;
 }			t_penetration;
+
+typedef struct s_offset
+{
+	double	x;
+	double	y;
+}	t_offset;
+
+typedef struct s_tilepos
+{
+	int	x;
+	int	y;
+}	t_tilepos;
+
 
 #endif
