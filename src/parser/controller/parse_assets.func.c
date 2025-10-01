@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_assets.func.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 01:00:38 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/01 01:02:29 by leothoma         ###   ########.fr       */
+/*   Updated: 2025/10/01 02:38:29 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	parse_no(char *line)
 	fd = open(line, O_RDONLY);
 	if (fd == -1 && set_sgt_error(NO_FILE))
 		return (*sgt_error());
+	if (read(fd, NULL, 1) == -1)
+		return (close(fd), 10);
 	if (is_file_empty(line) && set_sgt_error(EM_FILE))
 		return (close(fd), *sgt_error());
 	close(fd);
@@ -42,6 +44,8 @@ int	parse_so(char *line)
 	fd = open(line, O_RDONLY);
 	if (fd == -1 && set_sgt_error(NO_FILE))
 		return (*sgt_error());
+	if (read(fd, NULL, 1) == -1)
+		return (close(fd), 10);
 	if (is_file_empty(line) && set_sgt_error(EM_FILE))
 		return (close(fd), *sgt_error());
 	close(fd);
@@ -62,6 +66,8 @@ int	parse_we(char *line)
 	fd = open(line, O_RDONLY);
 	if (fd == -1 && set_sgt_error(NO_FILE))
 		return (*sgt_error());
+	if (read(fd, NULL, 1) == -1)
+		return (close(fd), 10);
 	if (is_file_empty(line) && set_sgt_error(EM_FILE))
 		return (close(fd), *sgt_error());
 	close(fd);
@@ -82,6 +88,8 @@ int	parse_ea(char *line)
 	fd = open(line, O_RDONLY);
 	if (fd == -1 && set_sgt_error(NO_FILE))
 		return (*sgt_error());
+	if (read(fd, NULL, 1) == -1)
+		return (close(fd), 10);
 	if (is_file_empty(line) && set_sgt_error(EM_FILE))
 		return (close(fd), *sgt_error());
 	close(fd);
