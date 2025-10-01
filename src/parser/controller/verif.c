@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 00:55:44 by inicoara          #+#    #+#             */
-/*   Updated: 2025/10/01 01:48:45 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/01 03:05:13 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	quick_verif(int argc, char *argv[], char *env[])
 		return (print_error());
 	if (!is_extension(argc, argv, env) && set_sgt_error(INV_EXT))
 		return (print_error());
+    printf("argv[1] %s\n", argv[1]);
 	if (is_file_empty(argv[1]) && set_sgt_error(E_SCENE))
 		return (print_error());
 	return (0);
