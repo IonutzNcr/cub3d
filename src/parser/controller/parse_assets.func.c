@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 01:00:38 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/01 02:38:29 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/01 02:45:23 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@ int	parse_no(char *line)
 {
 	int			fd;
 	t_assets	*assets;
+	char		buf[1];
 
 	while (*line && (*line != '/' && *line != '.'))
 		line++;
 	fd = open(line, O_RDONLY);
 	if (fd == -1 && set_sgt_error(NO_FILE))
 		return (*sgt_error());
-	if (read(fd, NULL, 1) == -1)
+	if (read(fd, buf, 1) == -1)
 		return (close(fd), 10);
 	if (is_file_empty(line) && set_sgt_error(EM_FILE))
 		return (close(fd), *sgt_error());
@@ -38,13 +39,14 @@ int	parse_so(char *line)
 {
 	int			fd;
 	t_assets	*assets;
+	char		buf[1];
 
 	while (*line && (*line != '/' && *line != '.'))
 		line++;
 	fd = open(line, O_RDONLY);
 	if (fd == -1 && set_sgt_error(NO_FILE))
 		return (*sgt_error());
-	if (read(fd, NULL, 1) == -1)
+	if (read(fd, buf, 1) == -1)
 		return (close(fd), 10);
 	if (is_file_empty(line) && set_sgt_error(EM_FILE))
 		return (close(fd), *sgt_error());
@@ -60,13 +62,14 @@ int	parse_we(char *line)
 {
 	int			fd;
 	t_assets	*assets;
+	char		buf[1];
 
 	while (*line && (*line != '/' && *line != '.'))
 		line++;
 	fd = open(line, O_RDONLY);
 	if (fd == -1 && set_sgt_error(NO_FILE))
 		return (*sgt_error());
-	if (read(fd, NULL, 1) == -1)
+	if (read(fd, buf, 1) == -1)
 		return (close(fd), 10);
 	if (is_file_empty(line) && set_sgt_error(EM_FILE))
 		return (close(fd), *sgt_error());
@@ -82,13 +85,14 @@ int	parse_ea(char *line)
 {
 	int			fd;
 	t_assets	*assets;
+	char		buf[1];
 
 	while (*line && (*line != '/' && *line != '.'))
 		line++;
 	fd = open(line, O_RDONLY);
 	if (fd == -1 && set_sgt_error(NO_FILE))
 		return (*sgt_error());
-	if (read(fd, NULL, 1) == -1)
+	if (read(fd, buf, 1) == -1)
 		return (close(fd), 10);
 	if (is_file_empty(line) && set_sgt_error(EM_FILE))
 		return (close(fd), *sgt_error());
