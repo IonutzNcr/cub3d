@@ -6,11 +6,22 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 00:55:44 by inicoara          #+#    #+#             */
-/*   Updated: 2025/10/01 03:31:07 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/05 17:20:46 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
+
+static int is_file_valid(char *file)
+{
+    int fd;
+
+    fd = open(file, O_RDONLY);
+    if (fd == -1)
+        return (0);
+    close(fd);
+    return (1);    
+}
 
 int	quick_verif(int argc, char *argv[], char *env[])
 {
@@ -20,8 +31,7 @@ int	quick_verif(int argc, char *argv[], char *env[])
 		return (print_error());
 	if (!is_extension(argc, argv, env) && set_sgt_error(INV_EXT))
 		return (print_error());
-    printf("argv[1] %s\n", argv[1]);
-    if (if_file_valid(argv[1] && set_sgt_error(NO_FILE)))
+    if (!is_file_valid(argv[1]) && set_sgt_error(NO_FILE))
         return (print_error());
 	if (is_file_empty(argv[1]) && set_sgt_error(E_SCENE))
 		return (print_error());

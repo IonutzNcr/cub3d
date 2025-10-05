@@ -25,8 +25,6 @@ enum e_err
     PLY_NB,
     NO_PLY,
     NO_FILE,
-
-
 };
 
 typedef int(*check)(char *line);
