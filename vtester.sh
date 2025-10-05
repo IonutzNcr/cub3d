@@ -10,7 +10,7 @@ OUTPUT_FILE="test_output"
 for map_file in maps/invalid/*; do
     echo ">>> Testing $map_file" 
 
-    valgrind --leak-check=full --show-leak-kinds=all ./cub3d "$map_file" 2>&1 \
+    valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes -q ./cub3d "$map_file" 2>&1 \
         | awk '/HEAP SUMMARY:/, /^==.*ERROR SUMMARY:/ { print }' 
     
     echo -e "---\n" 
@@ -21,7 +21,7 @@ echo -e "-------------------\n"
 for map_file in maps/valid/*; do
     echo ">>> Testing $map_file" 
 
-    valgrind --leak-check=full --show-leak-kinds=all ./cub3d "$map_file" 2>&1 \
+    valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes -q ./cub3d "$map_file" 2>&1 \
         | awk '/HEAP SUMMARY:/, /^==.*ERROR SUMMARY:/ { print }' 
     
     echo -e "---\n" 
