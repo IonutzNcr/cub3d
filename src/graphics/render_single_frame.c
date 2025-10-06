@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:20:43 by leothoma          #+#    #+#             */
-/*   Updated: 2025/09/30 22:04:11 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:19:23 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,16 @@ void	render_single_frame(t_game *game, t_mlx *mlx, t_ray *ray)
 
 int	loop_hook(t_ctx *ctx)
 {
-	handle_movement(ctx);
-	mlx_clear_window(ctx->mlx->mlx, ctx->mlx->mlx_win);
+	static long	last_time;
+	long		current_time;
+	double		dt;
+
+	current_time = get_time_ms();
+	if (last_time == 0)
+		last_time = current_time;
+	dt = (current_time - last_time) / 1000.0;
+	last_time = current_time;
+	handle_movement(ctx, dt);
 	render_single_frame(ctx->game, ctx->mlx, ctx->ray);
 	mlx_put_image_to_window(ctx->mlx->mlx, ctx->mlx->mlx_win,
 		ctx->mlx->img->img, 0, 0);

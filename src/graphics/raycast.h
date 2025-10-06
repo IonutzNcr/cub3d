@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:20:52 by leothoma          #+#    #+#             */
-/*   Updated: 2025/09/30 18:28:33 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:26:38 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ typedef struct s_game
 	int			endian[TEXTURE_COUNT];
 	int			tex_width[TEXTURE_COUNT];
 	int			tex_height[TEXTURE_COUNT];
-
-}	t_game;
+}				t_game;
 
 typedef struct s_ray
 {
@@ -107,7 +106,7 @@ void			init_ray(t_game *game, t_ray *r, int i);
 void			start_game_loop(t_game *game, t_mlx *mlx);
 void			clear_all(t_ctx *ctx);
 
-int				handle_movement(t_ctx *ctx);
+int				handle_movement(t_ctx *ctx, double dt);
 int				is_open_cell(t_game *g, int my, int mx);
 double			clampd(double v, double a, double b);
 int				inside_map(const t_game *g, int my, int mx);
@@ -140,5 +139,6 @@ void			fill_background(t_mlx *mlx, t_game *game);
 void			handle_time(t_ray *ray, struct timeval *tv);
 void			fix_position_near_walls(t_game *g, double radius);
 void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
+long			get_time_ms(void);
 
 #endif

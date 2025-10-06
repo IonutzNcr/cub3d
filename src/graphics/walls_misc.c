@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   walls_misc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:01:04 by leothoma          #+#    #+#             */
-/*   Updated: 2025/09/30 17:01:07 by leothoma         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:47:39 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	calculate_wall_distance(t_game *g, t_ray *r)
 {
-	const double		big = 1e30;
+	const double		big = 1e12;
 	double				denom;
 
 	if (r->side == 0)

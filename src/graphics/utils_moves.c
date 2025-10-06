@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 18:15:10 by inicoara          #+#    #+#             */
-/*   Updated: 2025/09/30 18:32:21 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:28:14 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ double	get_rot_speed(t_game *g)
 {
 	if (g->rotation_speed > 0.0)
 		return (g->rotation_speed);
-	return (0.05);
+	return (3.0);
 }
 
 t_offset	compute_offset(double dx, double dy, double radius)
