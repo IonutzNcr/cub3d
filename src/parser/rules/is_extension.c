@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 01:33:19 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/05 17:17:56 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:27:46 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	is_extension(int argc, char *argv[], char *env[])
 {
 	char	*pathfile;
-    int i;
+	int		i;
 
-    i = 0;
+	i = 0;
 	pathfile = argv[1];
 	(void)argc;
 	(void)env;
