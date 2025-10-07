@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:20:52 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/06 17:26:38 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/07 14:57:55 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void			init_ray(t_game *game, t_ray *r, int i);
 void			start_game_loop(t_game *game, t_mlx *mlx);
 void			clear_all(t_ctx *ctx);
 
-int				handle_movement(t_ctx *ctx, double dt);
+int				handle_movement(t_ctx *ctx);
 int				is_open_cell(t_game *g, int my, int mx);
 double			clampd(double v, double a, double b);
 int				inside_map(const t_game *g, int my, int mx);

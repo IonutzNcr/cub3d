@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:01:04 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/06 16:47:39 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/07 14:42:28 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	calculate_wall_distance(t_game *g, t_ray *r)
 
 int	check_wall_colision(double *wall_dist)
 {
-	if (*wall_dist < 0.15)
+	if (*wall_dist < 0.05)
 		return (0);
 	return (1);
 }

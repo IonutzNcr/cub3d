@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:36:12 by inicoara          #+#    #+#             */
-/*   Updated: 2025/10/06 17:26:19 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/07 14:28:55 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	handle_translation(t_ctx *ctx, double move_speed, double radius)
 			ctx->game->plane_y}, move_speed, radius);
 }
 
-void	handle_rotation(t_ctx *ctx, double rot_speed, double dt)
+void	handle_rotation(t_ctx *ctx, double rot_speed)
 {
 	double	angle;
 	int		dir;
@@ -42,11 +42,11 @@ void	handle_rotation(t_ctx *ctx, double rot_speed, double dt)
 		dir = 1;
 	if (dir == 0)
 		return ;
-	angle = rot_speed * dt * (double)dir;
+	angle = rot_speed * (double)dir;
 	rotate_player(ctx->game, angle);
 }
 
-int	handle_movement(t_ctx *ctx, double dt)
+int	handle_movement(t_ctx *ctx)
 {
 	double	move_speed;
 	double	rot_speed;
@@ -56,6 +56,6 @@ int	handle_movement(t_ctx *ctx, double dt)
 	rot_speed = get_rot_speed(ctx->game);
 	radius = 0.25;
 	handle_translation(ctx, move_speed, radius);
-	handle_rotation(ctx, rot_speed, dt);
+	handle_rotation(ctx, rot_speed);
 	return (0);
 }

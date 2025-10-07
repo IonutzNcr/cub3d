@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:32:08 by leothoma          #+#    #+#             */
-/*   Updated: 2025/09/30 16:32:09 by leothoma         ###   ########.fr       */
+/*   Updated: 2025/10/07 14:45:45 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ void	load_textures(t_ctx *ctx)
 		if (!ctx->game->textures[i])
 			clear_all(ctx);
 		ctx->game->tex_addr[i] = mlx_get_data_addr(ctx->game->textures[i],
-				&ctx->game->bits_per_pixel[i],
-				&ctx->game->line_length[i],
+				&ctx->game->bits_per_pixel[i], &ctx->game->line_length[i],
 				&ctx->game->endian[i]);
 	}
 }

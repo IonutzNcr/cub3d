@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:20:43 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/06 17:19:23 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/07 14:45:31 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	calculate_distances(t_game *game, t_ray *r)
 
 void	cast_ray(t_game *game, int i, t_mlx *mlx, t_ray *ray)
 {
-	ft_bzero(ray, sizeof(t_ray));
 	init_ray(game, ray, i);
 	calculate_distances(game, ray);
 	execute_dda(game, ray);
@@ -54,11 +53,9 @@ void	cast_ray(t_game *game, int i, t_mlx *mlx, t_ray *ray)
 
 void	render_single_frame(t_game *game, t_mlx *mlx, t_ray *ray)
 {
-	int					i;
-	struct timeval		tv;
+	int				i;
+	struct timeval	tv;
 
-	ft_bzero(mlx->img->addr, game->map_width * game->map_height
-		* (mlx->img->bits_per_pixel / 8));
 	i = 0;
 	fill_background(mlx, game);
 	while (i < SCREEN_WIDTH)
@@ -66,24 +63,14 @@ void	render_single_frame(t_game *game, t_mlx *mlx, t_ray *ray)
 		cast_ray(game, i, mlx, ray);
 		i++;
 	}
-	handle_time(ray, &tv);
 }
 
 int	loop_hook(t_ctx *ctx)
 {
-	static long	last_time;
-	long		current_time;
-	double		dt;
-
-	current_time = get_time_ms();
-	if (last_time == 0)
-		last_time = current_time;
-	dt = (current_time - last_time) / 1000.0;
-	last_time = current_time;
-	handle_movement(ctx, dt);
-	render_single_frame(ctx->game, ctx->mlx, ctx->ray);
+	handle_movement(ctx);
 	mlx_put_image_to_window(ctx->mlx->mlx, ctx->mlx->mlx_win,
 		ctx->mlx->img->img, 0, 0);
+	render_single_frame(ctx->game, ctx->mlx, ctx->ray);
 	return (0);
 }
 
@@ -99,8 +86,8 @@ void	start_game_loop(t_game *game, t_mlx *mlx)
 	game->pos_y = sgt_player()->y + 0.5;
 	game->dir_x = cos(sgt_player()->orientation * M_PI / 180);
 	game->dir_y = sin(sgt_player()->orientation * M_PI / 180);
-	game->plane_x = -game->dir_y * 0.66;
-	game->plane_y = game->dir_x * 0.66;
+	game->plane_x = -game->dir_y * 0.60;
+	game->plane_y = game->dir_x * 0.60;
 	game->map_width = ft_strlen(**sgt_map());
 	game->map_height = count_elements(*sgt_map());
 	load_textures(&ctx);
