@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:20:43 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/07 14:45:31 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/10 21:58:17 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,23 @@ void	render_single_frame(t_game *game, t_mlx *mlx, t_ray *ray)
 
 int	loop_hook(t_ctx *ctx)
 {
+	static struct timeval	last = {0};
+	struct timeval			now;
+	double					delta_ms;
+
+	gettimeofday(&now, NULL);
+	delta_ms = (now.tv_sec - last.tv_sec) * 1000.0
+		+ (now.tv_usec - last.tv_usec) / 1000.0;
+
+	// 60 FPS = 16.67 ms par frame
+	if (delta_ms < 16.67)
+		return (0);
+
+	last = now;
 	handle_movement(ctx);
+	render_single_frame(ctx->game, ctx->mlx, ctx->ray);
 	mlx_put_image_to_window(ctx->mlx->mlx, ctx->mlx->mlx_win,
 		ctx->mlx->img->img, 0, 0);
-	render_single_frame(ctx->game, ctx->mlx, ctx->ray);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:10:00 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/07 14:16:51 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/10 21:38:18 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	compute_wall_params(t_game *game, t_ray *r)
 
 	if (r->perp_wall_dist <= 1e-6)
 		r->perp_wall_dist = 1e-6;
-	temp = SCREEN_HEIGHT / r->perp_wall_dist;
+	temp = (1.0/r->perp_wall_dist) * SCREEN_HEIGHT;
 	r->line_height = (int)temp;
 	r->draw_start = -r->line_height / 2 + SCREEN_HEIGHT / 2;
 	if (r->draw_start < 0)
