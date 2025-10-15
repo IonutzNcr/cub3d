@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:01:04 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/10 21:52:53 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/15 19:59:00 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,27 @@ int	check_wall_colision(double *wall_dist)
 
 void	fill_background(t_mlx *mlx, t_game *game)
 {
-	int		*pixels;
-	int		y;
-	int		x;
-	int		color;
+	int	*pixels;
+	int	y;
+	int	x;
+	int	color;
 
 	pixels = (int *)mlx->img->addr;
 	game->floor_color = sgt_assets()->floor;
 	game->ceiling_color = sgt_assets()->ceiling;
-
-	for (y = 0; y < SCREEN_HEIGHT; y++)
+	y = 0;
+	while (y < SCREEN_HEIGHT)
 	{
-		color = (y < SCREEN_HEIGHT / 2)
-			? game->floor_color   // ← même logique que ton code
-			: game->ceiling_color;
-		for (x = 0; x < SCREEN_WIDTH; x++)
+		if (y < SCREEN_HEIGHT / 2)
+			color = game->floor_color;
+		else
+			color = game->ceiling_color;
+		x = 0;
+		while (x < SCREEN_WIDTH)
+		{
 			pixels[y * SCREEN_WIDTH + x] = color;
+			x++;
+		}
+		y++;
 	}
 }
-

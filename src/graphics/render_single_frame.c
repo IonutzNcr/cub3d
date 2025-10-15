@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:20:43 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/10 21:58:17 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/15 20:06:46 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,8 @@ int	loop_hook(t_ctx *ctx)
 	gettimeofday(&now, NULL);
 	delta_ms = (now.tv_sec - last.tv_sec) * 1000.0
 		+ (now.tv_usec - last.tv_usec) / 1000.0;
-
-	// 60 FPS = 16.67 ms par frame
 	if (delta_ms < 16.67)
 		return (0);
-
 	last = now;
 	handle_movement(ctx);
 	render_single_frame(ctx->game, ctx->mlx, ctx->ray);
