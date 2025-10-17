@@ -1,102 +1,105 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_assets.func.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 01:00:38 by leothoma          #+#    #+#             */
+/*   Updated: 2025/10/17 10:28:41 by inicoara         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
-/*
-    return 0 if success
-    return err if error found...
-    set sgt error 
-    set assets sgt if no error
-*/
-int parse_NO(char *line)
+int	parse_no(char *line)
 {
-    int fd;
-    t_assets *assets;
+	int			fd;
+	t_assets	*assets;
+	char		buf[1];
 
-    while(*line && (*line != '/' && *line != '.' ))
-        line++;
-    fd = open(line, O_RDONLY);
-    if (fd == -1 && set_sgt_error(NO_FILE))// FAIIL TO OPEN ASSETS
-        return (*sgt_error());
-    if (is_file_empty(line) && set_sgt_error(EM_FILE))//empty .xmp file
-        return (close(fd), *sgt_error());
-    close(fd);
-    assets = sgt_assets();
-    assets->file_NO = ft_strdup(line);
-    if (!assets->file_NO && set_sgt_error(F_MALL))//malloc fail
-        return (*sgt_error());
-    return (0);
+	while (*line && (*line != '/' && *line != '.'))
+		line++;
+	fd = open(line, O_RDONLY);
+	if (fd == -1 && set_sgt_error(NO_FILE))
+		return (*sgt_error());
+	if (read(fd, buf, 1) == -1)
+		return (close(fd), 10);
+	if (is_file_empty(line) && set_sgt_error(EM_FILE))
+		return (close(fd), *sgt_error());
+	close(fd);
+	assets = sgt_assets();
+	assets->file_no = ft_strdup(line);
+	if (!assets->file_no && set_sgt_error(F_MALL))
+		return (*sgt_error());
+	return (0);
 }
-/*
-    return 0 if success
-    return err if error found...
-    set sgt error 
-    set assets sgt if no error
-*/
-int parse_SO(char *line)
-{
-    int fd;
-    t_assets *assets;
 
-    while(*line && (*line != '/' && *line != '.' ))
-        line++;
-    fd = open(line, O_RDONLY);
-    if (fd == -1 && set_sgt_error(NO_FILE))// FAIIL TO OPEN ASSETS
-        return (*sgt_error());
-    if (is_file_empty(line) && set_sgt_error(EM_FILE))//empty .xmp file
-        return (close(fd), *sgt_error());
-    close(fd);
-    assets = sgt_assets();
-    assets->file_SO = ft_strdup(line);
-    if (!assets->file_SO && set_sgt_error(F_MALL))//malloc fail
-        return (*sgt_error());
-    return (0);
+int	parse_so(char *line)
+{
+	int			fd;
+	t_assets	*assets;
+	char		buf[1];
+
+	while (*line && (*line != '/' && *line != '.'))
+		line++;
+	fd = open(line, O_RDONLY);
+	if (fd == -1 && set_sgt_error(NO_FILE))
+		return (*sgt_error());
+	if (read(fd, buf, 1) == -1)
+		return (close(fd), 10);
+	if (is_file_empty(line) && set_sgt_error(EM_FILE))
+		return (close(fd), *sgt_error());
+	close(fd);
+	assets = sgt_assets();
+	assets->file_so = ft_strdup(line);
+	if (!assets->file_so && set_sgt_error(F_MALL))
+		return (*sgt_error());
+	return (0);
 }
-/*
-    return 0 if success
-    return err if error found...
-    set sgt error 
-    set assets sgt if no error
-*/
-int parse_WE(char *line)
-{
-    int fd;
-    t_assets *assets;
 
-    while(*line && (*line != '/' && *line != '.' ))
-        line++;
-    fd = open(line, O_RDONLY);
-    if (fd == -1 && set_sgt_error(NO_FILE))// FAIIL TO OPEN ASSETS
-        return (*sgt_error());
-    if (is_file_empty(line) && set_sgt_error(EM_FILE))//empty .xmp file
-        return (close(fd), *sgt_error());
-    close(fd);
-    assets = sgt_assets();
-    assets->file_WE = ft_strdup(line);
-    if (!assets->file_WE && set_sgt_error(F_MALL))//malloc fail
-        return (*sgt_error());
-    return (0);
+int	parse_we(char *line)
+{
+	int			fd;
+	t_assets	*assets;
+	char		buf[1];
+
+	while (*line && (*line != '/' && *line != '.'))
+		line++;
+	fd = open(line, O_RDONLY);
+	if (fd == -1 && set_sgt_error(NO_FILE))
+		return (*sgt_error());
+	if (read(fd, buf, 1) == -1)
+		return (close(fd), 10);
+	if (is_file_empty(line) && set_sgt_error(EM_FILE))
+		return (close(fd), *sgt_error());
+	close(fd);
+	assets = sgt_assets();
+	assets->file_we = ft_strdup(line);
+	if (!assets->file_we && set_sgt_error(F_MALL))
+		return (*sgt_error());
+	return (0);
 }
-/*
-    return 0 if success
-    return err if error found...
-    set sgt error 
-    set assets sgt if no error
-*/
-int parse_EA(char *line)
-{
-    int fd;
-    t_assets *assets;
 
-    while(*line && (*line != '/' && *line != '.' ))
-        line++;
-    fd = open(line, O_RDONLY);
-    if (fd == -1 && set_sgt_error(NO_FILE))// FAIIL TO OPEN ASSETS
-        return (*sgt_error());
-    if (is_file_empty(line) && set_sgt_error(EM_FILE))//empty .xmp file
-        return (close(fd), *sgt_error());
-    close(fd);
-    assets = sgt_assets();
-    assets->file_EA = ft_strdup(line);
-    if (!assets->file_EA && set_sgt_error(F_MALL))//malloc fail
-        return (*sgt_error());
-    return (0);
+int	parse_ea(char *line)
+{
+	int			fd;
+	t_assets	*assets;
+	char		buf[1];
+
+	while (*line && (*line != '/' && *line != '.'))
+		line++;
+	fd = open(line, O_RDONLY);
+	if (fd == -1 && set_sgt_error(NO_FILE))
+		return (*sgt_error());
+	if (read(fd, buf, 1) == -1)
+		return (close(fd), 10);
+	if (is_file_empty(line) && set_sgt_error(EM_FILE))
+		return (close(fd), *sgt_error());
+	close(fd);
+	assets = sgt_assets();
+	assets->file_ea = ft_strdup(line);
+	if (!assets->file_ea && set_sgt_error(F_MALL))
+		return (*sgt_error());
+	return (0);
 }

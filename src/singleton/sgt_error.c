@@ -1,13 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sgt_error.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 01:30:03 by leothoma          #+#    #+#             */
+/*   Updated: 2025/10/01 01:30:14 by leothoma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-
-
-int *sgt_error()
+int	*sgt_error(void)
 {
-    static int error;
-    return &error;
+	static int	error;
+
+	return (&error);
 }
-int set_sgt_error(int error)
+
+int	set_sgt_error(int error)
 {
-    *sgt_error() = error;
-    return (1);
+	*sgt_error() = error;
+	return (1);
 }

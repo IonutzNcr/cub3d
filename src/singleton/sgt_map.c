@@ -1,103 +1,95 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sgt_map.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 01:28:50 by leothoma          #+#    #+#             */
+/*   Updated: 2025/10/01 01:29:21 by leothoma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
-/*
-    remalloc and copy the old array content inside a new one 
-    return the new one or NULL if fail
-    note: does not free the old one is your job to free it
-*/
-void *ft_remalloc(void *old, int n_size, int old_size)
+void	*ft_remalloc(void *old, int n_size, int old_size)
 {
-    void *map;
-    unsigned char *dest;
-    unsigned char *src;  
+	void			*map;
+	unsigned char	*dest;
+	unsigned char	*src;
 
-    if (n_size == 0)
-        return (0);
-    src = old;
-    map = malloc(n_size);
-    if (!map)
-        return (0);
-    dest = map;
-    while (old_size--)
-        dest[old_size] = src[old_size];
-    return (dest); 
+	if (n_size == 0)
+		return (0);
+	src = old;
+	map = malloc(n_size);
+	if (!map)
+		return (0);
+	dest = map;
+	while (old_size--)
+		dest[old_size] = src[old_size];
+	return (dest);
 }
 
-/*
-    return l'addresse du pointeur de la row.. 
-    return null if row not inside the map...
-
-*/
-char **get_row(int row)
+char	**get_row(int row)
 {
-    char **map;
-    int k;
+	char	**map;
+	int		k;
 
-    map = *sgt_map();
-    k = count_elements(map);
-    if (row > k - 1)
-        return (NULL);
-    return (&map[row]);
+	map = *sgt_map();
+	k = count_elements(map);
+	if (row > k - 1)
+		return (NULL);
+	return (&map[row]);
 }
 
-/*
-    always return 0 
-    solo purpose is to free the map using the singleton
-*/
-int remove_map()
+int	remove_map(void)
 {
-    char **map;
-    int i;
+	char	**map;
+	int		i;
 
-    i = 0;
-    map = *sgt_map();
-    if (!map)
-        return (0);
-    while (map[i])
-        free(map[i++]);
-    free(map);
-    *sgt_map() = 0;
-    return (0);
-}
-/*
-    add a line to the map
-    return err if fail to malloc
-    return 0 in case of success
-*/
-int add_line(char *line)
-{
-    char **map;
-    int nb;
-
-    if(!*sgt_map())
-    {
-        map = malloc(sizeof(char *) * (1 + 1));
-        if (!map)
-            return (10);//malloc fail
-        *map = ft_strdup(line);
-        *(map + 1) = 0;
-        *sgt_map() = map;
-    }
-    else
-    {
-        nb = count_elements(*sgt_map());
-        map = ft_remalloc(*sgt_map(), (nb + 2) * sizeof(char *), (nb + 1) * sizeof(char *));
-        if (!map)
-            return (10);//malloc fail
-        free(*sgt_map());
-        *(map + nb) = ft_strdup(line);
-        *(map + nb + 1) = 0;
-        *sgt_map() = map;
-    }
-    return(0);
+	i = 0;
+	map = *sgt_map();
+	if (!map)
+		return (0);
+	while (map[i])
+		free(map[i++]);
+	free(map);
+	*sgt_map() = 0;
+	return (0);
 }
 
-/*
-    return the adresse of a pointer to a pointer
-*/
-char ***sgt_map()
+int	add_line(char *line)
 {
-    static char **map;
-    return (&map);
+	char	**map;
+	int		nb;
+
+	if (!*sgt_map())
+	{
+		map = malloc(sizeof(char *) * (1 + 1));
+		if (!map)
+			return (10);
+		*map = ft_strdup(line);
+		*(map + 1) = 0;
+		*sgt_map() = map;
+	}
+	else
+	{
+		nb = count_elements(*sgt_map());
+		map = ft_remalloc(*sgt_map(), (nb + 2) * sizeof(char *), (nb + 1)
+				* sizeof(char *));
+		if (!map)
+			return (10);
+		free(*sgt_map());
+		*(map + nb) = ft_strdup(line);
+		*(map + nb + 1) = 0;
+		*sgt_map() = map;
+	}
+	return (0);
 }
 
+char	***sgt_map(void)
+{
+	static char	**map;
+
+	return (&map);
+}

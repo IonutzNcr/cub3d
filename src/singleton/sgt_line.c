@@ -1,9 +1,18 @@
-/*
-give the actual line wich is parse
-?? for now im not sure im gonna do it..
-*/
-int *sgt_line()
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sgt_line.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 01:29:40 by leothoma          #+#    #+#             */
+/*   Updated: 2025/10/05 17:20:17 by inicoara         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int	*sgt_line(void)
 {
-    static int line;
-    return &line;
+	static int	line;
+
+	return (&line);
 }

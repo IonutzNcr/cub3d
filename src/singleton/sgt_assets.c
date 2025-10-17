@@ -1,24 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sgt_assets.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 01:30:23 by leothoma          #+#    #+#             */
+/*   Updated: 2025/10/17 10:29:32 by inicoara         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
-
-
-void remove_assets()
+void	remove_assets(void)
 {
-    t_assets *assets;
+	t_assets	*assets;
 
-    assets = sgt_assets();
-    if(assets->file_EA)
-        free(assets->file_EA);
-    if(assets->file_NO)
-        free(assets->file_NO);
-    if(assets->file_SO)
-        free(assets->file_SO);
-    if(assets->file_WE)
-        free(assets->file_WE);
+	assets = sgt_assets();
+	if (assets->file_ea)
+		free(assets->file_ea);
+	if (assets->file_no)
+		free(assets->file_no);
+	if (assets->file_so)
+		free(assets->file_so);
+	if (assets->file_we)
+		free(assets->file_we);
 }
 
-t_assets *sgt_assets()
+t_assets	*sgt_assets(void)
 {
-    static t_assets assets;
-    return &assets;
+	static t_assets	assets;
+
+	return (&assets);
 }
