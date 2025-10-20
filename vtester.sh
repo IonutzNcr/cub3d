@@ -17,10 +17,3 @@ done
  
 echo -e "-------------------\n" 
 
-for map_file in maps/valid/*; do
-    echo ">>> Testing $map_file" 
-
-    valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes ./cub3D "$map_file" 2>&1 \
-        
-    echo -e "---\n" 
-done
