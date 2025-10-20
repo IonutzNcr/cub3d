@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 01:47:14 by inicoara          #+#    #+#             */
-/*   Updated: 2025/10/05 18:06:17 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/20 19:34:18 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,13 @@ int	hard_verif(char *argv[])
 		if (checked_list(liste))
 		{
 			if (mapper(line, fd))
-				return (1);
+				return (close(fd), 1);
 		}
 		else if (hard_verif2(liste, line, fd))
-			return (1);
+			return (close(fd), 1);
 	}
 	if (last_verif(liste))
-		return (free_singleton(), print_error());
+		return (close(fd), free_singleton(), print_error());
+	close(fd);
 	return (0);
 }
