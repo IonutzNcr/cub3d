@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 01:03:56 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/31 19:08:06 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/06 00:54:56 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ static void	print_error_2(int error)
 		write(2, "ERROR: No player detected\n", 26);
 	if (error == NO_FILE)
 		write(2, "ERROR: INVALID FILE\n", 20);
-	if (error > 13)
+	if (error == LOAD_ERR)
+		write(2, "ERROR: FAILED TO LOAD TEXTURE\n", 30);
+	if (error == INC_ERR)
+		write(2, "ERROR: incomplete file config\n", 30);
+	if (error > 15)
 		printf("ERROR %d not detected yet\n", error);
 }
 

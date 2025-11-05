@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 00:55:44 by inicoara          #+#    #+#             */
-/*   Updated: 2025/10/06 16:27:25 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/06 00:52:59 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	quick_verif(int argc, char *argv[], char *env[])
 int	last_verif(t_task liste[6])
 {
 	if (!checked_list(liste))
-		return (set_sgt_error(10));
+		return (set_sgt_error(INC_ERR));
 	if (!*sgt_map())
 		return (set_sgt_error(11));
 	return (0);
