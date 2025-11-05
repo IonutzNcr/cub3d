@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 00:57:59 by leothoma          #+#    #+#             */
-/*   Updated: 2025/11/05 19:42:34 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/05 22:02:07 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	is_invalid_ch(char ch)
 {
-	if (ch == '1' || ch == '0' || ch == 'N' || ch == 'S' || ch == 'E' || ch == ' '
-		|| ch == 'W')
+	if (ch == '1' || ch == '0' || ch == 'N' || ch == 'S' || ch == 'E'
+		|| ch == ' ' || ch == 'W')
 		return (0);
 	return (1);
 }
@@ -54,7 +54,7 @@ int	check_characters(void)
 	return (0);
 }
 
-int check_line(char *line)
+int	check_line(char *line)
 {
 	while (*line)
 	{

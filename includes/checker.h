@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 10:21:21 by inicoara          #+#    #+#             */
-/*   Updated: 2025/11/05 19:43:15 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/05 22:05:52 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ char		***sgt_map(void);
 int			get_player_info(void);
 t_player	*sgt_player(void);
 
-/*this is ok...*/
 int			is_texture_no(char *line);
 int			is_texture_so(char *line);
 int			is_texture_we(char *line);
@@ -127,13 +126,11 @@ int			is_c1_wall(void);
 int			is_lr_wall(void);
 int			is_r1_wall(void);
 
-char	**ft_free_map_null(char **map);
-char	**copy_map(char **map);
-int check_walls();
-int	can_move(int x, int y, char **map);
-int is_on_edge(int x, int y);
-void	ft_searchpath(int x, int y, char **map, int *isOut);
-
-
-t_player find_new_zero(char **map);
+char		**ft_free_map_null(char **map);
+char		**copy_map(char **map);
+int			check_walls(void);
+int			can_move(int x, int y, char **map);
+int			is_on_edge(int x, int y);
+void		ft_searchpath(int x, int y, char **map, int *isOut);
+t_player	find_new_zero(char **map);
 #endif

@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:20:52 by leothoma          #+#    #+#             */
-/*   Updated: 2025/11/03 10:48:27 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/05 22:01:01 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,6 @@ void			handle_time(t_ray *ray, struct timeval *tv);
 void			fix_position_near_walls(t_game *g, double radius);
 void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
 long			get_time_ms(void);
-int check_line(char *line);
+int				check_line(char *line);
 
 #endif

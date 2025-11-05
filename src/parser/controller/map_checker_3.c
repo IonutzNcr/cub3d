@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:53:10 by yoyo              #+#    #+#             */
-/*   Updated: 2025/11/05 16:48:51 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/05 22:02:35 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,19 @@ char	**copy_map(char **map)
 	return (copy);
 }
 
-static void set_player(t_player *player, int x, int y)
+static void	set_player(t_player *player, int x, int y)
 {
 	player->x = x;
 	player->y = y;
 	player->orientation = 0;
 }
 
-t_player find_new_zero(char **map)
+t_player	find_new_zero(char **map)
 {
-	int y;
-	int x;
-	t_player player;
-	int k;
+	int			y;
+	int			x;
+	t_player	player;
+	int			k;
 
 	k = count_elements(map);
 	y = 0;
@@ -80,5 +80,5 @@ t_player find_new_zero(char **map)
 		y++;
 	}
 	set_player(&player, 0, 0);
-	return player;
+	return (player);
 }
