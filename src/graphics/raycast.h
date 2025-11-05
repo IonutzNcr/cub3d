@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:20:52 by leothoma          #+#    #+#             */
-/*   Updated: 2025/11/05 22:01:01 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/06 00:07:36 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void			execute_dda(t_game *game, t_ray *r);
 void			calculate_distances(t_game *game, t_ray *r);
 void			init_ray(t_game *game, t_ray *r, int i);
 void			start_game_loop(t_game *game, t_mlx *mlx);
-void			clear_all(t_ctx *ctx);
+void			clear_all(t_ctx *ctx, int i);
 
 int				handle_movement(t_ctx *ctx);
 int				is_open_cell(t_game *g, int my, int mx);

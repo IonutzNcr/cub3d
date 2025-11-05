@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 17:57:16 by yoyo              #+#    #+#             */
-/*   Updated: 2025/10/07 14:55:19 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/05 22:55:34 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,17 @@ int	init_t_mlx(t_mlx *mlx)
 	mlx->mlx = mlx_init();
 	if (!mlx->mlx)
 		return (0);
+	printf("here3\n");
 	mlx->img = malloc(sizeof(t_img));
-	if (!mlx->img)
+	printf("here 000 %p\n", mlx->img);
+	if (!(mlx->img))
 		return (0);
+	printf("here 5\n");
 	mlx->mlx_win = mlx_new_window(mlx->mlx,
 			SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
 	if (!mlx->mlx_win)
 		return (0);
+	printf("here 6\n");
 	mlx->img->img = mlx_new_image(mlx->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!mlx->img->img)
 		return (0);
@@ -31,6 +35,7 @@ int	init_t_mlx(t_mlx *mlx)
 			&mlx->img->line_length, &mlx->img->endian);
 	if (!mlx->img->addr)
 		return (0);
+	printf("here 9\n");
 	*sgt_mlx() = mlx;
 	return (1);
 }
@@ -64,13 +69,16 @@ int	main(int argc, char **argv, char **env)
 	t_game	game;
 	t_mlx	mlx;
 
+	printf("here\n");
 	if (parser(argc, argv, env))
 		return (1);
 	get_player_info();
 	ft_bzero(&game, sizeof(t_game));
 	ft_bzero(&mlx, sizeof(t_mlx));
+	printf("here\n");
 	if (!init_t_mlx(&mlx))
 	{
+		printf("here\n");
 		free_mlx(&mlx);
 		free_singleton();
 		return (1);

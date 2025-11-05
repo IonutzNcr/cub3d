@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:51:07 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/07 14:14:13 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/06 00:08:11 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	key_press(int keycode, t_ctx *ctx)
 		ctx->mlx->right_arrow = 1;
 	else if (keycode == 65307)
 	{
-		clear_all(ctx);
+		clear_all(ctx, 3);
 		exit(0);
 	}
 	return (0);
@@ -58,6 +58,6 @@ int	mouse_press(void *param)
 	t_ctx	*ctx;
 
 	ctx = (t_ctx *)param;
-	clear_all(ctx);
+	clear_all(ctx, 3);
 	return (0);
 }

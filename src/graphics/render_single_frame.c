@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:20:43 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/17 16:25:15 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/05 23:50:14 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,9 @@ void	start_game_loop(t_game *game, t_mlx *mlx)
 	game->plane_y = game->dir_x * 0.60;
 	game->map_width = ft_strlen(**sgt_map());
 	game->map_height = count_elements(*sgt_map());
+	printf("here sgl\n");
 	load_textures(&ctx);
+	printf("here sgl 2\n");
 	ray.time = 0;
 	ray.oldtime = 0;
 	ray.frametime = 0;

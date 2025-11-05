@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:56:54 by yoyo              #+#    #+#             */
-/*   Updated: 2025/11/05 22:04:43 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/05 22:15:45 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ int	check_walls(void)
 
 int	can_move(int x, int y, char **map)
 {
+	int width;
+	int height;
+
+	width = ft_strlen(map[0]);
+	height = count_elements(map);
+	if (x >= width || y >= height)
+		return (0);
 	if (map[y][x] == '0' || map[y][x] == 'S' || map[y][x] == 'N'
 		|| map[y][x] == 'E' || map[y][x] == 'W' || map[y][x] == '-')
 		return (1);
