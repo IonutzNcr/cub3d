@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_fixer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 00:59:01 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/01 00:59:02 by leothoma         ###   ########.fr       */
+/*   Updated: 2025/10/31 19:17:02 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	fill_row(char *dest, int max)
 	while (dest[i])
 		i++;
 	while (i < max)
-		dest[i++] = '1';
+		dest[i++] = '-';
 	dest[i] = '\0';
 }
 
@@ -75,7 +75,7 @@ static void	replace_space(void)
 		while (*row)
 		{
 			if (*row == ' ')
-				*row = '1';
+				*row = '-';
 			row++;
 		}
 		map++;

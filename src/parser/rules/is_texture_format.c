@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:55:22 by yoyo              #+#    #+#             */
-/*   Updated: 2025/10/01 02:32:03 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/05 19:47:17 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	is_texture_no(char *line)
 	if (ft_strncmp(line, "NO", 2))
 		return (0);
 	line += 2;
+	if (*line != ' ')
+		return (0);
 	while (*line == ' ')
 		line++;
 	if (!*line)
@@ -39,6 +41,8 @@ int	is_texture_so(char *line)
 	if (ft_strncmp(line, "SO", 2))
 		return (0);
 	line += 2;
+	if (*line != ' ')
+		return (0);
 	while (*line == ' ')
 		line++;
 	if (!*line)
@@ -59,6 +63,8 @@ int	is_texture_we(char *line)
 	if (ft_strncmp(line, "WE", 2))
 		return (0);
 	line += 2;
+	if (*line != ' ')
+		return (0);
 	while (*line == ' ')
 		line++;
 	if (!*line)
@@ -79,6 +85,8 @@ int	is_texture_ea(char *line)
 	if (ft_strncmp(line, "EA", 2))
 		return (0);
 	line += 2;
+	if (*line != ' ')
+		return (0);
 	while (*line == ' ')
 		line++;
 	if (!*line)

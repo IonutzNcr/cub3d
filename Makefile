@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+         #
+#    By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 16:19:15 by kjullien          #+#    #+#              #
-#    Updated: 2025/10/29 11:35:08 by inicoara         ###   ########.fr        #
+#    Updated: 2025/11/05 12:58:26 by yoyo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ SRC_FILES = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/parser/controller/map_parser.c \
 			$(SRC_DIR)/parser/controller/map_checker.c \
 			$(SRC_DIR)/parser/controller/map_checker_2.c \
+			$(SRC_DIR)/parser/controller/map_checker_3.c \
+			$(SRC_DIR)/parser/controller/map_checker_4.c \
 			$(SRC_DIR)/parser/controller/mapper.c \
 			$(SRC_DIR)/parser/controller/parse_assets.func.c \
 			$(SRC_DIR)/parser/controller/parse_cf.func.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_characters.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 00:57:59 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/01 00:58:04 by leothoma         ###   ########.fr       */
+/*   Updated: 2025/11/05 19:42:34 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	is_invalid_ch(char ch)
 {
-	if (ch == '1' || ch == '0' || ch == 'N' || ch == 'S' || ch == 'E'
+	if (ch == '1' || ch == '0' || ch == 'N' || ch == 'S' || ch == 'E' || ch == ' '
 		|| ch == 'W')
 		return (0);
 	return (1);
@@ -42,8 +42,6 @@ int	check_characters(void)
 		row = *get_row(i++);
 		while (row && *row)
 		{
-			if (is_invalid_ch(*row) && set_sgt_error(INV_CH))
-				return (*sgt_error());
 			if (is_player(*row))
 				cply++;
 			if (cply > 1 && set_sgt_error(PLY_NB))
@@ -53,5 +51,16 @@ int	check_characters(void)
 	}
 	if (cply == 0 && set_sgt_error(NO_PLY))
 		return (*sgt_error());
+	return (0);
+}
+
+int check_line(char *line)
+{
+	while (*line)
+	{
+		if (is_invalid_ch(*line))
+			return (1);
+		line++;
+	}
 	return (0);
 }

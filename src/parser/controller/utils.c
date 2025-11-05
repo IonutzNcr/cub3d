@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 01:03:56 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/17 15:44:29 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/10/31 19:08:06 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*wgnl(char **line, int fd)
 	*line = get_next_line(fd);
 	if (!*line)
 		return (NULL);
-	if (*line)
+	if ((*line)[ft_strlen(*line) - 1] == '\n')
 		(*line)[ft_strlen(*line) - 1] = '\0';
 	return (*line);
 }

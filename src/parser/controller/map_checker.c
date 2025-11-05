@@ -6,26 +6,16 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 00:58:45 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/17 10:27:34 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/05 19:19:19 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-int	check_walls(void)
-{
-	if (is_r1_wall() || is_lr_wall() || is_c1_wall() || is_lc_wall())
-	{
-		set_sgt_error(NO_WALL);
-		return (*sgt_error());
-	}
-	return (0);
-}
-
 static void	init_map_list(t_mapf *liste)
 {
-	liste[0] = check_walls;
-	liste[1] = check_characters;
+	liste[1] = check_walls;
+	liste[0] = check_characters;
 }
 
 int	map_checker(void)

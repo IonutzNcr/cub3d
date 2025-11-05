@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_cf_format.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 01:34:16 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/01 01:34:17 by leothoma         ###   ########.fr       */
+/*   Updated: 2025/11/05 19:51:51 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	is_ceiling(char *line)
 	if (ft_strncmp(line, "C", 1))
 		return (0);
 	line += 1;
+	if (*line != ' ')
+		return (0);
 	while (*line && *line == ' ')
 		line++;
 	if (!*line)
@@ -83,6 +85,8 @@ int	is_floor(char *line)
 	if (ft_strncmp(line, "F", 1))
 		return (0);
 	line += 1;
+	if (*line != ' ')
+		return (0);
 	while (*line == ' ')
 		line++;
 	if (!*line)
