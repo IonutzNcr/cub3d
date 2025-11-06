@@ -6,11 +6,22 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 01:02:48 by leothoma          #+#    #+#             */
-/*   Updated: 2025/11/05 19:50:33 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/06 01:35:29 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
+
+static int double_float(char *line)
+{
+	while (*line && *(line + 1))
+	{
+		if (*line == ',' && *(line + 1) == ',')
+			return (1);
+		line++;
+	}
+	return (0);
+}
 
 int	parse_floor(char *line)
 {
@@ -28,6 +39,8 @@ int	parse_floor(char *line)
 		i++;
 	tmp = line[i];
 	line[i] = '\0';
+	if (double_float(line) && set_sgt_error(INV_LN))
+		return (1);
 	rgb = ft_split(line, ',');
 	line[i] = tmp;
 	if (!rgb && set_sgt_error(10))
@@ -54,6 +67,8 @@ int	parse_ceiling(char *line)
 		i++;
 	tmp = line[i];
 	line[i] = '\0';
+	if (double_float(line) && set_sgt_error(INV_LN))
+		return (1);
 	rgb = ft_split(line, ',');
 	line[i] = tmp;
 	if (!rgb && set_sgt_error(10))
