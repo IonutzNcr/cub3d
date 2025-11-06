@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 10:21:21 by inicoara          #+#    #+#             */
-/*   Updated: 2025/11/06 00:53:19 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/06 01:44:21 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ enum		e_err
 	NO_PLY,
 	NO_FILE,
 	LOAD_ERR,
-	INC_ERR
+	INC_ERR,
+	BTW_LN
 };
 
 typedef int	(*t_check)(char *line);

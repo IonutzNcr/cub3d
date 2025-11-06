@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 01:03:56 by leothoma          #+#    #+#             */
-/*   Updated: 2025/11/06 01:17:30 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/06 02:54:24 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ static void	print_error_2(int error)
 		write(2, "ERROR: FAILED TO LOAD TEXTURE\n", 30);
 	if (error == INC_ERR)
 		write(2, "ERROR: incomplete file config\n", 30);
-	if (error > 15)
+	if (error == BTW_LN)
+		write(2, "ERROR: missing empty line\n", 26);
+	if (error > 16)
 		printf("ERROR %d not detected yet\n", error);
 }
 

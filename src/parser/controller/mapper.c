@@ -6,16 +6,30 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 00:59:53 by leothoma          #+#    #+#             */
-/*   Updated: 2025/11/05 19:42:17 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/06 03:13:58 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
+/* 
+static int checked_empty_line(char *line)
+{
+	int is_empty;
+
+	is_empty = 0;
+	printf("line = %s\n", line);
+	printf("len = %d\n", ft_strlen(line));
+	if (*line == '\0')
+	{
+		is_empty = 1;
+	}
+	return (is_empty);
+} */
 
 int	mapper(char *line, int fd)
 {
 	if (map_parser(line))
-		return (free(line), empty_gnl(fd), print_error());
+		return (free_singleton(), free(line), empty_gnl(fd), print_error());
 	free(line);
 	while (wgnl(&line, fd))
 	{
