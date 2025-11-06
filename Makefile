@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yoyo <yoyo@student.42.fr>                  +#+  +:+       +#+         #
+#    By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 16:19:15 by kjullien          #+#    #+#              #
-#    Updated: 2025/11/05 12:58:26 by yoyo             ###   ########.fr        #
+#    Updated: 2025/11/06 06:56:45 by inicoara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC_FILES = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/parser/controller/utility.c \
 			$(SRC_DIR)/parser/controller/hard_verif.c \
 			$(SRC_DIR)/parser/controller/verif.c \
+			$(SRC_DIR)/parser/controller/save_lines.c \
 			$(SRC_DIR)/parser/rules/is_cf_format.c \
 			$(SRC_DIR)/parser/rules/is_extension.c \
 			$(SRC_DIR)/parser/rules/is_file_empty.c \

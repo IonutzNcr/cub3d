@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 01:47:14 by inicoara          #+#    #+#             */
-/*   Updated: 2025/11/06 06:37:25 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/06 06:55:13 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,17 @@ static int	hard_verif2(t_task liste[6], char *line, int fd)
 	return (0);
 }
 
+
+
 int	hard_verif(char *argv[])
 {
 	int		fd;
 	t_task	liste[6];
 	char	*line;
-	size_t		is;
+	size_t	is;
 
-	is = 0;
-	init_list(liste);
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		return (perror("Error: "), 1);
+	if (init_to_save_lines(&fd, liste, &is, argv))
+		return (1);
 	while (wgnl(&line, fd))
 	{
 		if (checked_list(liste) && *line == '\0')
@@ -67,8 +66,5 @@ int	hard_verif(char *argv[])
 		else if (hard_verif2(liste, line, fd))
 			return (close(fd), 1);
 	}
-	if (last_verif(liste))
-		return (close(fd), free_singleton(), print_error());
-	close(fd);
-	return (0);
+	return (last_verif_to_save_lines(fd, liste));
 }
