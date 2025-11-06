@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 17:57:16 by yoyo              #+#    #+#             */
-/*   Updated: 2025/11/06 00:29:05 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/06 01:18:49 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	main(int argc, char **argv, char **env)
 
 	if (parser(argc, argv, env))
 		return (1);
+	printf("F = %d\n", sgt_assets()->ceiling);
+	printf("C = %d\n", sgt_assets()->floor);
 	get_player_info();
 	ft_bzero(&game, sizeof(t_game));
 	ft_bzero(&mlx, sizeof(t_mlx));

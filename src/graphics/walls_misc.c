@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:01:04 by leothoma          #+#    #+#             */
-/*   Updated: 2025/10/15 19:59:00 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/06 01:24:24 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	fill_background(t_mlx *mlx, t_game *game)
 	while (y < SCREEN_HEIGHT)
 	{
 		if (y < SCREEN_HEIGHT / 2)
-			color = game->floor_color;
-		else
 			color = game->ceiling_color;
+		else
+			color = game->floor_color;
 		x = 0;
 		while (x < SCREEN_WIDTH)
 		{

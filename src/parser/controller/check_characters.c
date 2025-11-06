@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 00:57:59 by leothoma          #+#    #+#             */
-/*   Updated: 2025/11/06 00:42:48 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/06 01:12:49 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,9 @@ int	check_line(char *line)
 	{
 		if (is_invalid_ch(*line))
 		{
-			printf("J'ai return 1\n");
 			return (1);
 		}
 		line++;
 	}
-	printf("j'ai return 0\n");
 	return (0);
 }
