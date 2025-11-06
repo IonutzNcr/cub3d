@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:49:54 by leothoma          #+#    #+#             */
-/*   Updated: 2025/11/06 00:29:50 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/06 01:29:42 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	clear_all(t_ctx *ctx, int i, int is)
 {
 	t_mlx	*mlx;
-	int k;
+	int		k;
 
 	k = 0;
 	remove_map();
