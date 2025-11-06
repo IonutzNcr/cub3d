@@ -6,13 +6,13 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 01:02:48 by leothoma          #+#    #+#             */
-/*   Updated: 2025/11/06 01:35:29 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/06 03:17:11 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-static int double_float(char *line)
+static int	double_float(char *line)
 {
 	while (*line && *(line + 1))
 	{
