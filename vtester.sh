@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Fichier de sortie
-OUTPUT_FILE="test_output"
-
 # Vider le fichier de sortie s'il existe déjà
 > "$OUTPUT_FILE"
 

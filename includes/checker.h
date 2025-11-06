@@ -6,7 +6,7 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 10:21:21 by inicoara          #+#    #+#             */
-/*   Updated: 2025/11/06 06:56:14 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:27:27 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ int			can_move(int x, int y, char **map);
 int			is_on_edge(int x, int y);
 void		ft_searchpath(int x, int y, char **map, int *isOut);
 t_player	find_new_zero(char **map);
-int			init_to_save_lines(int *fd, t_task liste[6], size_t *is, char **argv);
+int			init_to_save_lines(int *fd, t_task liste[6],
+				size_t *is, char **argv);
 int			last_verif_to_save_lines(int fd, t_task liste[6]);
 #endif

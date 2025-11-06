@@ -6,11 +6,12 @@
 /*   By: inicoara <inicoara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 01:03:56 by leothoma          #+#    #+#             */
-/*   Updated: 2025/11/06 07:01:17 by inicoara         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:50:26 by inicoara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
+#define ERR_LG "ERROR: Invalid line between map and the rest\n"
 
 static void	print_error_2(int error)
 {
@@ -31,9 +32,7 @@ static void	print_error_2(int error)
 	if (error == INC_ERR)
 		write(2, "ERROR: incomplete file config\n", 30);
 	if (error == BTW_LN)
-		write(2,
-			"ERROR: Unexpted line or no empty line between the map and the rest\n",
-			67);
+		write(2, ERR_LG, 45);
 	if (error > 16)
 		printf("ERROR %d not detected yet\n", error);
 }
