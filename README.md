@@ -148,7 +148,3 @@ The codebase is split into two main concerns:
 - The project uses a custom `libft` implementation.
 - The game is intended to be run in a graphical Linux session with X11 support.
 - Invalid maps are rejected early with clear parser errors.
-
-## Credits
-
-This project is implemented as a C game engine and raycasting renderer, with a parser and rendering pipeline tailored to the Cub3D ruleset.
